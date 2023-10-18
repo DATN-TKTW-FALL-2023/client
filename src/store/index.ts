@@ -18,10 +18,8 @@ const persistConfig = {
     whitelist: ['cart']
 }
 const rootReducer = combineReducers({
-    [productApi.reducerPath]: productReducer,
-    [authApi.reducerPath]: authApi.reducer,
 })
-const middleware = [productApi.middleware, authApi.middleware]
+const middleware = []
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
