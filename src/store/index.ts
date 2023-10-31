@@ -1,4 +1,4 @@
-import filmApi, { filmReducer } from '@/apis/films';
+import filmApi,{filmReducer} from '@/apis/films';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
     FLUSH,
@@ -19,11 +19,8 @@ const persistConfig = {
     whitelist: ['cart']
 }
 const rootReducer = combineReducers({
-    films: filmReducer,
-})
-
-// Chuyển filmApi.middleware thành một mảng nếu nó không phải là mảng
-const middlewareArray = Array.isArray(filmApi.middleware) ? filmApi.middleware : [filmApi.middleware];
+    [filmApi.reducerPath]: filmReducer,
+  })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
@@ -33,7 +30,7 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(...middlewareArray),
+        }).concat(filmApi.middleware),
 })
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
