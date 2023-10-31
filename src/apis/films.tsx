@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { pause } from '@/utils/pause';
 
 
-const FilmApi = createApi({
+const filmApi = createApi({
           reducerPath: 'film',
           tagTypes: ['Film'],
           baseQuery: fetchBaseQuery({
@@ -28,6 +28,6 @@ const FilmApi = createApi({
       export const {
           useGetFilmsQuery,
           useGetFilmsByIdQuery
-      } = FilmApi;
-      export const productReducer = FilmApi.reducer;
-      export default FilmApi;
+      } = filmApi;
+      export const filmReducer = filmApi.reducer;
+      export default filmApi;
