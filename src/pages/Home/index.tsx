@@ -1,7 +1,12 @@
 import { useGetFilmsQuery } from "@/apis/films";
+
 import React, { useState, useEffect } from "react";
 
 type Props = {};
+
+import React from "react";
+import { Link } from "react-router-dom";
+
 
 const Home = () => {
   const { data: films } = useGetFilmsQuery();
@@ -77,7 +82,11 @@ const Home = () => {
                 <div className="product-content">
                   <div>
                     <h3 className="text-[#337ab7] font-bold text-lg py-2">
+
+                    <Link to={`/film/${item._id}`}>
                       {item?.name}
+                      </Link>
+
                     </h3>
                     <ul className="pb-6">
                       <li>
