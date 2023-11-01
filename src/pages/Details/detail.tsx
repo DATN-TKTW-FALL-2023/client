@@ -6,6 +6,16 @@ type Props = {};
 const Details = () => {
   const { id } = useParams();
   const { data: films } = useGetFilmsByIdQuery(id);
+
+  function formatDate(dateString:any) {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const daysOfWeek = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
+    const dayOfWeek = daysOfWeek[date.getDay()];
+    return `${day}/${month}/${dayOfWeek}`;
+  }
   return (
     <div className="container">
       <h3 className="text-2xl">
@@ -87,6 +97,20 @@ const Details = () => {
       </div>
       <div>
         <ul className="flex border-b-2 border-[#ccc]">
+        {films?.data?.dayShowing.map((showingDate:any, index:any) => {
+       const formattedDate = formatDate(showingDate);
+        const [day, month,dayOfWeek] = formattedDate.split('/');
+
+      return (
+        <div className="my-4 text-center" key={index}>
+          <a className="text-[#03599d] active px-8" style={{ display: "block" }}>
+            <span className="text-4xl">{day}</span>/{month}-{dayOfWeek}
+          </a>
+          </div>
+  );
+})}
+
+
           <li className="text-[#03599d] active px-8">
             <a href="">
               <span className="text-4xl">16</span>/10 - T2
