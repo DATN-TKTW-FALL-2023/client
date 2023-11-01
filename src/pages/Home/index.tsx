@@ -1,17 +1,15 @@
 import { useGetFilmsQuery } from "@/apis/films";
-
 import React, { useState, useEffect } from "react";
-
-type Props = {};
-
-import React from "react";
 import { Link } from "react-router-dom";
 
+type Props = {};
 
 const Home = () => {
   const { data: films } = useGetFilmsQuery();
   const [currentTab, setCurrentTab] = useState("upcoming"); // Ban đầu hiển thị danh sách phim sắp chiếu
-  const [filteredFilms, setFilteredFilms] = useState<any[] | undefined>(undefined);
+  const [filteredFilms, setFilteredFilms] = useState<any[] | undefined>(
+    undefined
+  );
 
   const filterFilmsByStatus = (status: string) => {
     return films?.data?.filter((film: any) =>
@@ -82,22 +80,22 @@ const Home = () => {
                 <div className="product-content">
                   <div>
                     <h3 className="text-[#337ab7] font-bold text-lg py-2">
-
-                    <Link to={`/film/${item._id}`}>
-                      {item?.name}
-                      </Link>
-
+                      <Link to={`/film/${item._id}`}>{item?.name}</Link>
                     </h3>
                     <ul className="pb-6">
                       <li>
                         Thể loại:{" "}
                         <span className="font-light">
-                          {item?.taxonomies?.map((taxonomy: any) => taxonomy.name).join(", ")}
+                          {item?.taxonomies
+                            ?.map((taxonomy: any) => taxonomy.name)
+                            .join(", ")}
                         </span>
                       </li>
                       <li>
                         Thời lượng:
-                        <span className="font-light">{item?.duration} phút</span>
+                        <span className="font-light">
+                          {item?.duration} phút
+                        </span>
                       </li>
                     </ul>
                   </div>
