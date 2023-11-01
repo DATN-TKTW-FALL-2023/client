@@ -1,8 +1,11 @@
 import React from "react";
-
+import { useParams } from "react-router-dom";
+import { useGetFilmsByIdQuery } from "@/apis/films";
 type Props = {};
 
-const Details = (props: Props) => {
+const Details = () => {
+  const { id } = useParams();
+  const { data: films } = useGetFilmsByIdQuery(id);
   return (
     <div className="container">
       <h3 className="text-2xl">
@@ -11,35 +14,25 @@ const Details = (props: Props) => {
       <div className="py-4 grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
         <div>
           <div>
-            <img
-              width="250"
-              className="rounded-3xl"
-              src="./img/img1.png"
-              alt=""
-            />
+          <img
+                      className="rounded-3xl w-[228px] h-[360px]" 
+                      width="228px"
+                      src={films?.data?.thumbnail?.location}
+                      alt=""
+                    />
           </div>
         </div>
         <div>
-          <h1 className="text-3xl font-medium">Đất Rừng Phương Nam</h1>
+          <h1 className="text-3xl font-medium">{films?.data?.name}</h1>
           <p className="text-justify py-4">
-            Đất Rừng Phương Nam phiên bản điện ảnh được kế thừa và phát triển từ
-            tiểu thuyết cùng tên của nhà văn Đoàn Giỏi và tác phẩm truyền hình
-            nổi tiếng “Đất Phương Nam” của đạo diễn Nguyễn Vinh Sơn. Bộ phim kể
-            về hành trình phiêu lưu của An - một cậu bé chẳng may mất mẹ trên
-            đường đi tìm cha. Cùng với An, khán giả sẽ trải nghiệm sự trù phú
-            của thiên nhiên và nét đẹp văn hoá đặc sắc của vùng đất Nam Kì Lục
-            Tỉnh, sự hào hiệp của những người nông dân bám đất bám rừng và tinh
-            thần yêu nước kháng Pháp đầu thế kỉ 20. Bên cạnh đó, tình cảm gia
-            đình, tình bạn, tình người, tình thầy trò, tình yêu nước là những
-            cung bậc cảm xúc sâu sắc sẽ đọng lại qua mỗi bước chân của An và
-            đồng bạn.
+            {films?.data?.content}
           </p>
           <div className="grid grid-cols-[150px_minmax(420px,_1fr)_100px]">
             <div>
               <h3 className="text-lg">ĐẠO DIỄN:</h3>
             </div>
             <div>
-              <h3 className="text-lg font-light">Nguyễn Quang Dũng</h3>
+              <h3 className="text-lg font-light">{films?.data?.director}</h3>
             </div>
           </div>
           <div className="grid grid-cols-[150px_minmax(420px,_1fr)_100px]">
@@ -48,8 +41,7 @@ const Details = (props: Props) => {
             </div>
             <div>
               <h3 className="text-lg font-light">
-                Hồng Ánh, Huỳnh Hạo Khang, Mai Tài Phến, Công Ninh, Hứa Vĩ Văn,
-                Tuyền Mập, Tuấn Trần.
+              {films?.data?.actor}
               </h3>
             </div>
           </div>
@@ -58,7 +50,13 @@ const Details = (props: Props) => {
               <h3 className="text-lg">THỂ LOẠI:</h3>
             </div>
             <div>
-              <h3 className="text-lg font-light">Tâm lý</h3>
+              <h3 className="text-lg font-light">
+              {films?.data?.taxonomies?.map((taxonomy:any, index:any) => (
+                <h3 className="text-lg font-light" key={index}>
+                  {taxonomy.name}
+                </h3>
+              ))}
+                </h3>
             </div>
           </div>
           <div className="grid grid-cols-[150px_minmax(420px,_1fr)_100px]">
@@ -66,7 +64,7 @@ const Details = (props: Props) => {
               <h3 className="text-lg">THỜI LƯỢNG:</h3>
             </div>
             <div>
-              <h3 className="text-lg font-light">110 phút</h3>
+              <h3 className="text-lg font-light">{films?.data?.duration} phút</h3>
             </div>
           </div>
           <div className="grid grid-cols-[150px_minmax(420px,_1fr)_100px]">
@@ -82,7 +80,7 @@ const Details = (props: Props) => {
               <h3 className="text-lg">NGÀY KHỞI CHIẾU:</h3>
             </div>
             <div>
-              <h3 className="text-lg font-light">20/10/2023</h3>
+              <h3 className="text-lg font-light">{films?.data?.scheduleAt}</h3>
             </div>
           </div>
         </div>
