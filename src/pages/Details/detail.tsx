@@ -8,7 +8,7 @@ const Details = (props: Props) => {
       <h3 className="text-2xl">
         Trang chủ<span className="text-[#03599d]">Đất Rừng Phương Nam</span>
       </h3>
-      <div className="py-4 grid grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
+      <div className="py-4 grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
         <div>
           <div>
             <img
@@ -115,10 +115,9 @@ const Details = (props: Props) => {
           <div className="grid grid-cols-8">
             <div className="my-4 text-center">
               <button
-                style="transition: 0.5s;"
                 id="myBtn"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
-                href=""
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
+
               >
                 09:00
               </button>
@@ -130,8 +129,7 @@ const Details = (props: Props) => {
             </div>
             <div className="my-4 text-center">
               <a
-                style="transition: 0.5s;"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500" 
                 href=""
               >
                 13:00
@@ -140,8 +138,7 @@ const Details = (props: Props) => {
             </div>
             <div className="my-4 text-center">
               <a
-                style="transition: 0.5s;"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
                 href=""
               >
                 15:00
@@ -150,8 +147,7 @@ const Details = (props: Props) => {
             </div>
             <div className="my-4 text-center">
               <a
-                style="transition: 0.5s;"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
                 href=""
               >
                 17:00
@@ -160,8 +156,7 @@ const Details = (props: Props) => {
             </div>
             <div className="my-4 text-center">
               <a
-                style="transition: 0.5s;"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
                 href=""
               >
                 20:00
@@ -170,8 +165,7 @@ const Details = (props: Props) => {
             </div>
             <div className="my-4 text-center">
               <a
-                style="transition: 0.5s;"
-                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium"
+                className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
                 href=""
               >
                 22:00

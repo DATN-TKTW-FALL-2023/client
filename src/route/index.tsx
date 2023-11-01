@@ -23,6 +23,10 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "detail",
+        element: <Details />,
+      },
     ],
   },
   {
@@ -32,10 +36,6 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
-  },
-  {
-    path: "/details",
-    element: <Details />,
   },
   {
     path: "/checkout",
