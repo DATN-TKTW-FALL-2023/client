@@ -1,15 +1,16 @@
 import { useGetFilmsQuery } from "@/apis/films";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ReactPlayer from "react-player";
+import "./home.css";
 
 type Props = {};
 
 const Home = () => {
-  const { data: films } = useGetFilmsQuery();
-  const [currentTab, setCurrentTab] = useState("upcoming"); // Ban đầu hiển thị danh sách phim sắp chiếu
-  const [filteredFilms, setFilteredFilms] = useState<any[] | undefined>(
-    undefined
-  );
+  const { data: films } = useGetFilmsQuery({ /* pass the required argument here */ });
+  const [currentTab, setCurrentTab] = useState("upcoming");
+  const [filteredFilms, setFilteredFilms] = useState<any[] | undefined>(undefined);
+  const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
 
   const filterFilmsByStatus = (status: string) => {
     return films?.data?.filter((film: any) =>
@@ -23,6 +24,10 @@ const Home = () => {
 
   const handleTabClick = (tab: string) => {
     setCurrentTab(tab);
+  };
+
+  const toggleTrailer = (url?: string) => {
+    setTrailerUrl(url);
   };
 
   useEffect(() => {
@@ -67,11 +72,13 @@ const Home = () => {
               <div className="mb-20" key={item?._id}>
                 <div className="product-image relative">
                   <div className="">
+                    {/* Thêm sự kiện onClick để hiển thị trailer */}
                     <img
                       className="rounded-3xl w-[228px] h-[360px]"
                       width="228px"
                       src={item?.thumbnail?.location}
                       alt=""
+                      onClick={() => toggleTrailer(item?.trailerUrl)}
                     />
                   </div>
                   <span></span>
@@ -112,6 +119,19 @@ const Home = () => {
           )}
         </div>
       </div>
+      {trailerUrl && (
+        <div className="trailer-modal">
+          <div className="trailer-modal-content">
+            <ReactPlayer
+              url={trailerUrl}
+              width="100%" // Đảm bảo video toàn màn hình
+              height="100%"
+              controls={true}
+            />
+            <button onClick={() => toggleTrailer(undefined)}>✖</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
