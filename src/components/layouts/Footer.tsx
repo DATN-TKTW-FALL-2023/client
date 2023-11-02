@@ -10,10 +10,13 @@ const Footer = (props: Props) => {
         <div className="container py-10 grid grid-cols-4">
           <div>
             <div className="mb-4">
-              <img width="100" src="./img/Pornhub-Logo-700x394.png" alt="" />
+              <img width="200" src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698914102/logo_datn-01_bun5pj.png" alt="" />
             </div>
+            
             <div>
+              
               <ul>
+                
                 <li className="font-light hover:text-sky-700 cursor-pointer py-[2px]">
                   Tuyển dụng
                 </li>

@@ -24,7 +24,7 @@ const Header = (props: Props) => {
         <div className=" h-[80px] leading-[80px] flex container justify-between ">
           <div className="py-[8px]">
             <a href="#">
-              <img width="170" src="./img/Pornhub-Logo-700x394.png" alt="" />
+              <img width="185" src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698913976/logo_datn-01_alv0lc.jpg" alt="" />
             </a>
           </div>
           <div>
