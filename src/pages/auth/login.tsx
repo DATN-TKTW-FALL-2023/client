@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoginMutation } from "@/api/auth";
+import { useLoginMutation } from "@/apis/auth";
 import { IUser } from "@/interfaces/User";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
