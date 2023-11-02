@@ -20,6 +20,14 @@ const filmApi = createApi({
               getFilmsById: builder.query({
                   query: (id) => `/v1/film/${id}/client`,
                   providesTags: ['Film']
+              }),
+              getFilmComing: builder.query({
+                  query: () => `/v1/film/client?page=1&limit=10&order=DESC&orderBy=createdAt&isRelease=false`,
+                  providesTags: ['Film']
+              }),
+              getFilmIsShowing: builder.query({
+                  query: () => `/v1/film/client?page=1&limit=10&order=DESC&orderBy=createdAt&isRelease=true`,
+                  providesTags: ['Film']
               })
              
           })
@@ -27,7 +35,10 @@ const filmApi = createApi({
       
       export const {
           useGetFilmsQuery,
-          useGetFilmsByIdQuery
+          useGetFilmsByIdQuery,
+          useGetFilmComingQuery,
+          useGetFilmIsShowingQuery
+
       } = filmApi;
       export const filmReducer = filmApi.reducer;
       export default filmApi;
