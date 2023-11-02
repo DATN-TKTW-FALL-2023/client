@@ -19,7 +19,7 @@ const Details = () => {
   return (
     <div className="container">
       <h3 className="text-2xl">
-        Trang chủ<span className="text-[#03599d]">Đất Rừng Phương Nam</span>
+        Trang chủ <span className="text-[#03599d]">{films?.data?.name}</span>
       </h3>
       <div className="py-4 grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
         <div>
