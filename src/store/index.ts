@@ -1,5 +1,7 @@
-import filmApi,{filmReducer} from '@/apis/films';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+import filmApi,{filmReducer} from "@/apis/films";
+import showtimeApi,{showtimeReducer} from "@/apis/showtime";
+import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
 import {
     FLUSH,
     PAUSE,
@@ -10,19 +12,19 @@ import {
     persistReducer,
     persistStore,
 } from 'redux-persist';
-
 import storage from 'redux-persist/lib/storage';
-
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cart']
+    whitelist: ['film']
 }
 const rootReducer = combineReducers({
     [filmApi.reducerPath]: filmReducer,
-  })
-
+    [showtimeApi.reducerPath]: showtimeReducer,
+})
+const middleware = [filmApi.middleware,showtimeApi.middleware]
 const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
@@ -30,9 +32,15 @@ export const store = configureStore({
             serializableCheck: {
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
-        }).concat(filmApi.middleware),
+        }).concat(...middleware),
 })
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
 
+export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>
+export type AppThunk<ReturnType = void> = ThunkAction<
+    ReturnType,
+    RootState,
+    unknown,
+    Action<string>
+>
 export default persistStore(store);

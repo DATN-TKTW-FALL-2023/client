@@ -1,11 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetFilmsByIdQuery } from "@/apis/films";
+import { useGetShowtimeQuery } from "@/apis/showtime";
 type Props = {};
 
 const Details = () => {
   const { id } = useParams();
   const { data: films } = useGetFilmsByIdQuery(id);
+  const {data:showtime} =useGetShowtimeQuery({});
 
   function formatDate(dateString:any) {
     const date = new Date(dateString);
@@ -141,7 +143,7 @@ const Details = () => {
                 className="px-12 py-[6px] hover:bg-[#ccc] ease-linear bg-[#e5e5e5] text-sm font-medium duration-500"
 
               >
-                09:00
+                {showtime?.data?.startHour}
               </button>
               <p className="text-xs py-2 font-medium">136 ghế trống</p>
             </div>
