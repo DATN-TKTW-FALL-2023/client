@@ -1,26 +1,15 @@
 import { useGetFilmsQuery } from "@/apis/films";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import "./home.css";
 
 const Home = () => {
-  const { data: films } = useGetFilmsQuery();
-  const [currentTab, setCurrentTab] = useState("upcoming");
+  const [params, setParams] = useState<any>({
+    isRelease: false,
+  });
+  const { data: filmsData } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
-
-  const handleTabClick = (tab: string) => {
-    setCurrentTab(tab);
-  };
-
-  const currentDate = new Date();
-  const filteredFilms = films?.data?.filter((film: any) =>
-    currentTab === "upcoming"
-      ? new Date(film.scheduleAt) > currentDate
-      : currentTab === "nowShowing"
-      ? new Date(film.scheduleAt) <= currentDate
-      : false
-  );
 
   return (
     <div>
@@ -30,33 +19,44 @@ const Home = () => {
             <ul className="inline-block text-center border-b-2 border-gray">
               <li
                 className={`inline-block px-4 text-3xl ${
-                  currentTab === "upcoming" ? "active" : ""
+                  !params.isRelease ? "active" : ""
                 }`}
               >
-                <a href="#" onClick={() => handleTabClick("upcoming")}>
+                <a
+                  href="#"
+                  onClick={() =>
+                    setParams((prev: any) => ({
+                      ...prev,
+                      isRelease: false,
+                    }))
+                  }
+                >
                   PHIM SẮP CHIẾU
                 </a>
               </li>
               <li
                 className={`inline-block px-4 text-3xl ${
-                  currentTab === "nowShowing" ? "active" : ""
+                  params.isRelease ? "active" : ""
                 }`}
               >
-                <a href="#" onClick={() => handleTabClick("nowShowing")}>
+                <a
+                  href="#"
+                  onClick={() =>
+                    setParams((prev: any) => ({
+                      ...prev,
+                      isRelease: true,
+                    }))
+                  }
+                >
                   PHIM ĐANG CHIẾU
-                </a>
-              </li>
-              <li className={`inline-block px-4 text-3xl`}>
-                <a href="#" onClick={() => handleTabClick("special")}>
-                  SUẤT CHIẾU ĐẶC BIỆT
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="product py-16 grid grid-cols-4">
-          {filteredFilms && filteredFilms.length > 0 ? (
-            filteredFilms.map((item: any) => (
+          {filmsData && filmsData?.data?.length > 0 ? (
+            filmsData?.data.map((item: any) => (
               <div className="mb-20" key={item?._id}>
                 <div className="product-image relative">
                   <div className="">
