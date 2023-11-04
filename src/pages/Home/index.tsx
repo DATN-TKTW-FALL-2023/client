@@ -10,7 +10,7 @@ const Home = () => {
   });
   const { data: filmsData, isFetching } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
-
+  
   return (
     <div>
       <div className="content container">
@@ -54,7 +54,10 @@ const Home = () => {
             </ul>
           </div>
         </div>
-        {isFetching ? `Loading...`: ( <div className="product py-16 grid grid-cols-4">
+      <div className="">  {isFetching ? (<div
+  className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+  role="status">
+</div>) : ( <div className="product py-16 grid grid-cols-4">
           {filmsData && filmsData?.data?.length > 0 ? (
             filmsData?.data.map((item: any) => (
               <div className="mb-20" key={item?._id}>
@@ -120,6 +123,7 @@ const Home = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };
