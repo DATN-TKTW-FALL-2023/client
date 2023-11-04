@@ -8,7 +8,7 @@ const Home = () => {
   const [params, setParams] = useState<any>({
     isRelease: false,
   });
-  const { data: filmsData } = useGetFilmsQuery(params);
+  const { data: filmsData, isFetching } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
 
   return (
@@ -54,7 +54,7 @@ const Home = () => {
             </ul>
           </div>
         </div>
-        <div className="product py-16 grid grid-cols-4">
+        {isFetching ? `Loading...`: ( <div className="product py-16 grid grid-cols-4">
           {filmsData && filmsData?.data?.length > 0 ? (
             filmsData?.data.map((item: any) => (
               <div className="mb-20" key={item?._id}>
@@ -104,7 +104,8 @@ const Home = () => {
           ) : (
             <div>No films available.</div>
           )}
-        </div>
+        </div>)}
+       
       </div>
       {trailerUrl && (
         <div className="trailer-modal">
