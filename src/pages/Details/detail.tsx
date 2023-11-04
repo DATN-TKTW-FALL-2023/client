@@ -18,7 +18,9 @@ const Details = () => {
   });
 
   useEffect(() => {
-    setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
+    if(film?.data?.dayShowing.length > 0){
+      setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
+    }
   }, [film]);
 
   useEffect(() => {
@@ -30,12 +32,16 @@ const Details = () => {
 
   function formatDate(dateString: any) {
     const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return "Invalid Date"; // Handle invalid date string
+    }
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const daysOfWeek = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
   }
+
 
   return (
     <div className="container">
