@@ -1,8 +1,6 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <div>
       <div className="pre-header h-6 bg-black">
@@ -23,9 +21,13 @@ const Header = (props: Props) => {
       <div className="header relative z-50">
         <div className=" h-[80px] leading-[80px] flex container justify-between ">
           <div className="py-[8px]">
-            <a href="#">
-              <img width="185" src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698913976/logo_datn-01_alv0lc.jpg" alt="" />
-            </a>
+            <Link to="/">
+              <img
+                width="185"
+                src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698913976/logo_datn-01_alv0lc.jpg"
+                alt=""
+              />
+            </Link>
           </div>
           <div>
             <ul className="flex">
