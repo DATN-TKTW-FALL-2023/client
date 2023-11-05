@@ -1,5 +1,6 @@
 import userApi, { userReducer } from '@/apis/auth';
 import filmApi,{filmReducer} from '@/apis/films';
+import layoutApi, { layoutReducer } from '@/apis/layout';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
     FLUSH,
@@ -21,9 +22,10 @@ const persistConfig = {
 }
 const rootReducer = combineReducers({
     [filmApi.reducerPath]: filmReducer,
-    [userApi.reducerPath]: userReducer
+    [userApi.reducerPath]: userReducer,
+    [layoutApi.reducerPath]: layoutReducer
   })
-const middleware = [userApi.middleware,filmApi.middleware]
+const middleware = [userApi.middleware,filmApi.middleware,layoutApi.middleware]
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
     reducer: persistedReducer,
