@@ -1,11 +1,11 @@
-import { RouterProvider } from "react-router-dom";
-import { router } from "./route";
+import { HashRouter } from "react-router-dom";
+import RouteApp from "./route";
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router} />
-    </>
+    <HashRouter>
+      <RouteApp />
+    </HashRouter>
   );
 }
 
