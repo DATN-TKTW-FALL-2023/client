@@ -29,4 +29,38 @@
           cursor: pointer;
           z-index: 1; /* Đảm bảo nút hiển thị phía trên video */
         }
+
+        /* CSS cho modal overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* CSS cho modal content */
+.modal-content {
+  width: 1000px;
+  height: 500px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  position: relative;
+}
+
+/* CSS cho nút đóng modal */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
         
