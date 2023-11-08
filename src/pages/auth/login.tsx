@@ -3,51 +3,36 @@ import { useForm } from "react-hook-form";
 import { useLoginMutation } from "@/apis/auth";
 import { IUser } from "@/interfaces/User";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { clearAccessToken, setAccessToken } from "@/slices/authSlice";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loginMutation, { error }] = useLoginMutation();
+  const { register, handleSubmit } = useForm();
+  const dispatch = useAppDispatch();
+  const [loginMutation] = useLoginMutation();
   const navigate = useNavigate();
+  
   const onSubmit = async (formData: IUser) => {
     try {
       const response = await loginMutation(formData);
-      if (
-        response.error &&
-        response.error.data &&
-        response.error.data.message
-      ) {
-        const errorMessages = response.error.data.message;
-        if (Array.isArray(errorMessages)) {
-          errorMessages.forEach((errorMessage) => {
-            Swal.fire("Error", errorMessage, "error");
-          });
-        } else {
-          Swal.fire("Error", errorMessages, "error");
-        }
-      } else {
-        localStorage.setItem("isLoggedIn", "true");
-        setIsLoggedIn(true);
-        Swal.fire("Good job!", "You clicked the button!", "success").then(
-          (result) => {
-            if (result.isConfirmed) {
-              navigate("/");
-            }
+      const { accessToken } = response.data.data.auth;
+      dispatch(setAccessToken(accessToken));
+      Swal.fire("Good job!", "You clicked the button!", "success").then(
+        (result) => {
+          if (result.isConfirmed) {
+            navigate("/");
           }
-        );
-      }
+        }
+      );
     } catch (error) {
       console.log(error);
     }
   };
+  const getAccessToken = useAppSelector((state) => state.auth.accessToken);
+  
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    setIsLoggedIn(false);
+    dispatch(clearAccessToken());
   };
   return (
     <div className="container">
@@ -55,16 +40,7 @@ const Login = () => {
         <div className="forms">
           <ul className="tab-group flex text-center border-b-2 border-[#ccc]">
             <li className=" w-[50%] tab px-14 py-2 event">
-              {isLoggedIn ? (
-                <button
-                  className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2"
-                  onClick={handleLogout}
-                >
-                  Đăng xuất
-                </button>
-              ) : (
-                <a href="#login">Log In</a>
-              )}
+              <a href="#login">Log In</a>
             </li>
             <li className=" w-[50%] tab px-14 py-2">
               <a href="#signup">Sign Up</a>
@@ -97,11 +73,13 @@ const Login = () => {
                 />
               </div>
               <p className="text-p py-4 text-[#337ab7] hover:underline inline-block">
-                {" "}
-                <a href="#">Quên mật khẩu?</a>{" "}
+                <a href="#">Quên mật khẩu?</a>
               </p>
               <div className="text-center">
-                <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2">
+                <button
+                  onClick={onSubmit}
+                  className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2"
+                >
                   Đăng nhập
                 </button>
               </div>

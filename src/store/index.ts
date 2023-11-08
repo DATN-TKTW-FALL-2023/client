@@ -18,15 +18,17 @@ import {
   persistStore,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import authReducer from "@/slices/authSlice"
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["film"],
+  whitelist: ["auth"],
 };
 const rootReducer = combineReducers({
-  [filmApi.reducerPath]: filmReducer,
-  [showtimeApi.reducerPath]: showtimeReducer,
-  [userApi.reducerPath]: userReducer,
+  film: filmReducer,
+  showtime: showtimeReducer,
+  user: userReducer,
+  auth: authReducer,
 });
 const middleware = [
   userApi.middleware,
