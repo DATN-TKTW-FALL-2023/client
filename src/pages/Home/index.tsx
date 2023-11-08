@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { useGetFilmsQuery } from "@/apis/films";
+import { useGetFilmsByIdQuery, useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
+import { useGetShowtimeQuery } from "@/apis/showtime";
 
 const Home = () => {
   const [params, setParams] = useState<any>({
@@ -11,12 +12,15 @@ const Home = () => {
   });
   const { data: filmsData, isFetching } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
-
+  const [filmSelected, setFilmSelected] = useState<string | undefined>(
+    undefined
+  );
   // State để theo dõi trạng thái của popup mua vé
   const [isBuyPopupOpen, setIsBuyPopupOpen] = useState(false);
 
   // Function để mở popup mua vé
-  const openBuyPopup = () => {
+  const openBuyPopup = (id: any) => {
+    setFilmSelected(id);
     setIsBuyPopupOpen(true);
   };
 
@@ -95,7 +99,10 @@ const Home = () => {
                     <div className="product-content">
                       <div>
                         <h3 className="text-[#337ab7] font-bold text-lg py-2">
-                          <Link to={`/film/${item._id}`} className="line-clamp-1">
+                          <Link
+                            to={`/film/${item._id}`}
+                            className="line-clamp-1"
+                          >
                             {item?.name}
                           </Link>
                         </h3>
@@ -119,7 +126,7 @@ const Home = () => {
                       <div>
                         <button
                           className="btn text-white font-medium w-full py-2 rounded-lg"
-                          onClick={openBuyPopup} // Mở popup mua vé khi click vào nút "MUA VÉ"
+                          onClick={() => openBuyPopup(item?._id)} // Mở popup mua vé khi click vào nút "MUA VÉ"
                         >
                           MUA VÉ
                         </button>
@@ -147,12 +154,13 @@ const Home = () => {
           </div>
         )}
       </div>
-      {/* Popup Mua Vé */}
-      <Modal isOpen={isBuyPopupOpen} onClose={closeBuyPopup}>
-        {/* Nội dung bên trong popup mua vé */}
-        <h2>Tên Phim:</h2>
-        {/* Thêm nút để đóng popup */}
-      </Modal>
+      {filmSelected && (
+        <Modal
+          isOpen={isBuyPopupOpen}
+          onClose={closeBuyPopup}
+          id={filmSelected}
+        />
+      )}
     </div>
   );
 };
