@@ -1,8 +1,9 @@
-import { useGetFilmsQuery } from "@/apis/films";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
+import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 
 const Home = () => {
   const [params, setParams] = useState<any>({
@@ -10,6 +11,19 @@ const Home = () => {
   });
   const { data: filmsData, isFetching } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
+
+  // State để theo dõi trạng thái của popup mua vé
+  const [isBuyPopupOpen, setIsBuyPopupOpen] = useState(false);
+
+  // Function để mở popup mua vé
+  const openBuyPopup = () => {
+    setIsBuyPopupOpen(true);
+  };
+
+  // Function để đóng popup mua vé
+  const closeBuyPopup = () => {
+    setIsBuyPopupOpen(false);
+  };
 
   return (
     <div>
@@ -55,7 +69,6 @@ const Home = () => {
           </div>
         </div>
         <div className="">
-          {" "}
           {isFetching ? (
             <div
               className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
@@ -82,10 +95,7 @@ const Home = () => {
                     <div className="product-content">
                       <div>
                         <h3 className="text-[#337ab7] font-bold text-lg py-2">
-                          <Link
-                            to={`/film/${item._id}`}
-                            className="line-clamp-1"
-                          >
+                          <Link to={`/film/${item._id}`} className="line-clamp-1">
                             {item?.name}
                           </Link>
                         </h3>
@@ -107,7 +117,10 @@ const Home = () => {
                         </ul>
                       </div>
                       <div>
-                        <button className="btn text-white font-medium w-full py-2 rounded-lg">
+                        <button
+                          className="btn text-white font-medium w-full py-2 rounded-lg"
+                          onClick={openBuyPopup} // Mở popup mua vé khi click vào nút "MUA VÉ"
+                        >
                           MUA VÉ
                         </button>
                       </div>
@@ -134,6 +147,12 @@ const Home = () => {
           </div>
         )}
       </div>
+      {/* Popup Mua Vé */}
+      <Modal isOpen={isBuyPopupOpen} onClose={closeBuyPopup}>
+        {/* Nội dung bên trong popup mua vé */}
+        <h2>Tên Phim:</h2>
+        {/* Thêm nút để đóng popup */}
+      </Modal>
     </div>
   );
 };
