@@ -8,11 +8,11 @@ const Header = () => {
           <div className="float-right">
             <ul className="flex">
               <li className="text-white text-[14px]">
-                <a href="">Đăng nhập</a>
+                <a href="/login">Đăng nhập</a>
               </li>
               <li className="text-white px-2 text-[14px]">|</li>
               <li className="text-white text-[14px]">
-                <a href="">Đăng ký</a>
+                <a href="/signup">Đăng ký</a>
               </li>
             </ul>
           </div>
