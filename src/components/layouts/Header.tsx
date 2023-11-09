@@ -1,15 +1,31 @@
-import { Link } from "react-router-dom";
+import { clearAccessToken } from "@/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const getAccessToken = useAppSelector((state) => state.auth.accessToken);
+  const handleLogout = () => {
+    dispatch(clearAccessToken());
+  };
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="pre-header h-6 bg-black">
         <div className="container w-[1150px] m-auto">
           <div className="float-right">
             <ul className="flex">
-              <li className="text-white text-[14px]">
-                <a href="">Đăng nhập</a>
-              </li>
+              {getAccessToken? (
+                <li className="text-white text-[14px]">
+                  <a onClick={handleLogout} href="">Đăng xuất</a>
+                </li>
+              ) : (
+                <li className="text-white text-[14px]">
+                  <a href="/#/login">Đăng nhập</a>
+                </li>
+              )}
+
               <li className="text-white px-2 text-[14px]">|</li>
               <li className="text-white text-[14px]">
                 <a href="">Đăng ký</a>

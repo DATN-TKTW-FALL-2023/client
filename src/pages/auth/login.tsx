@@ -12,7 +12,6 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const [loginMutation] = useLoginMutation();
   const navigate = useNavigate();
-  
   const onSubmit = async (formData: IUser) => {
     try {
       const response = await loginMutation(formData);
@@ -29,11 +28,7 @@ const Login = () => {
       console.log(error);
     }
   };
-  const getAccessToken = useAppSelector((state) => state.auth.accessToken);
-  
-  const handleLogout = () => {
-    dispatch(clearAccessToken());
-  };
+ 
   return (
     <div className="container">
       <div className="px-[300px]">
