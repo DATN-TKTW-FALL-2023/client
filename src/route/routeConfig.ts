@@ -26,7 +26,7 @@ const routeConfig: TRouteConfig[] = [
     isProtected: true,
   },
   {
-    path: "/checkout",
+    path: "/checkout/:id",
     Element: Checkout,
     isProtected: true,
   },

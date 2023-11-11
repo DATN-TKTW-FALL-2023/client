@@ -18,7 +18,8 @@ import {
   persistStore,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authReducer from "@/slices/authSlice"
+import authReducer from "@/slices/authSlice";
+import orderApi, { orderReducer } from "@/apis/order";
 const persistConfig = {
   key: "root",
   storage,
@@ -29,11 +30,13 @@ const rootReducer = combineReducers({
   showtime: showtimeReducer,
   user: userReducer,
   auth: authReducer,
+  order: orderReducer,
 });
 const middleware = [
   userApi.middleware,
   filmApi.middleware,
   showtimeApi.middleware,
+  orderApi.middleware,
 ];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

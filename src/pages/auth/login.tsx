@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useLoginMutation } from "@/apis/auth";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/hook";
-import { setAuth } from "@/slices/authSlice";
+import { setAuth, setProfile } from "@/slices/authSlice";
 import { IUser } from "@/interfaces/user";
 
 const Login = () => {
@@ -13,8 +13,9 @@ const Login = () => {
   const onSubmit = async (formData: IUser) => {
     try {
       const { data } = await loginMutation(formData);
-      const { auth } = data.data;
+      const { auth, user } = data.data;
       dispatch(setAuth(auth));
+      dispatch(setProfile(user));
       navigate("/");
     } catch (error) {
       console.log(error);

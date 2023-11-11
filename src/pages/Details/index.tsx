@@ -16,10 +16,11 @@ const Details = () => {
   const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
     skip: !params.day,
   });
-  const [isShowtimeDetailsVisible, setIsShowtimeDetailsVisible] = useState(false);
-  const [selectedShowtime, setSelectedShowtime] = useState({});
+  const [isShowtimeDetailsVisible, setIsShowtimeDetailsVisible] =
+    useState(false);
+  const [selectedShowtime, setSelectedShowtime] = useState(null);
   useEffect(() => {
-    if(film?.data?.dayShowing.length > 0){
+    if (film?.data?.dayShowing.length > 0) {
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
     }
   }, [film]);
@@ -41,14 +42,6 @@ const Details = () => {
     const daysOfWeek = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
-  }
-  function handleShowtimeClick(st: any) {
-    setSelectedShowtime({
-      movieName: film?.data?.name,
-      showDate: dayjs(new Date(st.startHour).toISOString()).format("DD/MM/YYYY"),
-      showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
-    });
-    setIsShowtimeDetailsVisible(true);
   }
 
   return (
@@ -182,34 +175,38 @@ const Details = () => {
             </div>
           )}
           {showtime && !isLoading ? (
-          <div className="flex mx-[-4px]">
-            {showtime?.data?.map((st: any) => (
-              <div className="relative my-4 text-center px-2 cursor-pointer">
-                <div
-                  onClick={() => handleShowtimeClick(st)}
-                  className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
-                >
-                  {`${dayjs(new Date(st.startHour).toISOString()).format("h:mm A")}`}
-                </div>
-                <p className="text-xs py-2 font-medium">
+            <div className="flex mx-[-4px]">
+              {showtime?.data?.map((st: any) => (
+                <div className="relative my-4 text-center px-2 cursor-pointer">
+                  <div
+                    onClick={() => {
+                      setSelectedShowtime(st);
+                      setIsShowtimeDetailsVisible(true);
+                    }}
+                    className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
+                  >
+                    {`${dayjs(new Date(st.startHour).toISOString()).format(
+                      "h:mm A"
+                    )}`}
+                  </div>
+                  <p className="text-xs py-2 font-medium">
                     {st.room.seats.length - st.seatsBooked} {"  "}
                     ghế trống
                   </p>
-                <ShowtimeDetails
-                  movieName={selectedShowtime.movieName}
-                  showDate={selectedShowtime.showDate}
-                  showTime={selectedShowtime.showTime}
-                  isPopupVisible={isShowtimeDetailsVisible}
-                  onClosePopup={() => setIsShowtimeDetailsVisible(false)}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div>No show time</div>
-        )}
+                  {selectedShowtime && (
+                    <ShowtimeDetails
+                      showtime={selectedShowtime}
+                      isPopupVisible={isShowtimeDetailsVisible}
+                      onClosePopup={() => setIsShowtimeDetailsVisible(false)}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>No show time</div>
+          )}
         </div>
-        
       </div>
     </div>
   );

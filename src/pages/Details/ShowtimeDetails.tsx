@@ -1,6 +1,12 @@
-import React from "react";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
-const ShowtimeDetails = ({ movieName, showDate, showTime, isPopupVisible, onClosePopup }:any) => {
+const ShowtimeDetails = ({
+  showtime: { _id, film, day, startHour },
+  isPopupVisible,
+  onClosePopup,
+}: any) => {
+  const navigate = useNavigate();
   if (!isPopupVisible) {
     return null;
   }
@@ -15,16 +21,18 @@ const ShowtimeDetails = ({ movieName, showDate, showTime, isPopupVisible, onClos
         >
           X
         </span>
-        <h2 className="text-lg font-medium">{movieName}</h2>
-        <p className="text-sm">{showDate}</p>
-        <p className="text-sm">{showTime}</p>
+        <h2 className="text-lg font-medium">{film.name}</h2>
+        <p className="text-sm">{dayjs(day).format("DD/MM/YYYY")}</p>
+        <p className="text-sm">{dayjs(startHour).format("HH:mm")}</p>
         <div>
-        <button className="btn text-white font-medium w-full py-2 rounded-lg">
-                          ĐỒNG Ý
-                        </button>
+          <button
+            onClick={() => navigate(`/showtime/${_id}`)}
+            className="btn text-white font-medium w-full py-2 rounded-lg"
+          >
+            ĐỒNG Ý
+          </button>
         </div>
       </div>
-
     </div>
   );
 };
