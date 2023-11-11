@@ -11,9 +11,8 @@ export function getStoredAuth(): TSignature | null {
   return storedAuth ? JSON.parse(storedAuth) : null;
 }
 
-export function checkAuth(): string {
+export function checkAuth(signature: TSignature | null): string {
   const now: number = dayjs().unix();
-  const signature: TSignature | null = getStoredAuth();
   const accessToken: string | null = signature ? signature.accessToken : null;
   const expiredAt: number = signature ? +signature.expiredAt : 0;
   if (!!accessToken && +now < +expiredAt) return accessToken;

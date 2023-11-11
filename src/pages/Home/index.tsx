@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
-import { useGetFilmsByIdQuery, useGetFilmsQuery } from "@/apis/films";
+import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
-import { useGetShowtimeQuery } from "@/apis/showtime";
 
 const Home = () => {
   const [params, setParams] = useState<any>({

@@ -1,10 +1,10 @@
 import NotFound from "@/components/widget/404";
-import Login from "@/pages/Auth/Login";
 import { Route, Routes } from "react-router-dom";
 import routeConfig, { TRouteConfig } from "./routeConfig";
 import ProtectedRoute from "./protectedRoute";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
+import Login from "@/pages/Auth/login";
 import Signup from "@/pages/Auth/Register";
 
 function RouteApp() {

@@ -1,19 +1,34 @@
+import { clearAuth } from "@/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth.auth);
+  const handleLogout = () => {
+    dispatch(clearAuth());
+  };
+
   return (
     <div>
       <div className="pre-header h-6 bg-black">
         <div className="container w-[1150px] m-auto">
           <div className="float-right">
             <ul className="flex">
-              <li className="text-white text-[14px]">
-                <a href="/login">Đăng nhập</a>
-              </li>
-              <li className="text-white px-2 text-[14px]">|</li>
-              <li className="text-white text-[14px]">
-                <a href="/signup">Đăng ký</a>
-              </li>
+              {auth ? (
+                <li className="text-white text-[14px]">
+                  <p onClick={handleLogout}>Đăng xuất</p>
+                </li>
+              ) : (
+                <>
+                  <li className="text-white text-[14px]">
+                    <Link to="/login">Đăng nhập</Link>
+                  </li>
+                  <li className="text-white text-[14px]">
+                    <Link to="/signup">Đăng ký</Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
