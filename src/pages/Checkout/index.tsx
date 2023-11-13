@@ -1,19 +1,51 @@
-import React from "react";
+import { useGetOrderDetailQuery } from "@/apis/order";
+import { useMemo } from "react";
+import { Link, useParams } from "react-router-dom";
 
-type Props = {};
+const Checkout = () => {
+  const { id } = useParams();
+  const { data, isLoading } = useGetOrderDetailQuery(id as string);
+  console.log("🚀 ~ file: index.tsx:7 ~ Checkout ~ data:", data);
 
-const Checkout = (props: Props) => {
+  const order = useMemo(() => data?.data, [data, isLoading]);
+
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
         <div className="col-span-7">
-          <h3 className="text-[#337ab7] text-xl">
-            <a href="">Trang Chủ</a>
-            <i className="text-base text-[#000] fa-solid fa-chevron-right"></i>
-            <a href="">Đặt vé</a>
-            <i className="text-base text-[#000] fa-solid fa-chevron-right"></i>
-            <span>Đất Rừng Phương Nam</span>
-          </h3>
+          <div className="text-[#337ab7] text-xl flex items-center justify-start gap-2 mt-3">
+            <Link to="/">Trang Chủ</Link>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+            <span>Đơn hàng</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8.25 4.5l7.5 7.5-7.5 7.5"
+              />
+            </svg>
+            <span>{order?.film}</span>
+          </div>
           <div className="inline-block mt-8">
             <div className="inline-block">
               <img width="35" src="https://picsum.photos/200/300" alt="" />
@@ -25,144 +57,29 @@ const Checkout = (props: Props) => {
           <div className="grid grid-cols-3 my-6">
             <div>
               <h4>Họ tên:</h4>
-              <span>Quách Trung Anh</span>
+              <span>{order?.user?.username}</span>
             </div>
             <div>
               <h4>Số điện thoại:</h4>
-              <span>0326912033</span>
+              <span>{order?.user?.phone}</span>
             </div>
             <div>
               <h4>Email:</h4>
-              <span>trunganh123cx@gmail.com</span>
+              <span>{order?.user?.email}</span>
             </div>
           </div>
-          <div className="grid grid-cols-10 pb-4 border-b-2 border-[#ccc] ">
+          <div className="flex justify-between border-b-2 border-[#ccc] ">
             <div className="col-span-7">
-              <h1>Ghết VIP</h1>
+              <h1>Ghế thường</h1>
             </div>
-            <div className="col-span-1">
-              <span>2 x 50.000</span>
-            </div>
-            <div className="col-span-2">
-              <span> = 100.000 vnđ</span>
-            </div>
-          </div>
-          <div className="inline-block mt-8">
-            <div className="inline-block">
-              <img width="35" src="https://picsum.photos/200/300" alt="" />
-            </div>
-            <div className="inline-block  mb-[-10px] mx-4">
-              <h1 className="text-xl text-[#494c62]">COMBO ƯU ĐÃI</h1>
-            </div>
-          </div>
-
-          <table className="w-full mt-10">
-            <tr className="border-b-2 border-[#ccc] pb-4">
-              <th className=" font-normal text-base w-[20%]"></th>
-              <th className=" font-normal text-base w-[25%]">Tên combo</th>
-              <th className=" font-normal text-base ">Mô tả</th>
-              <th className=" font-normal text-base w-[15%]">Số lượng</th>
-            </tr>
-            <tr>
-              <td className="px-4">
-                <img src="https://picsum.photos/200/300" alt="" />
-              </td>
-              <td className="px-4 font-medium">Combo See Mê - Cầu Vồng</td>
-              <td className="px-4">
-                GIÁ SỐC, Chỉ 139K sở hữu ngay: 1 Bắp (69oz) + 1 Cốc Cầu vồng kèm
-                nước có gaz
-              </td>
-              <td className="px-4">5</td>
-            </tr>
-          </table>
-
-          <div className="inline-block mt-8">
-            <div className="inline-block">
-              <img width="45" src="https://picsum.photos/200/300" alt="" />
-            </div>
-            <div className="inline-block  mb-[-10px] mx-4">
-              <h1 className="text-xl text-[#494c62]">GIẢM GIÁ</h1>
-            </div>
-          </div>
-          <div className="mt-6">
-            <div className="border-b-2 border-[#ccc] pb-2">
-              <h3>
-                <i className="fa-solid fa-circle-down"></i>
-                Beta Voucher
-                <span className="text-[#1473B6] italic">
-                  (Nhấn vào đây để xem danh sách voucher của bạn)
-                </span>
-              </h3>
-            </div>
-            <div className="grid grid-cols-5 gap-8 mt-4">
-              <div className="col-span-2">
-                <p className="py-2">Mã Voucher</p>
-                <input
-                  className="w-full border-[1px] border-[#ccc] py-2 bg-[#f8f8f8] focus:outline-none focus:ring focus:border-blue-500"
-                  type="text"
-                />
-              </div>
-              <div className="col-span-2">
-                <p className="py-2">Mã Pin</p>
-                <input
-                  className="w-full border-[1px] border-[#ccc] py-2 bg-[#f8f8f8] focus:outline-none focus:ring focus:border-blue-500"
-                  type="text"
-                />
-              </div>
-              <div className="col-span-1">
-                <p className="py-2">&nbsp;</p>
-                <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-8 py-2">
-                  ĐĂNG KÝ
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="mt-6 border-b-2 border-[#ccc] pb-12">
-            <div className="border-b-2 border-[#ccc] pb-2">
-              <h3>
-                <i className="fa-solid fa-circle-down"></i>
-                Điểm Beta
-                <span className="text-[#1473B6] italic">
-                  (Nhấn vào đây để xem danh sách voucher của bạn)
-                </span>
-              </h3>
-            </div>
-            <div className="grid grid-cols-4 gap-[90px] mt-4">
-              <div className="col-span-1">
-                <p className="py-2">Điểm hiện có</p>
-                <h3>0</h3>
-              </div>
-              <div className="col-span-1">
-                <p className="py-2">Nhập điểm</p>
-                <input
-                  className="w-full border-[1px] border-[#ccc] py-2 bg-[#f8f8f8] focus:outline-none focus:ring focus:border-blue-500"
-                  type="text"
-                />
-              </div>
-              <div className="col-span-1">
-                <p className="py-2">Số tiền được giảm</p>
-                <h3>= 0 vnđ</h3>
-              </div>
-              <div className="col-span-1">
-                <p className="py-2">&nbsp;</p>
-                <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-8 py-2">
-                  Đổi điểm
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="flex">
-              <h3>Tổng tiền:</h3>
-              <p className="text-red-500">50.000 vnđ</p>
-            </div>
-            <div className="flex">
-              <h3>Số tiền được giảm:</h3>
-              <p className="text-red-500">0 vnđ</p>
-            </div>
-            <div className="flex">
-              <h3>Số tiền cần thanh toán:</h3>
-              <p className="text-red-500">50.000 vnđ</p>
+            <div>
+              <span>
+                {order?.seats?.length} x {order?.price}
+              </span>
+              <span> = </span>
+              <span>
+                {Number(order?.seats?.length) * Number(order?.price)} vnđ
+              </span>
             </div>
           </div>
         </div>
@@ -173,7 +90,7 @@ const Checkout = (props: Props) => {
             </div>
             <div>
               <h1 className="text-xl text-[#03599d] font-bold py-4">
-                Đất Rừng Phương Nam
+                {order?.film}
               </h1>
               <h4>2D Phụ đề</h4>
             </div>

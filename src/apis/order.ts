@@ -1,4 +1,5 @@
 import { TResApi } from "@/interfaces/common";
+import { TOrder } from "@/interfaces/order";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const orderApi = createApi({
@@ -19,7 +20,7 @@ const orderApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getOrderDetail: builder.query<TResApi<any>, string>({
+    getOrderDetail: builder.query<TResApi<TOrder>, string>({
       query: (id) => ({
         url: `/${id}`,
       }),
