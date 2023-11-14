@@ -208,6 +208,20 @@ const Details = () => {
           )}
         </div>
       </div>
+      <div>
+      {film?.data?.trailerUrl && (
+          <div className="my-4">
+            <h2 className="text-lg font-medium">Trailer</h2>
+            <video
+              width="100%"
+              height="315"
+              src={film?.data?.trailerUrl}
+              title="Trailer"
+              controls
+            ></video>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
