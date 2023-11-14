@@ -13,7 +13,9 @@ const ShowtimeDetails = ({
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-80">
-      <div className="bg-white px-[250px] py-[200px] rounded shadow-lg text-center relative">
+      <div className="">
+      <div className="bg-white px-[250px] my-[200px] rounded shadow-lg text-center relative">
+        <h1 className="flex justify-start">Bạn đang đặt vé xem phim</h1>
         <span
           onClick={onClosePopup}
           className="text-blue-500 hover:underline cursor-pointer absolute top-2 right-2"
@@ -33,6 +35,7 @@ const ShowtimeDetails = ({
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };
