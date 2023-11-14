@@ -5,6 +5,8 @@ import { useGetFilmsByIdQuery, useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 import { useGetShowtimeQuery } from "@/apis/showtime";
+import { GiTicket } from "react-icons/gi";
+
 
 const Home = () => {
   const [params, setParams] = useState<any>({
@@ -127,9 +129,10 @@ const Home = () => {
                         <button
                           className="btn text-white font-medium w-full py-2 rounded-lg"
                           onClick={() => openBuyPopup(item?._id)} // Mở popup mua vé khi click vào nút "MUA VÉ"
-                        >
+                        > <span><GiTicket className="bg-icon"/></span>
                           MUA VÉ
                         </button>
+                        
                       </div>
                     </div>
                   </div>
