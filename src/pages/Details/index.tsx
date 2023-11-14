@@ -194,7 +194,7 @@ const Details = () => {
                     )}`}
                   </div>
                   <p className="text-xs py-2 font-medium">
-                    {st.room.seats.length - st.seatsBooked} {"  "}
+                    {st.room.seats.length - st.seatsBooked.length} {"  "}
                     ghế trống
                   </p>
                   {selectedShowtime && (
