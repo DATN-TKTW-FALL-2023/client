@@ -47,7 +47,7 @@ const Details = () => {
   return (
     <div className="container">
       <h3 className="text-2xl">
-        Trang chủ <span className="text-[#03599d]">{film?.data?.name}</span>
+        Trang chủ <span className="text-[#03599d]" >{film?.data?.name}</span>
       </h3>
       <div className="py-4 grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
         <div>
@@ -121,7 +121,11 @@ const Details = () => {
               <h3 className="text-lg">NGÀY KHỞI CHIẾU:</h3>
             </div>
             <div>
-              <h3 className="text-lg font-light">{film?.data?.scheduleAt}</h3>
+            <h3 className="text-lg font-light">
+          {film?.data?.scheduleAt
+            ? dayjs(film.data.scheduleAt).format("DD/MM/YYYY")
+              : "Invalid Date"}
+              </h3>
             </div>
           </div>
         </div>
@@ -190,7 +194,7 @@ const Details = () => {
                     )}`}
                   </div>
                   <p className="text-xs py-2 font-medium">
-                    {st.room.seats.length - st.seatsBooked} {"  "}
+                    {st.room.seats.length - st.seatsBooked.length} {"  "}
                     ghế trống
                   </p>
                   {selectedShowtime && (
@@ -207,6 +211,16 @@ const Details = () => {
             <div>No show time</div>
           )}
         </div>
+      </div>
+      <div>
+      {film?.data?.trailerUrl && (
+        <div>
+          <h1 className="font-bold text-center text-[30px]">TRAILER</h1>
+          <iframe width="100%"
+              height="555" src={film?.data?.trailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        
+        </div>
+        )}
       </div>
     </div>
   );
