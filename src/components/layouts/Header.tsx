@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.auth);
+  
+  console.log(auth);
+  
   const handleLogout = () => {
     dispatch(clearAuth());
   };
@@ -16,16 +19,21 @@ const Header = () => {
           <div className="float-right">
             <ul className="flex">
               {auth ? (
-                <li className="text-white text-[14px]">
-                  <p onClick={handleLogout}>Đăng xuất</p>
-                </li>
+                <>
+                  <li className="text-white text-[14px]">
+                    <Link to="/profile" >Xin Chào {auth?.email}</Link>
+                  </li>
+                  <li className="text-white text-[14px] pl-3">
+                    <p onClick={handleLogout}>Đăng xuất</p>
+                  </li>
+                </>
               ) : (
                 <>
                   <li className="text-white text-[14px]">
                     <Link to="/login">Đăng nhập</Link>
                   </li>
-                  <li className="text-white text-[14px]">
-                    <Link to="/signup">Đăng ký</Link>
+                  <li className="pl-2 text-white text-[14px]">
+                    <Link to="/register">Đăng ký</Link>
                   </li>
                 </>
               )}

@@ -7,6 +7,7 @@ import {
 import showtimeApi, { showtimeReducer } from "@/apis/showtime";
 import userApi, { userReducer } from "@/apis/auth";
 import filmApi, { filmReducer } from "@/apis/films";
+import profileApi,{profileReducer} from "@/apis/user";
 import {
   FLUSH,
   PAUSE,
@@ -31,12 +32,15 @@ const rootReducer = combineReducers({
   user: userReducer,
   auth: authReducer,
   order: orderReducer,
+  profile: profileReducer,
+
 });
 const middleware = [
   userApi.middleware,
   filmApi.middleware,
   showtimeApi.middleware,
   orderApi.middleware,
+  profileApi.middleware
 ];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
