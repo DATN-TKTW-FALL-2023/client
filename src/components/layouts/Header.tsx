@@ -72,7 +72,7 @@ const Header = () => {
         </div>
       </div>
       <div className="banner">
-        <img src="./img/Thiết kế chưa có tên.png" alt="" />
+        <img src="https://files.betacorp.vn/files/ecm/2023/11/15/370090522-3511623162424399-1155662884771169456-n-1-120242-151123-30.png" alt="" />
       </div>
     </div>
   );

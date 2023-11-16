@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
+import { GiTicket } from "react-icons/gi";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 
 const Home = () => {
@@ -127,6 +128,7 @@ const Home = () => {
                           className="btn text-white font-medium w-full py-2 rounded-lg"
                           onClick={() => openBuyPopup(item?._id)} // Mở popup mua vé khi click vào nút "MUA VÉ"
                         >
+                          <span className="bg-icon"><GiTicket/></span>
                           MUA VÉ
                         </button>
                       </div>
@@ -134,7 +136,10 @@ const Home = () => {
                   </div>
                 ))
               ) : (
-                <div>No films available.</div>
+                <div>
+                  <img src="https://img.freepik.com/free-vector/people-creating-film_1262-20653.jpg?w=996&t=st=1700108735~exp=1700109335~hmac=bfda8613c7bd627b2334911bcea1f3935b32673338ce3d9937be922e63feb1d4" alt="" />
+
+                </div>
               )}
             </div>
           )}

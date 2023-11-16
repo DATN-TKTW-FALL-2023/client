@@ -51,12 +51,13 @@ li {
   text-decoration: underline;
 }
 .btn {
-  background-image: linear-gradient(
+  background-image: 
+  linear-gradient(
     to right,
     #0a64a7 0%,
     #258dcf 51%,
     #3db1f3 100%
-  ) !important;
+  )
 }
 .modal {
   display: none; /* Hidden by default */
