@@ -63,4 +63,9 @@
   background: transparent;
   border: none;
 }
-        
+.bg-icon {
+  position: absolute;
+    opacity: 0.5;
+    font-size: 80px;
+    margin-top: -12px;
+}

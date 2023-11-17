@@ -1,5 +1,5 @@
 import React from "react";
-
+import { AiFillFacebook, AiFillYoutube, AiFillInstagram   } from "react-icons/ai";
 type Props = {};
 
 const Footer = (props: Props) => {
@@ -7,7 +7,7 @@ const Footer = (props: Props) => {
     <div>
       {" "}
       <div className="footer border-t-2 border-[#ccc]">
-        <div className="container py-10 grid grid-cols-4">
+        <div className="container py-10 grid grid-cols-3">
           <div>
             <div className="mb-4">
               <img width="200" src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698914102/logo_datn-01_bun5pj.png" alt="" />
@@ -56,7 +56,12 @@ const Footer = (props: Props) => {
               KẾT NỐI VỚI CHÚNG TÔI
             </h2>
             <div>
-              <img width="150" src="./img/dathongbao.png" alt="" />
+              <div className="flex text-3xl text-[#ccc] mb-2">
+                <AiFillFacebook className="mx-2"/>
+                <AiFillInstagram className="mx-2"/>
+                <AiFillYoutube className="mx-2"/>
+              </div>
+              <img width="150" src="https://betacinemas.vn/Assets/Common/logo/dathongbao.png" alt="" />
             </div>
           </div>
           <div>
