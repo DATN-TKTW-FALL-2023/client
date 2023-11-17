@@ -28,6 +28,25 @@ const orderApi = createApi({
         return [{ type: "Orders", id: arg }];
       },
     }),
+    getListOrder: builder.query<any, any>({
+      query: (params) => ({
+        url: `/my-order`,
+        params,
+      }),
+      providesTags(result, _, arg) {
+        if (result) {
+          const final = [
+            ...result.data.map(({ _id }: { _id: string }) => ({
+              type: "Orders" as const,
+              id: _id,
+            })),
+            { type: "Orders" as const, id: "LIST", params: JSON.stringify(arg) },
+          ];
+          return final;
+        }
+        return [{ type: "Orders", id: "LIST", params: JSON.stringify(arg) }];
+      },
+    }),
     createOrder: builder.mutation({
       query(body) {
         try {
@@ -46,6 +65,6 @@ const orderApi = createApi({
   }),
 });
 
-export const { useCreateOrderMutation, useGetOrderDetailQuery } = orderApi;
+export const { useCreateOrderMutation, useGetOrderDetailQuery,useGetListOrderQuery } = orderApi;
 export const orderReducer = orderApi.reducer;
 export default orderApi;
