@@ -81,7 +81,7 @@ const Showtime = () => {
   };
 
   const handleOrder = async () => {
-    const res = await order({
+    const res: any = await order({
       showtime: id,
       seats: selectedSeats.map((s) => s._id),
     });

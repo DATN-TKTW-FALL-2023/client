@@ -1,22 +1,16 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useRegisterMutation } from "@/apis/auth";
-import { IUser } from "@/interfaces/User";
+import { IUser } from "@/interfaces/user";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Signup = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const [registerMutation] = useRegisterMutation();
   const navigate = useNavigate();
   const onSubmit = async (formData: IUser) => {
     try {
-      const response = await registerMutation(formData);
-      console.log(response.error);
+      const response: any = await registerMutation(formData);
       if (response.error) {
         if (response.error.data) {
           const errorMessages = response.error.data.message;

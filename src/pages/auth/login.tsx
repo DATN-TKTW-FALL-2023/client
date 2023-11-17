@@ -12,8 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
   const onSubmit = async (formData: IUser) => {
     try {
-      const { data } = await loginMutation(formData);
-      const { auth, user } = data.data;
+      const res: any = await loginMutation(formData);
+      const { auth, user } = res.data.data;
       dispatch(setAuth(auth));
       dispatch(setProfile(user));
       navigate("/");

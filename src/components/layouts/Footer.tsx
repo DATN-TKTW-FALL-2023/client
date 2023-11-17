@@ -1,8 +1,6 @@
-import React from "react";
-import { AiFillFacebook, AiFillYoutube, AiFillInstagram   } from "react-icons/ai";
-type Props = {};
+import { AiFillFacebook, AiFillYoutube, AiFillInstagram } from "react-icons/ai";
 
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <div>
       {" "}
@@ -10,13 +8,15 @@ const Footer = (props: Props) => {
         <div className="container py-10 grid grid-cols-3">
           <div>
             <div className="mb-4">
-              <img width="200" src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698914102/logo_datn-01_bun5pj.png" alt="" />
+              <img
+                width="200"
+                src="https://res.cloudinary.com/dxzkcrvi0/image/upload/v1698914102/logo_datn-01_bun5pj.png"
+                alt=""
+              />
             </div>
-            
+
             <div>
-              
               <ul>
-                
                 <li className="font-light hover:text-sky-700 cursor-pointer py-[2px]">
                   Tuyển dụng
                 </li>
@@ -57,11 +57,15 @@ const Footer = (props: Props) => {
             </h2>
             <div>
               <div className="flex text-3xl text-[#ccc] mb-2">
-                <AiFillFacebook className="mx-2"/>
-                <AiFillInstagram className="mx-2"/>
-                <AiFillYoutube className="mx-2"/>
+                <AiFillFacebook className="mx-2" />
+                <AiFillInstagram className="mx-2" />
+                <AiFillYoutube className="mx-2" />
               </div>
-              <img width="150" src="https://betacinemas.vn/Assets/Common/logo/dathongbao.png" alt="" />
+              <img
+                width="150"
+                src="https://betacinemas.vn/Assets/Common/logo/dathongbao.png"
+                alt=""
+              />
             </div>
           </div>
           <div>

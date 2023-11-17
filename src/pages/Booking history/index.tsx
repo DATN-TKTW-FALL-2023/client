@@ -1,12 +1,7 @@
-import React, { useState } from "react";
 import { useGetListOrderQuery } from "@/apis/order";
 
 const BookingHistory = () => {
-  const [params, setParams] = useState<any>({
-    isRelease: false,
-  });
-
-  const { data: orderData, isLoading } = useGetListOrderQuery(params);
+  const { data: orderData, isLoading } = useGetListOrderQuery({});
 
   if (isLoading) {
     return <div className="text-center">Loading...</div>;
@@ -20,13 +15,27 @@ const BookingHistory = () => {
             <table className="min-w-full text-left text-sm font-light border-collapse">
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
-                  <th scope="col" className="px-6 py-4">#</th>
-                  <th scope="col" className="px-6 py-4">Film</th>
-                  <th scope="col" className="px-6 py-4">Phòng</th>
-                  <th scope="col" className="px-6 py-4">Ghế</th>
-                  <th scope="col" className="px-6 py-4">Giá</th>
-                  <th scope="col" className="px-6 py-4">Ngày</th>
-                  <th scope="col" className="px-6 py-4">Giờ chiếu</th>
+                  <th scope="col" className="px-6 py-4">
+                    #
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Film
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Phòng
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Ghế
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Giá
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Ngày
+                  </th>
+                  <th scope="col" className="px-6 py-4">
+                    Giờ chiếu
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -35,11 +44,21 @@ const BookingHistory = () => {
                     <td className="whitespace-nowrap px-6 py-4 font-medium">
                       {index + 1}
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4">{item?.film}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item?.room}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item?.seats}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item?.price}</td>
-                    <td className="whitespace-nowrap px-6 py-4">{item?.date}</td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item?.film}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item?.room}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item?.seats}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item?.price}
+                    </td>
+                    <td className="whitespace-nowrap px-6 py-4">
+                      {item?.date}
+                    </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item?.startHour}
                     </td>

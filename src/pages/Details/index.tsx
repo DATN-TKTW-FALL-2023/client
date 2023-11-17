@@ -11,6 +11,7 @@ const Details = () => {
     film: id,
     day: selectedDay,
   });
+  console.log("🚀 ~ file: index.tsx:14 ~ Details ~ params:", params);
 
   const { data: film } = useGetFilmsByIdQuery(id);
   const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
@@ -19,6 +20,7 @@ const Details = () => {
   const [isShowtimeDetailsVisible, setIsShowtimeDetailsVisible] =
     useState(false);
   const [selectedShowtime, setSelectedShowtime] = useState(null);
+
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
@@ -47,7 +49,7 @@ const Details = () => {
   return (
     <div className="container">
       <h3 className="text-2xl">
-        Trang chủ <span className="text-[#03599d]" >{film?.data?.name}</span>
+        Trang chủ <span className="text-[#03599d]">{film?.data?.name}</span>
       </h3>
       <div className="py-4 grid grid-cols-[250px_minmax(720px,_1fr)_100px] gap-10">
         <div>
@@ -121,10 +123,10 @@ const Details = () => {
               <h3 className="text-lg">NGÀY KHỞI CHIẾU:</h3>
             </div>
             <div>
-            <h3 className="text-lg font-light">
-          {film?.data?.scheduleAt
-            ? dayjs(film.data.scheduleAt).format("DD/MM/YYYY")
-              : "Invalid Date"}
+              <h3 className="text-lg font-light">
+                {film?.data?.scheduleAt
+                  ? dayjs(film.data.scheduleAt).format("DD/MM/YYYY")
+                  : "Invalid Date"}
               </h3>
             </div>
           </div>
@@ -213,13 +215,19 @@ const Details = () => {
         </div>
       </div>
       <div>
-      {film?.data?.trailerUrl && (
-        <div>
-          <h1 className="font-bold text-center text-[30px]">TRAILER</h1>
-          <iframe width="100%"
-              height="555" src={film?.data?.trailerUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-        
-        </div>
+        {film?.data?.trailerUrl && (
+          <div>
+            <h1 className="font-bold text-center text-[30px]">TRAILER</h1>
+            <iframe
+              width="100%"
+              height="555"
+              src={film?.data?.trailerUrl}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          </div>
         )}
       </div>
     </div>

@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth.auth);
-  
-  console.log(auth);
-  
+  const auth: any = useAppSelector((state) => state.auth.auth);
+
   const handleLogout = () => {
     dispatch(clearAuth());
   };
@@ -21,12 +19,12 @@ const Header = () => {
               {auth ? (
                 <>
                   <li className="text-white text-[14px]">
-                    <Link to="/profile" >Xin Chào {auth?.email}</Link>
+                    <Link to="/profile">Xin Chào {auth?.email}</Link>
                   </li>
-                   <li className="text-white text-[14px]">
-                    <Link to="/bookinghistory" >Lịch sử đặt vé</Link>
+                  <li className="text-white text-[14px] px-3">
+                    <Link to="/bookinghistory">Lịch sử đặt vé</Link>
                   </li>
-                  <li className="text-white text-[14px] pl-3">
+                  <li className="text-white text-[14px] ">
                     <p onClick={handleLogout}>Đăng xuất</p>
                   </li>
                 </>
@@ -81,9 +79,6 @@ const Header = () => {
             </ul>
           </div>
         </div>
-      </div>
-      <div className="banner">
-        <img src="https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg" alt="" />
       </div>
     </div>
   );
