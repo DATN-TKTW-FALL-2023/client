@@ -2,6 +2,7 @@ import Checkout from "@/pages/Checkout";
 import Details from "@/pages/Details";
 import Home from "@/pages/Home";
 import Showtime from "@/pages/Showtime";
+import Profile from "@/pages/Profile";
 import React from "react";
 import { PathRouteProps } from "react-router-dom";
 
@@ -28,6 +29,11 @@ const routeConfig: TRouteConfig[] = [
   {
     path: "/checkout/:id",
     Element: Checkout,
+    isProtected: true,
+  },
+  {
+    path: "/profile",
+    Element: Profile,
     isProtected: true,
   },
 ];

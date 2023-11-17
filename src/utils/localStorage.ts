@@ -40,3 +40,6 @@ export function setLocalStored(key: string, data: any): void {
 export function clearLocalStored(key: string): void {
   localStorage.removeItem(key);
 }
+
+
+
