@@ -180,8 +180,8 @@ const Details = () => {
           )}
           {showtime && !isLoading ? (
             <div className="flex mx-[-4px]">
-              {showtime?.data?.map((st: any) => (
-                <div className="relative my-4 text-center px-2 cursor-pointer">
+              {showtime?.data?.map((st: any,index:number) => (
+                <div key={index} className="relative my-4 text-center px-2 cursor-pointer">
                   <div
                     onClick={() => {
                       setSelectedShowtime(st);
@@ -217,7 +217,7 @@ const Details = () => {
         <div>
           <h1 className="font-bold text-center text-[30px]">TRAILER</h1>
           <iframe width="100%"
-              height="555" src={film?.data?.trailerUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              height="555" src={film?.data?.trailerUrl} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
         
         </div>
         )}

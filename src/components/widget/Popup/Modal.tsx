@@ -15,9 +15,11 @@ const Modal = ({ isOpen, onClose, id }: any) => {
   const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
     skip: !params.day,
   });
+  
   const [isShowtimeDetailsVisible, setIsShowtimeDetailsVisible] =
-    useState(false);
-  const [selectedShowtime, setSelectedShowtime] = useState({});
+    useState(false);  
+    const [selectedShowtime, setSelectedShowtime] = useState(null);
+    
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
@@ -42,16 +44,15 @@ const Modal = ({ isOpen, onClose, id }: any) => {
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
   }
-  function handleShowtimeClick(st: any) {
-    setSelectedShowtime({
-      movieName: film?.data?.name,
-      showDate: dayjs(new Date(st.startHour).toISOString()).format(
-        "DD/MM/YYYY"
-      ),
-      showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
-    });
-    setIsShowtimeDetailsVisible(true);
-  }
+  // function handleShowtimeClick(st: any) {
+  //   console.log(st);
+  //   setSelectedShowtime({
+  //     movieName: film?.data?.name,
+  //     showDate: dayjs(new Date(st.startHour).toISOString()).format("DD/MM/YYYY"),
+  //     showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
+  //   });
+  //   setIsShowtimeDetailsVisible(true);
+  // }
 
   if (!isOpen || !id) return null;
   return (
@@ -111,34 +112,38 @@ const Modal = ({ isOpen, onClose, id }: any) => {
               </div>
             )}
             {showtime && !isLoading ? (
-              <div className="flex mx-[-4px]">
-                {showtime?.data?.map((st: any) => (
-                  <div className="relative my-4 text-center px-2 cursor-pointer">
-                    <div
-                      onClick={() => handleShowtimeClick(st)}
-                      className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
-                    >
-                      {`${dayjs(new Date(st.startHour).toISOString()).format(
-                        "h:mm A"
-                      )}`}
-                    </div>
-                    <p className="text-xs py-2 font-medium">
-                      {st.room.seats.length - st.seatsBooked} {"  "}
-                      ghế trống
-                    </p>
+            <div className="flex mx-[-4px]">
+              {showtime?.data?.map((st: any,index:number) => (
+                <div key={index} className="relative my-4 text-center px-2 cursor-pointer">
+                  <div
+                    onClick={() => {
+                      setSelectedShowtime(st);
+                      setIsShowtimeDetailsVisible(true);
+                    }}
+                    className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
+                  >
+                    {`${dayjs(new Date(st.startHour).toISOString()).format(
+                      "h:mm A"
+                    )}`}
+                  </div>
+                  <p className="text-xs py-2 font-medium">
+                    {st.room.seats.length - st.seatsBooked.length} {"  "}
+                    ghế trống
+                  </p>
+                  {selectedShowtime && (
                     <ShowtimeDetails
-                      movieName={selectedShowtime.movieName}
-                      showDate={selectedShowtime.showDate}
-                      showTime={selectedShowtime.showTime}
+                      showtime={selectedShowtime}
                       isPopupVisible={isShowtimeDetailsVisible}
                       onClosePopup={() => setIsShowtimeDetailsVisible(false)}
                     />
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div>Không tìm thấy suất chiếu nào</div>
-            )}
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>No show time</div>
+          )}
+           
           </div>
         </div>
       </div>
