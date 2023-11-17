@@ -23,7 +23,7 @@ const Showtime = () => {
   const showtime = useMemo(() => data?.data, [data, isLoading]);
 
   const [bookingSeat, { isError }] = useBookingSeatMutation();
-
+  const [bookedSeats, setBookedSeats] = useState<string[]>([]);
   const [cancelBooking] = useCancelBookingMutation();
   const [order, { isLoading: isLoadingOrder }] = useCreateOrderMutation();
 
@@ -33,6 +33,12 @@ const Showtime = () => {
     };
   }, [location]);
 
+  useEffect(() => {
+    if (showtime) {
+      const bookedSeatIds = showtime.seatsBooked.map((s) => s._id);
+      setBookedSeats(bookedSeatIds);
+    }
+  }, [showtime]);
   const seatsBooked = showtime?.seatsBooked.map((s) => s._id) || [];
 
   const seatsOtherHeld =
@@ -62,14 +68,21 @@ const Showtime = () => {
   };
 
   const handleSelectSeats = async (seat: TSeat) => {
+    const isSeatBooked = bookedSeats.includes(seat._id);
     const index = selectedSeats.findIndex((s) => s._id === seat._id);
-    if (index < 0 && selectedSeats.length < 10) {
+    if (index < 0 && selectedSeats.length < 10 && !isSeatBooked) {
       setSeletedSeats((prev) => [...prev, seat]);
     } else if (index >= 0) {
       setSeletedSeats((prev) => [
         ...prev.slice(0, index),
         ...prev.slice(index + 1),
       ]);
+    } else if (isSeatBooked) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ghế này đã được đặt, vui lòng chọn ghế khác!",
+      });
     } else {
       Swal.fire({
         icon: "error",
