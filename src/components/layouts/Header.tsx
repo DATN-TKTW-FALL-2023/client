@@ -23,6 +23,9 @@ const Header = () => {
                   <li className="text-white text-[14px]">
                     <Link to="/profile" >Xin Chào {auth?.email}</Link>
                   </li>
+                   <li className="text-white text-[14px]">
+                    <Link to="/bookinghistory" >Lịch sử đặt vé</Link>
+                  </li>
                   <li className="text-white text-[14px] pl-3">
                     <p onClick={handleLogout}>Đăng xuất</p>
                   </li>
@@ -80,7 +83,7 @@ const Header = () => {
         </div>
       </div>
       <div className="banner">
-        <img src="./img/Thiết kế chưa có tên.png" alt="" />
+        <img src="https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg" alt="" />
       </div>
     </div>
   );
