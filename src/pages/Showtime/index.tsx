@@ -9,6 +9,7 @@ import { useAppSelector } from "@/store/hook";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Showtime = () => {
   const { id } = useParams();
@@ -62,13 +63,19 @@ const Showtime = () => {
 
   const handleSelectSeats = async (seat: TSeat) => {
     const index = selectedSeats.findIndex((s) => s._id === seat._id);
-    if (index < 0) {
+    if (index < 0 && selectedSeats.length < 10) {
       setSeletedSeats((prev) => [...prev, seat]);
-    } else {
+    } else if (index >= 0) {
       setSeletedSeats((prev) => [
         ...prev.slice(0, index),
         ...prev.slice(index + 1),
       ]);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Bạn không thể đặt được quá 10 ghế trong 1 lần đặt!",
+      });
     }
     await bookingSeat({
       idShowtime: id as string,
