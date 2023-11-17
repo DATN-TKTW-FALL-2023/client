@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRegisterMutation } from "@/apis/auth";
-import { IUser } from "@/interfaces/User";
+import { IUser } from "@/interfaces/user";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
