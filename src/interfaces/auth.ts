@@ -1,4 +1,4 @@
-import { IUser } from "./user";
+import { TUser } from "./person";
 
 export type TSignIn = {
   username: string;
@@ -15,6 +15,6 @@ export type TSignature = {
 };
 
 export type TAuth = {
-  user: IUser;
+  user: TUser;
   auth: TSignature;
 };

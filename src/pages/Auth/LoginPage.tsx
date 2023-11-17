@@ -3,14 +3,13 @@ import { useLoginMutation } from "@/apis/auth";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/hook";
 import { setAuth, setProfile } from "@/slices/authSlice";
-import { IUser } from "@/interfaces/user";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useAppDispatch();
   const [loginMutation, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
-  const onSubmit = async (formData: IUser) => {
+  const onSubmit = async (formData: any) => {
     try {
       const res: any = await loginMutation(formData);
       const { auth, user } = res.data.data;
