@@ -23,6 +23,9 @@ const Header = () => {
                   <li className="text-white text-[14px]">
                     <Link to="/profile" >Xin Chào {auth?.email}</Link>
                   </li>
+                   <li className="text-white text-[14px]">
+                    <Link to="/bookinghistory" >Lịch sử đặt vé</Link>
+                  </li>
                   <li className="text-white text-[14px] pl-3">
                     <p onClick={handleLogout}>Đăng xuất</p>
                   </li>
