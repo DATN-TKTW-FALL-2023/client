@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
+import { useGetListOrderQuery } from "@/apis/order";
 import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "react-icons/fa";
 
 const Checkout = () => {
@@ -10,7 +11,7 @@ const Checkout = () => {
   const { data, isLoading } = useGetOrderDetailQuery(id as string);
   console.log("🚀 ~ file: index.tsx:7 ~ Checkout ~ data:", data);
   const order = useMemo(() => data?.data, [data, isLoading]);
-
+  console.log(order)
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
@@ -59,30 +60,15 @@ const Checkout = () => {
           </div>
         </div>
         <div className="col-span-3 bg-white">
-          <div className="grid grid-cols-2 gap-6 dashed-border pb-6">
-            <div>
-              <img width="170" src="./img/img1.png" alt="" />
-            </div>
+          <div className=" px-10 gap-6 dashed-border pb-6 border-dashed border-b-2 border-[#ccc]">
+            
             <div>
               <h1 className="text-xl text-[#03599d] font-bold py-4">
                 {order?.film}
               </h1>
               <h4>2D Phụ đề</h4>
             </div>
-            <div className="col-span-4 px-10">
-              <ul className=" border-dashed border-b-2 border-[#ccc] pb-6">
-                <li className="py-2 check-out">
-                  <label className="flex"><FaTags className="mr-2 mt-[4px]"/>
-                  Thể loại:</label>
-                  <span>Tâm lý</span>
-                </li>
-                <li className="py-2 check-out">
-                  <label className="flex"><FaClock  className="mr-2 mt-[4px]"/>
-                  Thời lượng:</label>
-                  <span>110 phút</span>
-                </li>
-              </ul>
-            </div>
+          
           </div>
           <div className=" px-10">
             <ul>
@@ -105,7 +91,12 @@ const Checkout = () => {
               <li className="py-2 check-out">
                 <label className="flex"><FaCubes className="mr-2 mt-[4px]"/>
                   Ghế ngồi:</label>
-                <span>P2</span>
+                  {order?.seats.map((seat:any, index:any) => (
+                  <span key={index} className={`seat-${seat}`}>
+                    {seat}
+                    {index < order?.seats.length - 1 && ','}
+                  </span>
+                  ))}
               </li>
             </ul>
           </div>
