@@ -107,6 +107,7 @@ const Showtime = () => {
     });
     navigate(`/checkout/${res.data.data._id}`);
   };
+  const isButtonDisabled = selectedSeats.length === 0;
 
   return (
     <div className="container">
@@ -379,8 +380,11 @@ const Showtime = () => {
             </div>
             <div className="text-center mt-4">
               <button
-                onClick={handleOrder}
-                className="btn btn text-white font-medium w-[40%] py-2 rounded-lg"
+                 onClick={handleOrder}
+                 className={`btn btn text-white font-medium w-[40%] py-2 rounded-lg ${
+                   isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+                 }`}
+                 disabled={isButtonDisabled}
               >
                 {isLoadingOrder ? (
                   <svg
