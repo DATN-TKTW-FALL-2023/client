@@ -1,5 +1,6 @@
 import { useCreateOrderMutation } from "@/apis/order";
 import "../Home/home.css"
+import { GiTicket } from "react-icons/gi";
 import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "react-icons/fa";
 import {
   useBookingSeatMutation,
@@ -392,6 +393,7 @@ const Showtime = () => {
                 }`}
                 disabled={isButtonDisabled}
               >
+                <span><GiTicket className="bg-icon"/></span>
                 {isLoadingOrder ? (
                   <svg
                     aria-hidden="true"
