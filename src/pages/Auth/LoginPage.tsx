@@ -22,56 +22,61 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="px-[300px]">
-        <div className="forms">
-          <ul className="tab-group flex text-center border-b-2 border-[#ccc]">
-            <li className=" w-[50%] tab px-14 py-2 event">
-              <a href="#login">Log In</a>
-            </li>
-            <li className=" w-[50%] tab px-14 py-2">
-              <a href="#register">Sign Up</a>
-            </li>
-          </ul>
-          <form id="login" onSubmit={handleSubmit(onSubmit as any)}>
-            <div className="input-field bg-white p-4">
-              <p className="py-2">Name</p>
-              <div className="relative">
-                <i className="fa-solid fa-user absolute m-[10px] text-gray-500"></i>
-                <input
-                  {...register("username", { required: true })}
-                  className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                  placeholder="Tên tài khoản"
-                  type="username"
-                  name="username"
-                  required
-                />
+    <div className="bg-login">
+      <div className="container">
+        <div className="px-[300px]">
+          <div className="forms">
+            <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
+              <li className=" w-[50%] tab px-14 py-2 event">
+                <a href="#login">Log In</a>
+              </li>
+              <li className=" w-[50%] tab px-14 py-2">
+                <a href="#register">Sign Up</a>
+              </li>
+            </ul>
+            <form id="login" onSubmit={handleSubmit(onSubmit as any)}>
+              <div className="input-field rounded-b-lg bg-white p-4 pb-8">
+                <div className="relative my-4">
+                  <p className="pb-4">Username</p>
+                  <div className="form-field">
+                      <input className="form-input" placeholder=" " 
+                        {...register("username", { required: true })}
+                        type="username"
+                        name="username"
+                        required
+                        />
+                      <label className="form-label"><span>Username</span></label>
+                  </div>
+                </div>
+                <div className="relative my-4">
+                  <p className="pb-4">Password</p>
+                  <div className="form-field">
+                    <input className="form-input" placeholder=" " 
+                      {...register("password", { required: true })}
+                      type="password"
+                      name="password"
+                      required
+                      />
+                    <label className="form-label"><span>Password</span></label>
+                  </div>
+                </div>
+                
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="btn-gradient bg-gradient-to-r mt-4 from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2"
+                  >
+                    {isLoading ? "loading" : "Đăng nhập"}
+                  </button>
+                </div>
+                <div className="flex justify-end">
+                  <p className="text-p py-4 text-[#337ab7] hover:underline inline-block text-gradient">
+                    <a href="#">Quên mật khẩu?</a>
+                  </p>
+                </div>
               </div>
-              <p className="py-2 mt-2">Password</p>
-              <div className="relative">
-                <i className="fa-solid fa-lock absolute m-[10px] text-gray-500"></i>
-                <input
-                  {...register("password", { required: true })}
-                  className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                  placeholder="Mật khẩu"
-                  type="password"
-                  name="password"
-                  required
-                />
-              </div>
-              <p className="text-p py-4 text-[#337ab7] hover:underline inline-block">
-                <a href="#">Quên mật khẩu?</a>
-              </p>
-              <div className="text-center">
-                <button
-                  type="submit"
-                  className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2"
-                >
-                  {isLoading ? "loading" : "Đăng nhập"}
-                </button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

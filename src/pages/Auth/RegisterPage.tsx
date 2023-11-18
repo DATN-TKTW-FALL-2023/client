@@ -39,171 +39,180 @@ const Signup = () => {
     }
   };
   return (
-    <div className="container">
-      <div className="px-[300px]">
-        <div className="forms">
-          <ul className="tab-group flex text-center border-b-2 border-[#ccc]">
-            <li className=" w-[50%] tab px-14 py-2 event">
-              <a href="#login">Log In</a>
-            </li>
-            <li className=" w-[50%] tab px-14 py-2">
-              <a href="#register">Sign Up</a>
-            </li>
-          </ul>
+    <div className="bg-login">
+      <div className="container">
+        <div className="px-[300px]">
+          <div className="forms">
+            <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
+                <li className=" w-[50%] tab px-14 py-2 event">
+                  <a href="#login">Log In</a>
+                </li>
+                <li className=" w-[50%] tab px-14 py-2">
+                  <a href="#register">Sign Up</a>
+                </li>
+            </ul>
 
-          <form id="signup" onSubmit={handleSubmit(onSubmit as any)}>
-            <div className="input-field bg-white p-4">
-              <div className="flex">
-                <div className="mr-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span> Tên đăng nhập
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-user absolute m-[10px] text-gray-500"></i>
-                    <input
-                      {...register("username", {
-                        required: "Username is required",
-                      })}
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Tên đăng nhập"
-                      type="text"
-                      name="username"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex">
-                <div className="mr-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span> Họ
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-user absolute m-[10px] text-gray-500"></i>
-                    <input
-                      {...register("lastName", {
-                        required: "Last name is required",
-                      })}
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Họ"
-                      type="text"
-                      name="lastName"
-                      required
-                    />
-                  </div>
-                </div>
+            <form id="signup" onSubmit={handleSubmit(onSubmit as any)}>
+              <div className="input-field bg-white p-4 rounded-b-lg">
+                <div className="flex">
+                  <div className="mr-2 flex-1 mb-2">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span> Tên đăng nhập
+                    </p>
+                    <div className="relative">
 
-                <div className="mr-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span> Tên
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-user absolute m-[10px] text-gray-500"></i>
-                    <input
-                      {...register("firstName", {
-                        required: "First name is required",
-                      })}
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Tên"
-                      type="text"
-                      name="firstName"
-                      required
-                    />
+                      <div className="form-field">
+                        <input className="form-input" placeholder=" " 
+                          {...register("username", {
+                            required: "Username is required",
+                          })}
+                          type="text"
+                          name="username"
+                          required
+                          />
+                        <label className="form-label"><span>Username</span></label>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
-                {/* <div className="ml-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span>Email
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-envelope absolute m-[10px] text-gray-500"></i>
-                    <input
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Email"
-                      type="email"
-                      name="Email"
-                      required
-                    />
+                <div className="flex">
+                  <div className="mr-2 flex-1 mb-2">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span> Họ
+                    </p>
+                    <div className="relative">
+                      <div className="form-field">
+                          <input className="form-input" placeholder=" " 
+                            {...register("lastName", {
+                              required: "Last name is required",
+                            })}
+                            type="text"
+                            name="lastName"
+                            required
+                            />
+                          <label className="form-label"><span>First Name</span></label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mr-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span> Tên
+                    </p>
+                    <div className="relative">
+
+                    <div className="form-field">
+                          <input className="form-input" placeholder=" " 
+                            {...register("firstName", {
+                              required: "First name is required",
+                            })}
+                            type="text"
+                            name="firstName"
+                            required
+                            />
+                          <label className="form-label"><span>Last Name</span></label>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div className="ml-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span>Email
+                    </p>
+                    <div className="relative">
+                      <i className="fa-solid fa-envelope absolute m-[10px] text-gray-500"></i>
+                      <input
+                        className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
+                        placeholder="Email"
+                        type="email"
+                        name="Email"
+                        required
+                      />
+                    </div>
+                  </div> */}
+                </div>
+                <div className="flex">
+                  <div className="mr-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span> Mật khẩu
+                    </p>
+                    <div className="relative">
+                      <div className="form-field">
+                            <input className="form-input" placeholder=" " 
+                              {...register("password", {
+                                required: "Password is required",
+                              })}
+                              type="password"
+                              name="password"
+                              required
+                              />
+                            <label className="form-label"><span>Password</span></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ml-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span>Xác nhận mật khẩu
+                    </p>
+                    <div className="relative">
+
+                      <div className="form-field">
+                              <input className="form-input" placeholder=" " 
+                                {...register("confirmPassword", {
+                                  required: "Confirm Password is required",
+                                })}
+                                type="password"
+                                name="confirmPassword"
+                                required
+                                />
+                              <label className="form-label"><span>Confirm password</span></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="flex ">
+                  <div className="mr-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span> Ngày sinh
+                    </p>
+                    <div className="relative">
+                      <i className="fa-solid fa-calendar-days absolute m-[10px] text-gray-500"></i>
+                      <input
+                        className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
+                        placeholder="Ngày sinh"
+                        type="date"
+                        name="date"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="ml-2 flex-1">
+                    <p className="py-2">
+                      <span className="text-red-500">*</span>Số điện thoại
+                    </p>
+                    <div className="relative">
+                      <i className="fa-solid fa-phone absolute m-[10px] text-gray-500"></i>
+                      <input
+                        className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
+                        placeholder="Số điện thoại"
+                        type="text"
+                        name="number"
+                        required
+                      />
+                    </div>
                   </div>
                 </div> */}
-              </div>
-              <div className="flex">
-                <div className="mr-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span> Mật khẩu
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-user absolute m-[10px] text-gray-500"></i>
-                    <input
-                      {...register("password", {
-                        required: "Password is required",
-                      })}
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Mật khẩu"
-                      type="password"
-                      name="password"
-                      required
-                    />
-                  </div>
+                <div className="text-center mt-6">
+                  <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2">
+                    Đăng ký
+                  </button>
                 </div>
-                <div className="ml-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span>Xác nhận mật khẩu
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-lock absolute m-[10px] text-gray-500"></i>
-                    <input
-                      {...register("confirmPassword", {
-                        required: "Confirm Password is required",
-                      })}
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Xác nhận mật khẩu"
-                      type="password"
-                      name="confirmPassword"
-                      required
-                    />
-                  </div>
+                <div className="mt-6 mb-6 flex justify-end">
+                  <p className="font-semibold">Bạn đã có tài khoản? <span className="text-gradient"><a href="#login">Đăng nhập ngay!</a></span></p>
                 </div>
               </div>
-              {/* <div className="flex ">
-                <div className="mr-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span> Ngày sinh
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-calendar-days absolute m-[10px] text-gray-500"></i>
-                    <input
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Ngày sinh"
-                      type="date"
-                      name="date"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="ml-2 flex-1">
-                  <p className="py-2">
-                    <span className="text-red-500">*</span>Số điện thoại
-                  </p>
-                  <div className="relative">
-                    <i className="fa-solid fa-phone absolute m-[10px] text-gray-500"></i>
-                    <input
-                      className="border-2 border-[#ccc] outline-none w-full py-[5px] px-8"
-                      placeholder="Số điện thoại"
-                      type="text"
-                      name="number"
-                      required
-                    />
-                  </div>
-                </div>
-              </div> */}
-              <div className="text-center mt-6">
-                <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2">
-                  Đăng ký
-                </button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
