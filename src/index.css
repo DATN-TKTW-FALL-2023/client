@@ -1,14 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 .container {
-  width: 1150px !important;
-  margin: 0 auto;
+    width: 1150px !important;
+    margin: 0 auto;
 }
+
 html {
-  background-color: #f8f8f8;
+    background-color: #f8f8f8;
 }
+
 h1,
 h2,
 h3,
@@ -16,71 +17,85 @@ h4,
 h5,
 h6,
 li {
-  font-family: Oswald;
+    font-family: "Oswald", sans-serif;
+    font-family: "Outfit", sans-serif;
 }
+
 .br {
-  border-bottom: 4px solid transparent;
-  border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
-  border-image-slice: 1;
-  border-width: 0px 0px 4px 0px;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
+    border-image-slice: 1;
+    border-width: 0px 0px 4px 0px;
 }
+
 .header {
-  box-shadow: 0 1px 3px #ddd;
-  background-color: #fff;
+    box-shadow: 0 1px 3px #ddd;
+    background-color: #fff;
 }
+
 .active {
-  border-bottom: 4px solid transparent;
-  border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
-  border-image-slice: 1;
-  border-width: 0px 0px 4px 0px;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
+    border-image-slice: 1;
+    border-width: 0px 0px 4px 0px;
 }
+
 .sticker {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 63px !important;
-  height: 63px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 63px !important;
+    height: 63px !important;
 }
+
 .sticker-new {
-  position: absolute;
-  background: url(./img/hot.png) no-repeat;
-  left: auto;
-  right: 58px;
+    position: absolute;
+    background: url(./img/hot.png) no-repeat;
+    left: auto;
+    right: 58px;
 }
+
 .product-content h3:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
+
 .btn {
-  background-image: linear-gradient(
-    to right,
-    #0a64a7 0%,
-    #258dcf 51%,
-    #3db1f3 100%
-  ) !important;
+    background-image: linear-gradient( to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
 }
+
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 600px; /* Full width */
-  height: 600px; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 600px;
+    /* Full width */
+    height: 600px;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
+
 .close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
