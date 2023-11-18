@@ -1,5 +1,4 @@
 import { useGetUserProfileQuery } from "@/apis/user";
-import React, { useState, useEffect } from "react";
 const Profile = () => {
   const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
 
@@ -11,8 +10,7 @@ const Profile = () => {
     return <div>Error fetching user data</div>;
   }
 
-console.log(userData);
-
+  console.log(userData);
 
   return (
     <div className="container pt-5 pb-5">

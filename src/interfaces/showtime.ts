@@ -1,6 +1,6 @@
-import { IUser } from "./user";
 import { EStatus } from "./common";
 import { TFilm } from "./film";
+import { TUser } from "./person";
 
 export type TLayout = {
   _id: string;
@@ -23,8 +23,8 @@ export type TSeat = {
 
 export type TRoom = {
   _id: string;
-  author: IUser;
-  editedBy: IUser;
+  author: TUser;
+  editedBy: TUser;
   status: EStatus;
   name: string;
   content: string;
@@ -35,8 +35,8 @@ export type TRoom = {
 
 export type TShowtime = {
   _id: string;
-  author: IUser;
-  editedBy: IUser;
+  author: TUser;
+  editedBy: TUser;
   status: EStatus;
   film: TFilm;
   room: TRoom;

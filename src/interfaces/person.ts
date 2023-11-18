@@ -1,18 +1,18 @@
-export interface IUser {
+export type TUser = {
   _id?: string;
   username?: string;
   email?: string;
   phone?: string;
-  lastName?:  string;
+  lastName?: string;
   firstName?: string;
   isActive?: boolean;
-  avatar: string | null; 
+  avatar: string | null;
   roles: Array<{
     _id: string;
     code: string;
   }>;
   devices: any[];
   allowNotification: boolean;
-  createdAt: string; 
+  createdAt: string;
   updatedAt: string;
-}
+};

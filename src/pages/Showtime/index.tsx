@@ -11,6 +11,7 @@ import { useAppSelector } from "@/store/hook";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Showtime = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const Showtime = () => {
   const showtime = useMemo(() => data?.data, [data, isLoading]);
 
   const [bookingSeat, { isError }] = useBookingSeatMutation();
-
+  const [bookedSeats, setBookedSeats] = useState<string[]>([]);
   const [cancelBooking] = useCancelBookingMutation();
   const [order, { isLoading: isLoadingOrder }] = useCreateOrderMutation();
 
@@ -34,6 +35,12 @@ const Showtime = () => {
     };
   }, [location]);
 
+  useEffect(() => {
+    if (showtime) {
+      const bookedSeatIds = showtime.seatsBooked.map((s) => s._id);
+      setBookedSeats(bookedSeatIds);
+    }
+  }, [showtime]);
   const seatsBooked = showtime?.seatsBooked.map((s) => s._id) || [];
 
   const seatsOtherHeld =
@@ -63,14 +70,27 @@ const Showtime = () => {
   };
 
   const handleSelectSeats = async (seat: TSeat) => {
+    const isSeatBooked = bookedSeats.includes(seat._id);
     const index = selectedSeats.findIndex((s) => s._id === seat._id);
-    if (index < 0) {
+    if (index < 0 && selectedSeats.length < 10 && !isSeatBooked) {
       setSeletedSeats((prev) => [...prev, seat]);
-    } else {
+    } else if (index >= 0) {
       setSeletedSeats((prev) => [
         ...prev.slice(0, index),
         ...prev.slice(index + 1),
       ]);
+    } else if (isSeatBooked) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Ghế này đã được đặt, vui lòng chọn ghế khác!",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Bạn không thể đặt được quá 10 ghế trong 1 lần đặt!",
+      });
     }
     await bookingSeat({
       idShowtime: id as string,
@@ -83,12 +103,13 @@ const Showtime = () => {
   };
 
   const handleOrder = async () => {
-    const res = await order({
+    const res: any = await order({
       showtime: id,
       seats: selectedSeats.map((s) => s._id),
     });
     navigate(`/checkout/${res.data.data._id}`);
   };
+  const isButtonDisabled = selectedSeats.length === 0;
 
   return (
     <div className="container">
@@ -317,8 +338,11 @@ const Showtime = () => {
             </div>
             <div className="text-center mt-4">
               <button
-                onClick={handleOrder}
-                className="btn btn text-white font-medium w-[40%] py-2 rounded-lg"
+                 onClick={handleOrder}
+                 className={`btn btn text-white font-medium w-[40%] py-2 rounded-lg ${
+                   isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+                 }`}
+                 disabled={isButtonDisabled}
               >
                 {isLoadingOrder ? (
                   <svg

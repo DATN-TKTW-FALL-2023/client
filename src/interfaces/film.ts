@@ -1,10 +1,10 @@
-import { IUser } from "./user";
 import { EStatus, TFile } from "./common";
+import { TUser } from "./person";
 
 export type TFilm = {
   _id: string;
-  author: IUser;
-  editedBy: IUser;
+  author: TUser;
+  editedBy: TUser;
   status: EStatus;
   name: string;
   slug: string;

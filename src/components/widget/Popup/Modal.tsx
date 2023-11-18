@@ -2,7 +2,7 @@ import { useGetFilmsByIdQuery } from "@/apis/films";
 import { useGetShowtimeQuery } from "@/apis/showtime";
 import ShowtimeDetails from "@/pages/Details/ShowtimeDetails";
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Modal = ({ isOpen, onClose, id }: any) => {
   const [selectedDay, setSelectedDate] = useState<string>("");
@@ -15,9 +15,11 @@ const Modal = ({ isOpen, onClose, id }: any) => {
   const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
     skip: !params.day,
   });
+
   const [isShowtimeDetailsVisible, setIsShowtimeDetailsVisible] =
     useState(false);
-  const [selectedShowtime, setSelectedShowtime] = useState({});
+  const [selectedShowtime, setSelectedShowtime] = useState(null);
+
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
@@ -42,16 +44,15 @@ const Modal = ({ isOpen, onClose, id }: any) => {
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
   }
-  function handleShowtimeClick(st: any) {
-    setSelectedShowtime({
-      movieName: film?.data?.name,
-      showDate: dayjs(new Date(st.startHour).toISOString()).format(
-        "DD/MM/YYYY"
-      ),
-      showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
-    });
-    setIsShowtimeDetailsVisible(true);
-  }
+  // function handleShowtimeClick(st: any) {
+  //   console.log(st);
+  //   setSelectedShowtime({
+  //     movieName: film?.data?.name,
+  //     showDate: dayjs(new Date(st.startHour).toISOString()).format("DD/MM/YYYY"),
+  //     showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
+  //   });
+  //   setIsShowtimeDetailsVisible(true);
+  // }
 
   if (!isOpen || !id) return null;
   return (
@@ -112,10 +113,16 @@ const Modal = ({ isOpen, onClose, id }: any) => {
             )}
             {showtime && !isLoading ? (
               <div className="flex mx-[-4px]">
-                {showtime?.data?.map((st: any) => (
-                  <div className="relative my-4 text-center px-2 cursor-pointer">
+                {showtime?.data?.map((st: any, index: number) => (
+                  <div
+                    key={index}
+                    className="relative my-4 text-center px-2 cursor-pointer"
+                  >
                     <div
-                      onClick={() => handleShowtimeClick(st)}
+                      onClick={() => {
+                        setSelectedShowtime(st);
+                        setIsShowtimeDetailsVisible(true);
+                      }}
                       className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
                     >
                       {`${dayjs(new Date(st.startHour).toISOString()).format(
@@ -123,21 +130,21 @@ const Modal = ({ isOpen, onClose, id }: any) => {
                       )}`}
                     </div>
                     <p className="text-xs py-2 font-medium">
-                      {st.room.seats.length - st.seatsBooked} {"  "}
+                      {st.room.seats.length - st.seatsBooked.length} {"  "}
                       ghế trống
                     </p>
-                    <ShowtimeDetails
-                      movieName={selectedShowtime.movieName}
-                      showDate={selectedShowtime.showDate}
-                      showTime={selectedShowtime.showTime}
-                      isPopupVisible={isShowtimeDetailsVisible}
-                      onClosePopup={() => setIsShowtimeDetailsVisible(false)}
-                    />
+                    {selectedShowtime && (
+                      <ShowtimeDetails
+                        showtime={selectedShowtime}
+                        isPopupVisible={isShowtimeDetailsVisible}
+                        onClosePopup={() => setIsShowtimeDetailsVisible(false)}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
             ) : (
-              <div>Không tìm thấy suất chiếu nào</div>
+              <div>No show time</div>
             )}
           </div>
         </div>

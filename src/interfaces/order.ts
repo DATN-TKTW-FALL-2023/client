@@ -1,4 +1,4 @@
-import { IUser } from "./user";
+import { TUser } from "./person";
 
 export type TOrder = {
   _id: string;
@@ -10,5 +10,5 @@ export type TOrder = {
   seats: string[];
   createdAt: Date;
   updatedAt: Date;
-  user: IUser;
+  user: TUser;
 };

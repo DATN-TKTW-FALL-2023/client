@@ -5,14 +5,14 @@ export const userApi = createApi({
   tagTypes: ["user"],
   baseQuery: fetchBaseQuery({ baseUrl: "http://45.95.173.37:6500/api/v1" }),
   endpoints: (builder) => ({
-    Login: builder.mutation<any, any>({
+    Login: builder.mutation({
       query: (data) => ({
         url: `/auth/login`,
         method: "POST",
         body: data,
       }),
     }),
-    Register: builder.mutation<any, any>({
+    Register: builder.mutation({
       query: (data) => ({
         url: `auth/register`,
         method: "POST",

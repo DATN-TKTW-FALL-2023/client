@@ -4,8 +4,8 @@ import routeConfig, { TRouteConfig } from "./routeConfig";
 import ProtectedRoute from "./protectedRoute";
 import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
-import Login from "@/pages/auth/login";
-import Signup from "@/pages/auth/Register";
+import Signup from "@/pages/Auth/RegisterPage";
+import Login from "@/pages/Auth/LoginPage";
 
 function RouteApp() {
   return (
