@@ -47,7 +47,7 @@ const Signup = () => {
               <a href="#login">Log In</a>
             </li>
             <li className=" w-[50%] tab px-14 py-2">
-              <a href="#signup">Sign Up</a>
+              <a href="#register">Sign Up</a>
             </li>
           </ul>
 
