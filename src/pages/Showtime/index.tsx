@@ -1,4 +1,6 @@
 import { useCreateOrderMutation } from "@/apis/order";
+import "../Home/home.css"
+import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "react-icons/fa";
 import {
   useBookingSeatMutation,
   useCancelBookingMutation,
@@ -110,97 +112,50 @@ const Showtime = () => {
           </svg>
         </div>
       ) : (
-        <div className="grid grid-cols-10 gap-8">
+        <div className="grid grid-cols-10 gap-8 mt-4">
           <div className="col-span-7">
-            <div className="text-[#337ab7] text-xl flex items-center justify-start gap-2 mt-3">
-              <Link to="/">Trang Chủ</Link>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-              <span>Đặt vé</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-              <span>{showtime?.film?.name}</span>
+            <div className="text-xl font-semibold flex items-center justify-start gap-2 mt-3">
+              <span><Link to="/">Trang Chủ &gt;</Link></span>
+              <span className="text-[#337ab7]">Đặt vé</span>&gt;
+            
+              <span className="text-[#337ab7]">{showtime?.film?.name}</span>
             </div>
-            <div className="mt-12 grid grid-cols-5">
-              <div className="flex h-[35px] justify-evenly">
+            <div className="mt-12 grid grid-cols-3">
+              <div className="flex h-[35px] justify-center">
                 <img
                   width="35"
                   height="35"
                   src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1698942632/seat-unselect-normal_gy9jxv.png"
                   alt=""
                 />
-                <span className=" text-[13px] font-medium flex justify-center items-center">
+                <span className=" text-[13px] font-medium flex justify-center items-center ml-4">
                   Ghế trống
                 </span>
               </div>
-              <div className="flex h-[35px] justify-evenly">
+              <div className="flex h-[35px]  justify-center">
                 <img
                   width="35"
                   height="35"
-                  src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1698942632/seat-unselect-normal_gy9jxv.png"
+                  src="https://betacinemas.vn/Assets/global/img/booking/seat-select-normal.png"
                   alt=""
                 />
-                <span className=" text-[13px] font-medium flex justify-center items-center">
+                <span className=" text-[13px] font-medium flex justify-center items-center ml-4">
                   Ghế đang chọn
                 </span>
               </div>
-              <div className="flex h-[35px] justify-evenly">
+              
+              <div className="flex h-[35px]  justify-center">
                 <img
                   width="35"
                   height="35"
-                  src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1698942632/seat-unselect-normal_gy9jxv.png"
+                  src="https://betacinemas.vn/Assets/global/img/booking/seat-buy-normal.png"
                   alt=""
                 />
-                <span className=" text-[13px] font-medium flex justify-center items-center">
-                  Ghế đang được giữ
-                </span>
-              </div>
-              <div className="flex h-[35px] justify-evenly">
-                <img
-                  width="35"
-                  height="35"
-                  src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1698942632/seat-unselect-normal_gy9jxv.png"
-                  alt=""
-                />
-                <span className=" text-[13px] font-medium flex justify-center items-center">
+                <span className=" text-[13px] font-medium flex justify-center items-center ml-4">
                   Ghế đã bán
                 </span>
               </div>
-              <div className="flex h-[35px] justify-evenly">
-                <img
-                  width="35"
-                  height="35"
-                  src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1698942632/seat-unselect-normal_gy9jxv.png"
-                  alt=""
-                />
-                <span className=" text-[13px] font-medium flex justify-center items-center">
-                  Ghế đặt trước
-                </span>
-              </div>
+              
             </div>
             <div className="mt-8">
               <div>
@@ -310,19 +265,19 @@ const Showtime = () => {
                 <h4>2D Phụ đề</h4>
               </div>
               <div className="col-span-4 px-10">
-                <ul>
-                  <li className="py-2">
-                    <i className="fa fa-tags"></i>
-                    Thể loại:
+                <ul className="border-dashed border-b-2 border-[#ccc] pb-6">
+                  <li className="py-2 show-time check-out">
+                    <label className="flex"><FaTags className="mr-2 mt-[4px]"/>
+                    Thể loại:</label>
                     <span className="ml-2">
                       {showtime?.film?.taxonomies
                         ?.map((t: { name: any }) => t.name)
                         .join(", ")}
                     </span>
                   </li>
-                  <li className="py-2">
-                    <i className="fa-solid fa-clock"></i>
-                    Thời lượng:
+                  <li className="py-2 show-time check-out">
+                    <label className="flex"><FaClock  className="mr-2 mt-[4px]"/>
+                    Thời lượng:</label>
                     <span className="ml-2">
                       {showtime?.film?.duration} phút
                     </span>
@@ -332,28 +287,31 @@ const Showtime = () => {
             </div>
             <div className=" px-10">
               <ul>
-                <li className="py-2">
-                  <i className="fa-solid fa-clock"></i>
-                  Ngày chiếu:
+                <li className="py-2 check-out">
+                  <label className="flex"><FaCalendarAlt  className="mr-2 mt-[4px]"/>
+                    Ngày chiếu:</label>
                   <span className="ml-2">
                     {dayjs(showtime?.day).format("DD/MM/YYYY")}
                   </span>
                 </li>
-                <li className="py-2">
-                  <i className="fa-solid fa-clock"></i>
-                  Giờ chiếu:
+                <li className="py-2 check-out">
+                  <label className="flex"><FaRegClock className="mr-2 mt-[4px]"/>
+                    Giờ chiếu:</label>
                   <span className="ml-2">
                     {dayjs(showtime?.startHour).format("HH:mm")}
                   </span>
                 </li>
-                <li className="py-2">
-                  <i className="fa-solid fa-clock"></i>
-                  Phòng chiếu:
+                <li className="py-2 check-out">
+                  <label className="flex"><FaTv className="mr-2 mt-[4px]"/>
+                    Phòng chiếu:</label>
                   <span className="ml-2">{showtime?.room?.name}</span>
                 </li>
-                <li className="py-2">
-                  <i className="fa-solid fa-clock"></i>
-                  Ghế ngồi: {selectedSeats.map((s) => s.name).join(" ")}
+                <li className="py-2 check-out">
+                  <label className="flex"><FaCubes className="mr-2 mt-[4px]"/>
+                    Ghế ngồi:</label>
+                  <span className="ml-2">
+                    {selectedSeats.map((s) => s.name).join(", ")}
+                  </span>
                 </li>
               </ul>
             </div>

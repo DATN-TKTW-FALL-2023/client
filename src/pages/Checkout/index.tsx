@@ -1,50 +1,25 @@
 import { useGetOrderDetailQuery } from "@/apis/order";
 import { useMemo } from "react";
+import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
+import { GiTicket } from "react-icons/gi";
+import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "react-icons/fa";
 
 const Checkout = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetOrderDetailQuery(id as string);
   console.log("🚀 ~ file: index.tsx:7 ~ Checkout ~ data:", data);
-
   const order = useMemo(() => data?.data, [data, isLoading]);
 
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
         <div className="col-span-7">
-          <div className="text-[#337ab7] text-xl flex items-center justify-start gap-2 mt-3">
-            <Link to="/">Trang Chủ</Link>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-            <span>Đơn hàng</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-            <span>{order?.film}</span>
+          <div className="text-xl flex items-center justify-start gap-2 mt-3">
+            <Link to="/">Trang Chủ &gt;</Link>
+            
+            <span className="text-[#337ab7]">Đơn hàng</span> &gt;
+            <span className="text-[#337ab7]">{order?.film}</span>
           </div>
           <div className="inline-block mt-8">
             <div className="inline-block">
@@ -84,7 +59,7 @@ const Checkout = () => {
           </div>
         </div>
         <div className="col-span-3 bg-white">
-          <div className="grid grid-cols-2 gap-6 dashed-border pb-8">
+          <div className="grid grid-cols-2 gap-6 dashed-border pb-6">
             <div>
               <img width="170" src="./img/img1.png" alt="" />
             </div>
@@ -95,15 +70,15 @@ const Checkout = () => {
               <h4>2D Phụ đề</h4>
             </div>
             <div className="col-span-4 px-10">
-              <ul>
-                <li className="py-2">
-                  <i className="fa fa-tags"></i>
-                  Thể loại
+              <ul className=" border-dashed border-b-2 border-[#ccc] pb-6">
+                <li className="py-2 check-out">
+                  <label className="flex"><FaTags className="mr-2 mt-[4px]"/>
+                  Thể loại:</label>
                   <span>Tâm lý</span>
                 </li>
-                <li className="py-2">
-                  <i className="fa-solid fa-clock"></i>
-                  Thời lượng
+                <li className="py-2 check-out">
+                  <label className="flex"><FaClock  className="mr-2 mt-[4px]"/>
+                  Thời lượng:</label>
                   <span>110 phút</span>
                 </li>
               </ul>
@@ -111,38 +86,36 @@ const Checkout = () => {
           </div>
           <div className=" px-10">
             <ul>
-              <li className="py-2">
-                <i className="fa fa-tags"></i>
-                Rạp chiếu
-                <span>Beta Thái Nguyên</span>
+              <li className="py-2 check-out">
+                <label className="flex"><FaCalendarAlt  className="mr-2 mt-[4px]"/>
+                  Ngày chiếu:</label>
+
+                <span>{dayjs(order?.day).format("DD/MM/YYYY")}</span>
               </li>
-              <li className="py-2">
-                <i className="fa-solid fa-clock"></i>
-                Ngày chiếu
-                <span>18/10/2023</span>
+              <li className="py-2 check-out">
+                <label className="flex"><FaRegClock className="mr-2 mt-[4px]"/>
+                  Giờ chiếu:</label>
+                <span>{dayjs(order?.startHour).format("HH:mm")}</span>
               </li>
-              <li className="py-2">
-                <i className="fa-solid fa-clock"></i>
-                Giờ chiếu
-                <span>15:00</span>
+              <li className="py-2 check-out">
+                <label className="flex"><FaTv className="mr-2 mt-[4px]"/>
+                  Phòng chiếu:</label>
+                <span>{order?.room}</span>
               </li>
-              <li className="py-2">
-                <i className="fa-solid fa-clock"></i>
-                Phòng chiếu
-                <span>P2</span>
-              </li>
-              <li className="py-2">
-                <i className="fa-solid fa-clock"></i>
-                Ghế ngồi
+              <li className="py-2 check-out">
+                <label className="flex"><FaCubes className="mr-2 mt-[4px]"/>
+                  Ghế ngồi:</label>
                 <span>P2</span>
               </li>
             </ul>
           </div>
           <div className="text-center mt-4">
-            <button className="btn btn text-white font-medium w-[40%] py-2 rounded-lg">
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+              <span><GiTicket className="bg-icon"/></span>
               Quay lại
             </button>
-            <button className="btn btn text-white font-medium w-[40%] py-2 rounded-lg">
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+              <span><GiTicket className="bg-icon"/></span>
               Tiếp tục
             </button>
           </div>

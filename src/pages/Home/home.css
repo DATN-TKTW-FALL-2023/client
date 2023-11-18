@@ -69,3 +69,11 @@
     font-size: 80px;
     margin-top: -12px;
 }
+.show-time {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+.check-out {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
