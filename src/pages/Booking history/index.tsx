@@ -1,5 +1,5 @@
 import { useGetListOrderQuery } from "@/apis/order";
-
+import dayjs from "dayjs";
 const BookingHistory = () => {
   const { data: orderData, isLoading } = useGetListOrderQuery({});
 
@@ -51,16 +51,25 @@ const BookingHistory = () => {
                       {item?.room}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item?.seats}
+                  {item?.seats.map((seat:any, index:any) => (
+                  <span key={index} className={`seat-${seat}`}>
+                   {seat}
+                  {index < item?.seats.length - 1 && '-'}
+                  </span>
+                  ))}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
                       {item?.price}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item?.date}
+                      {item?.day
+                      ? dayjs(item?.day).format("DD/MM/YYYY")
+                        : "Invalid Date"}
                     </td>
                     <td className="whitespace-nowrap px-6 py-4">
-                      {item?.startHour}
+                      {item?.startHour
+                      ? dayjs(item?.startHour).format("HH:mm")
+                        : "Invalid Date"}
                     </td>
                   </tr>
                 ))}
