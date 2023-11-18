@@ -9,9 +9,16 @@ import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "reac
 const Checkout = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetOrderDetailQuery(id as string);
-  console.log("🚀 ~ file: index.tsx:7 ~ Checkout ~ data:", data);
   const order = useMemo(() => data?.data, [data, isLoading]);
-  console.log(order)
+  const formatCurrency = (amount: number | bigint | string | undefined) => {
+    if (amount === undefined) {
+      return '';
+    }
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(Number(amount));
+  };
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
@@ -50,11 +57,13 @@ const Checkout = () => {
             </div>
             <div>
               <span>
-                {order?.seats?.length} x {order?.price}
+                {order?.seats?.length} x {formatCurrency(order?.price)}
               </span>
               <span> = </span>
               <span>
-                {Number(order?.seats?.length) * Number(order?.price)} vnđ
+                {
+               formatCurrency(Number(order?.seats?.length) *  Number(order?.price)) 
+                }
               </span>
             </div>
           </div>
