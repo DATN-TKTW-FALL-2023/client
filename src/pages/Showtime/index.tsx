@@ -26,7 +26,35 @@ const Showtime = () => {
   const [bookedSeats, setBookedSeats] = useState<string[]>([]);
   const [cancelBooking] = useCancelBookingMutation();
   const [order, { isLoading: isLoadingOrder }] = useCreateOrderMutation();
+  const [timeLeft, setTimeLeft] = useState(10);
+  const [isTimeUp, setIsTimeUp] = useState(false);
 
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      if (timeLeft > 0) {
+        setTimeLeft((prevTime) => prevTime - 1);
+        if (timeLeft === 60) {
+          Swal.fire({
+            icon: "info",
+            title: "Cảnh báo!",
+            text: "Chỉ còn 1 phút để hoàn thành đặt ghế!",
+          });
+        }
+      } else {
+        setIsTimeUp(true);
+        Swal.fire({
+          icon: "warning",
+          title: "Hết thời gian!",
+          text: "Bạn đã hết thời gian để đặt ghế. Chuyển về trang chủ.",
+        }).then(() => {
+          navigate("/");
+        });
+        clearInterval(timerId);
+      }
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [timeLeft]);
   useEffect(() => {
     return () => {
       cancelBooking({ idShowtime: id as string });
@@ -53,6 +81,12 @@ const Showtime = () => {
     () => selectedSeats.length * (showtime?.price || 0),
     [showtime, selectedSeats]
   );
+  const formatCurrency = (amount: number | bigint) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+    }).format(amount);
+  };
 
   const getSeatImageURL = (seat: TSeat) => {
     if (selectedSeats.map((s) => s._id).includes(seat._id)) {
@@ -108,7 +142,13 @@ const Showtime = () => {
     navigate(`/checkout/${res.data.data._id}`);
   };
   const isButtonDisabled = selectedSeats.length === 0;
-
+  const displayTime = () => {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+    const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+    return `${formattedMinutes}:${formattedSeconds}`;
+  };
   return (
     <div className="container">
       {isLoading ? (
@@ -300,7 +340,7 @@ const Showtime = () => {
                 <div></div>
                 <div className="col-span-4 py-2">
                   <h1 className="text-xl pt-6 text-[#03599d]">
-                    {totalPrice} VNĐ
+                    {formatCurrency(totalPrice)} 
                   </h1>
                 </div>
               </div>
@@ -309,9 +349,17 @@ const Showtime = () => {
                   <h3 className="text-lg text-[#494c62]">Thời gian còn lại</h3>
                 </div>
                 <div></div>
-                <div className="col-span-4 py-2">
-                  <h1 className="text-xl pt-6 text-[#494c62]">10:00</h1>
-                </div>
+                {isTimeUp ? (
+                  <div>
+                    <p className="text-red-500 text-lg">Hết thời gian!</p>
+                  </div>
+                ) : (
+                  <div className="col-span-4 py-2">
+                    <h1 className="text-xl pt-6 text-[#494c62]">
+                      {displayTime()}
+                    </h1>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -380,11 +428,11 @@ const Showtime = () => {
             </div>
             <div className="text-center mt-4">
               <button
-                 onClick={handleOrder}
-                 className={`btn btn text-white font-medium w-[40%] py-2 rounded-lg ${
-                   isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
-                 }`}
-                 disabled={isButtonDisabled}
+                onClick={handleOrder}
+                className={`btn btn text-white font-medium w-[40%] py-2 rounded-lg ${
+                  isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+                disabled={isButtonDisabled}
               >
                 {isLoadingOrder ? (
                   <svg
