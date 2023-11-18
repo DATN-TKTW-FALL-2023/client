@@ -12,28 +12,28 @@ const Header = () => {
 
   return (
     <div>
-      <div className="pre-header h-6 bg-black">
+      <div className="pre-header h-7 bg-black">
         <div className="container w-[1150px] m-auto">
           <div className="float-right">
             <ul className="flex">
               {auth ? (
                 <>
-                  <li className="text-white text-[14px]">
+                  <li className="pt-1 text-white text-[15px] hover:underline">
                     <Link to="/profile">Xin Chào {auth?.email}</Link>
                   </li>
-                  <li className="text-white text-[14px] px-3">
+                  <li className="pt-1 text-white text-[15px] px-3 hover:underline">
                     <Link to="/bookinghistory">Lịch sử đặt vé</Link>
                   </li>
-                  <li className="text-white text-[14px] ">
+                  <li className="pt-1 text-white text-[15px] hover:underline ">
                     <p onClick={handleLogout}>Đăng xuất</p>
                   </li>
                 </>
               ) : (
                 <>
-                  <li className="text-white text-[14px]">
+                  <li className="text-white text-[14px] hover:underline ">
                     <Link to="/login">Đăng nhập</Link>
                   </li>
-                  <li className="pl-2 text-white text-[14px]">
+                  <li className="pl-2 text-white text-[14px] hover:underline">
                     <Link to="/register">Đăng ký</Link>
                   </li>
                 </>
@@ -55,25 +55,25 @@ const Header = () => {
           </div>
           <div>
             <ul className="flex">
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">LỊCH CHIẾU THEO RẠP</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">PHIM</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">RẠP</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">GIÁ VÉ</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">TIM MỚI VÀ ƯU ĐÃI</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">NHƯỢNG QUYỀN</a>
               </li>
-              <li className="font-bold px-4">
+              <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">THÀNH VIÊN</a>
               </li>
             </ul>
