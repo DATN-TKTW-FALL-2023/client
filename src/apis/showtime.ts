@@ -11,7 +11,7 @@ const showtimeApi = createApi({
       return fetch(...args);
     },
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as any).auth.auth.accessToken;
+      const token = (getState() as any).auth?.auth?.accessToken;
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
