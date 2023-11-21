@@ -1,79 +1,94 @@
-/* Trình chiếu trailer */
 .trailer-modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(70, 68, 68, 0.9);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-        }
-        
-        .trailer-modal-content {
-          width: 700px;
-          height: 500px;
-          background-color: white;
-          position: relative;
-        }
-        
-        .trailer-modal-content button {
-          position: absolute;
-          top: -20px;
-          right: -50px;
-          background-color: transparent;
-          border: none;
-          color: red;
-          cursor: pointer;
-          z-index: 1; /* Đảm bảo nút hiển thị phía trên video */
-        }
-
-        /* CSS cho modal overlay */
-.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  background-color: rgba(70, 68, 68, 0.9);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
 
+.trailer-modal-content {
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  position: relative;
+}
+
+.trailer-modal-content button {
+  position: absolute;
+  top: -20px;
+  right: -50px;
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  z-index: 1; /* Đảm bảo nút hiển thị phía trên video */
+}
+
+/* CSS cho modal overlay */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+
 /* CSS cho modal content */
 .modal-content {
-  width: 1000px;
-  height: 500px;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 20px;
-  position: relative;
+width: 1000px;
+height: 500px;
+background: #fff;
+border: 1px solid #ccc;
+padding: 20px;
+position: relative;
 }
 
 /* CSS cho nút đóng modal */
 .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
+position: absolute;
+top: 10px;
+right: 10px;
+cursor: pointer;
+background: transparent;
+border: none;
 }
 .bg-icon {
-  position: absolute;
-    opacity: 0.5;
-    font-size: 80px;
-    margin-top: -12px;
+position: absolute;
+opacity: 0.5;
+font-size: 80px;
+margin-top: -12px;
 }
 .show-time {
-  display: grid;
-  grid-template-columns: 40% 60%;
+display: grid;
+grid-template-columns: 40% 60%;
 }
 .check-out {
-  display: grid;
-  grid-template-columns: 50% 50%;
+display: grid;
+grid-template-columns: 50% 50%;
+}
+
+
+@keyframes slideIn {
+from {
+opacity: 0;
+transform: translateY(20px); 
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+.modal {
+animation: slideIn 0.3s ease-in-out; 
 }
