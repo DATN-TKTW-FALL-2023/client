@@ -44,20 +44,11 @@ const Modal = ({ isOpen, onClose, id }: any) => {
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
   }
-  // function handleShowtimeClick(st: any) {
-  //   console.log(st);
-  //   setSelectedShowtime({
-  //     movieName: film?.data?.name,
-  //     showDate: dayjs(new Date(st.startHour).toISOString()).format("DD/MM/YYYY"),
-  //     showTime: dayjs(new Date(st.startHour).toISOString()).format("h:mm A"),
-  //   });
-  //   setIsShowtimeDetailsVisible(true);
-  // }
-
+  const modalClassName = `modal ${isOpen ? 'open' : ''}`;
   if (!isOpen || !id) return null;
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
+    <div className={`modal-overlay ${modalClassName}`}>
+      <div className={`modal-content`}>
         <button className="modal-close" onClick={onClose}>
           ✖
         </button>

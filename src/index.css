@@ -74,9 +74,9 @@ li
     /* Location of the box */
     left: 0;
     top: 0;
-    width: 600px;
+    width: 100%;
     /* Full width */
-    height: 600px;
+    height: auto;
     /* Full height */
     overflow: auto;
     /* Enable scroll if needed */
