@@ -1,36 +1,35 @@
-/* Trình chiếu trailer */
 .trailer-modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(70, 68, 68, 0.9);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-        }
-        
-        .trailer-modal-content {
-          width: 700px;
-          height: 500px;
-          background-color: white;
-          position: relative;
-        }
-        
-        .trailer-modal-content button {
-          position: absolute;
-          top: -20px;
-          right: -50px;
-          background-color: transparent;
-          border: none;
-          color: red;
-          cursor: pointer;
-          z-index: 1; /* Đảm bảo nút hiển thị phía trên video */
-        }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(70, 68, 68, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-        /* CSS cho modal overlay */
+.trailer-modal-content {
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  position: relative;
+}
+
+.trailer-modal-content button {
+  position: absolute;
+  top: -20px;
+  right: -50px;
+  background-color: transparent;
+  border: none;
+  color: red;
+  cursor: pointer;
+  z-index: 1; /* Đảm bảo nút hiển thị phía trên video */
+}
+
+/* CSS cho modal overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -65,9 +64,9 @@
 }
 .bg-icon {
   position: absolute;
-    opacity: 0.5;
-    font-size: 80px;
-    margin-top: -12px;
+  opacity: 0.5;
+  font-size: 80px;
+  margin-top: -12px;
 }
 .show-time {
   display: grid;
@@ -77,9 +76,6 @@
   display: grid;
   grid-template-columns: 50% 50%;
 }
-
-
-
 
 .loader__text {
   margin: 5px auto;
@@ -130,3 +126,60 @@
   height: 100vh;
   min-height: 200px;
 }
+=======
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal {
+  animation: slideIn 0.3s ease-in-out;
+}
+/* Add this at the end of your home.css file */
+.product-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Initially hide the play icon */
+  cursor: pointer;
+  z-index: 2; /* Set a higher z-index */
+}
+
+.play-button {
+  font-size: 3em;
+  color: white;
+}
+
+.overlay {
+  position: absolute;
+  border-radius: 24px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0; /* Initially hide the overlay */
+  transition: opacity 0.3s ease; /* Add a smooth transition effect */
+  z-index: 1; /* Set a lower z-index */
+}
+
+.product-image:hover .overlay {
+  opacity: 1; /* Show the overlay on hover */
+}
+
+.product-image:hover .play-icon {
+  display: block; /* Show the play icon on hover */
+}
+

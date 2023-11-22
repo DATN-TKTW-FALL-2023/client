@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
-import { GiTicket } from "react-icons/gi";
+import {  GiTicket } from "react-icons/gi";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 import Loading from "@/components/Loading";
-
+import { AiFillPlayCircle } from "react-icons/ai";
 const Home = () => {
   const [params, setParams] = useState<any>({
     isRelease: false,
@@ -96,8 +96,16 @@ const Home = () => {
                           alt=""
                           onClick={() => setTrailerUrl(item?.trailerUrl)}
                         />
+                        <div
+                          className="play-icon"
+                          onClick={() => setTrailerUrl(item?.trailerUrl)}
+                        >
+                          <AiFillPlayCircle className="play-button"/>
+                        </div>
+                        <div className="overlay"></div>
                       </div>
                     </div>
+
                     <div className="product-content">
                       <div>
                         <h3 className="text-[#337ab7] font-bold text-lg py-2">
