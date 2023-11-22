@@ -6,6 +6,7 @@ import Profile from "@/pages/Profile";
 import React from "react";
 import { PathRouteProps } from "react-router-dom";
 import BookingHistory from "@/pages/Booking history";
+import paymentSuccess from "@/pages/Payment sucess";
 export interface TRouteConfig extends PathRouteProps {
   Element: React.FC;
   isProtected: boolean;
@@ -39,6 +40,11 @@ const routeConfig: TRouteConfig[] = [
   {
     path: "/bookinghistory",
     Element: BookingHistory,
+    isProtected: true,
+  },
+  {
+    path: "/success",
+    Element: paymentSuccess,
     isProtected: true,
   },
 ];
