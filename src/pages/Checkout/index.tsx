@@ -4,7 +4,14 @@ import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
 import { useGetListOrderQuery } from "@/apis/order";
-import { FaTags, FaClock, FaCalendarAlt, FaRegClock, FaTv, FaCubes  } from "react-icons/fa";
+import {
+  FaTags,
+  FaClock,
+  FaCalendarAlt,
+  FaRegClock,
+  FaTv,
+  FaCubes,
+} from "react-icons/fa";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -12,11 +19,11 @@ const Checkout = () => {
   const order = useMemo(() => data?.data, [data, isLoading]);
   const formatCurrency = (amount: number | bigint | string | undefined) => {
     if (amount === undefined) {
-      return '';
+      return "";
     }
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
     }).format(Number(amount));
   };
   return (
@@ -25,7 +32,6 @@ const Checkout = () => {
         <div className="col-span-7 ">
           <div className="text-xl flex items-center justify-start gap-2 mt-3">
             <Link to="/">Trang Chủ &gt;</Link>
-            
             <span className="text-[#337ab7]">Đơn hàng</span> &gt;
             <span className="text-[#337ab7]">{order?.film}</span>
           </div>
@@ -61,61 +67,71 @@ const Checkout = () => {
               </span>
               <span> = </span>
               <span>
-                {
-               formatCurrency(Number(order?.seats?.length) *  Number(order?.price)) 
-                }
+                {formatCurrency(
+                  Number(order?.seats?.length) * Number(order?.price)
+                )}
               </span>
             </div>
           </div>
         </div>
         <div className="col-span-3 bg-white">
           <div className=" px-10 gap-6 dashed-border pb-6 border-dashed border-b-2 border-[#ccc]">
-            
             <div>
               <h1 className="text-xl text-[#03599d] font-bold py-4">
                 {order?.film}
               </h1>
               <h4>2D Phụ đề</h4>
             </div>
-          
           </div>
           <div className=" px-10">
             <ul>
               <li className="py-2 check-out">
-                <label className="flex"><FaCalendarAlt  className="mr-2 mt-[4px]"/>
-                  Ngày chiếu:</label>
+                <label className="flex">
+                  <FaCalendarAlt className="mr-2 mt-[4px]" />
+                  Ngày chiếu:
+                </label>
 
                 <span>{dayjs(order?.day).format("DD/MM/YYYY")}</span>
               </li>
               <li className="py-2 check-out">
-                <label className="flex"><FaRegClock className="mr-2 mt-[4px]"/>
-                  Giờ chiếu:</label>
+                <label className="flex">
+                  <FaRegClock className="mr-2 mt-[4px]" />
+                  Giờ chiếu:
+                </label>
                 <span>{dayjs(order?.startHour).format("HH:mm")}</span>
               </li>
               <li className="py-2 check-out">
-                <label className="flex"><FaTv className="mr-2 mt-[4px]"/>
-                  Phòng chiếu:</label>
+                <label className="flex">
+                  <FaTv className="mr-2 mt-[4px]" />
+                  Phòng chiếu:
+                </label>
                 <span>{order?.room}</span>
               </li>
               <li className="py-2 check-out">
-                <label className="flex"><FaCubes className="mr-2 mt-[4px]"/>
-                  Ghế ngồi:</label>
-                  {order?.seats.map((seat:any, index:any) => (
+                <label className="flex">
+                  <FaCubes className="mr-2 mt-[4px]" />
+                  Ghế ngồi:
+                </label>
+                {order?.seats.map((seat: any, index: any) => (
                   <span key={index} className={`seat-${seat}`}>
                     {seat}
-                    {index < order?.seats.length - 1 && ','}
+                    {index < order?.seats.length - 1 && ","}
                   </span>
-                  ))}
+                ))}
               </li>
             </ul>
           </div>
           <div className="text-center mt-4">
             <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
-              <span><GiTicket className="bg-icon"/></span>
+              <span>
+                <GiTicket className="bg-icon" />
+              </span>
               Quay lại
             </button>
             <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
-              <span><GiTicket className="bg-icon"/></span>
+              <span>
+                <GiTicket className="bg-icon" />
+              </span>
               Tiếp tục
             </button>
           </div>

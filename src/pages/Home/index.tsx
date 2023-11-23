@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
-import {  GiTicket } from "react-icons/gi";
+import { GiTicket } from "react-icons/gi";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 import Loading from "@/components/Loading";
 import { AiFillPlayCircle } from "react-icons/ai";
@@ -100,7 +100,7 @@ const Home = () => {
                           className="play-icon"
                           onClick={() => setTrailerUrl(item?.trailerUrl)}
                         >
-                          <AiFillPlayCircle className="play-button"/>
+                          <AiFillPlayCircle className="play-button" />
                         </div>
                         <div className="overlay"></div>
                       </div>
