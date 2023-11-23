@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import { useGetFilmsQuery } from "@/apis/films";
 import "./home.css";
-import {  GiTicket } from "react-icons/gi";
+import { GiTicket } from "react-icons/gi";
 import Modal from "../../components/widget/Popup/Modal"; // Import Modal component
 import Loading from "@/components/Loading";
 import { AiFillPlayCircle } from "react-icons/ai";
+import * as dayjs from "dayjs";
+
 const Home = () => {
   const [params, setParams] = useState<any>({
-    isRelease: false,
+    isRelease: true,
   });
   const { data: filmsData, isFetching } = useGetFilmsQuery(params);
   const [trailerUrl, setTrailerUrl] = useState<string | undefined>(undefined);
@@ -100,12 +102,11 @@ const Home = () => {
                           className="play-icon"
                           onClick={() => setTrailerUrl(item?.trailerUrl)}
                         >
-                          <AiFillPlayCircle className="play-button"/>
+                          <AiFillPlayCircle className="play-button" />
                         </div>
                         <div className="overlay"></div>
                       </div>
                     </div>
-
                     <div className="product-content">
                       <div>
                         <h3 className="text-[#337ab7] font-bold text-lg py-2">
@@ -126,14 +127,22 @@ const Home = () => {
                             </span>
                           </li>
                           <li>
-                            Thời lượng:
+                            Thời lượng:{" "}
                             <span className="font-light">
                               {item?.duration} phút
                             </span>
                           </li>
+                          {!params.isRelease && (
+                            <li>
+                              Ngày khởi chiếu:{" "}
+                              <span className="font-bold italic text-[#337ab7]">
+                                {dayjs(item.scheduleAt).format("DD/MM/YYYY")}
+                              </span>
+                            </li>
+                          )}
                         </ul>
                       </div>
-                      <div>
+                      {item.dayShowing.length > 0 && (
                         <button
                           className="btn text-white font-medium w-full py-2 rounded-lg"
                           onClick={() => openBuyPopup(item?._id)} // Mở popup mua vé khi click vào nút "MUA VÉ"
@@ -143,7 +152,7 @@ const Home = () => {
                           </span>
                           MUA VÉ
                         </button>
-                      </div>
+                      )}
                     </div>
                   </div>
                 ))

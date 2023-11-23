@@ -7,6 +7,7 @@ export type TOrder = {
   price: number;
   endHour: Date;
   startHour: Date;
+  day: Date;
   seats: string[];
   createdAt: Date;
   updatedAt: Date;
