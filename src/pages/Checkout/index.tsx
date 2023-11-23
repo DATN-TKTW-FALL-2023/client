@@ -3,8 +3,20 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
-import { FaCalendarAlt, FaRegClock, FaTv, FaCubes } from "react-icons/fa";
+
+import { useGetListOrderQuery } from "@/apis/order";
+import {
+  FaTags,
+  FaClock,
+  FaCalendarAlt,
+  FaRegClock,
+  FaTv,
+  FaCubes,
+} from "react-icons/fa";
+
+
 import { useCreateUrlMutation } from "@/apis/payment";
+
 
 const Checkout = () => {
   const { id } = useParams();
@@ -65,8 +77,20 @@ const Checkout = () => {
               <h1>Số ghế: {order?.seats?.length}</h1>
             </div>
             <div>
+
+              <span>
+                {order?.seats?.length} x {formatCurrency(order?.price)}
+              </span>
+              <span> = </span>
+              <span>
+                {formatCurrency(
+                  Number(order?.seats?.length) * Number(order?.price)
+                )}
+              </span>
+
               <span>Tổng tiền: </span>
               <span>{formatCurrency(order?.price)}</span>
+
             </div>
           </div>
         </div>
@@ -108,6 +132,14 @@ const Checkout = () => {
                   <FaCubes className="mr-2 mt-[4px]" />
                   Ghế ngồi:
                 </label>
+
+                {order?.seats.map((seat: any, index: any) => (
+                  <span key={index} className={`seat-${seat}`}>
+                    {seat}
+                    {index < order?.seats.length - 1 && ","}
+                  </span>
+                ))}
+
                 <div>
                   {order?.seats.map((seat: any, index: any) => (
                     <span key={index}>
@@ -116,6 +148,7 @@ const Checkout = () => {
                     </span>
                   ))}
                 </div>
+
               </li>
             </ul>
           </div>
@@ -126,10 +159,14 @@ const Checkout = () => {
               </span>
               Quay lại
             </button>
+
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+
             <button
               onClick={handlePayment}
               className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"
             >
+
               <span>
                 <GiTicket className="bg-icon" />
               </span>
