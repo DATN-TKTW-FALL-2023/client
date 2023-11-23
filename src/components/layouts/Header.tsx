@@ -68,7 +68,7 @@ const Header = () => {
                 <a href="">GIÁ VÉ</a>
               </li>
               <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">TIM MỚI VÀ ƯU ĐÃI</a>
+                <a href="">TIN MỚI VÀ ƯU ĐÃI</a>
               </li>
               <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">NHƯỢNG QUYỀN</a>
