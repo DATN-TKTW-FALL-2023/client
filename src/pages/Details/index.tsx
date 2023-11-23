@@ -12,7 +12,6 @@ const Details = () => {
     film: id,
     day: selectedDay,
   });
-  console.log("🚀 ~ file: index.tsx:14 ~ Details ~ params:", params);
 
   const { data: film, isLoading: isLoadingFilm } = useGetFilmsByIdQuery(id);
   const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
@@ -170,7 +169,6 @@ const Details = () => {
               })}
             </div>
             <div className="py-8">
-              <h2 className="text-lg font-medium">2D PHỤ ĐỀ</h2>
               {isLoading && (
                 <div role="status">
                   <svg
@@ -191,8 +189,9 @@ const Details = () => {
                   </svg>
                 </div>
               )}
-              {showtime && !isLoading ? (
+              {showtime && !isLoading && (
                 <div className="flex mx-[-4px]">
+                  {/* <h2 className="text-lg font-medium">2D PHỤ ĐỀ</h2> */}
                   {showtime?.data?.map((st: any) => (
                     <div className="relative my-4 text-center px-2 cursor-pointer">
                       <div
@@ -222,8 +221,6 @@ const Details = () => {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <div>No show time</div>
               )}
             </div>
           </div>

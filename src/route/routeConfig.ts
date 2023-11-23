@@ -43,7 +43,7 @@ const routeConfig: TRouteConfig[] = [
     isProtected: true,
   },
   {
-    path: "/success",
+    path: "/vnpay_return",
     Element: paymentSuccess,
     isProtected: true,
   },

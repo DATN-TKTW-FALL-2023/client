@@ -162,3 +162,6 @@ tr, td {
     -webkit-background-clip: text;
     color: transparent;
 }
+.title-oswald {
+    font-family: Oswald;
+}

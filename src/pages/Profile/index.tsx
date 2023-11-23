@@ -1,9 +1,10 @@
 import { useGetUserProfileQuery } from "@/apis/user";
+import Loading from "@/components/Loading";
 const Profile = () => {
   const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return <div className="text-center"><Loading /></div>;
   }
 
   if (isError) {

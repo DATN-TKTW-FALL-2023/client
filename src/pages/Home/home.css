@@ -79,7 +79,7 @@
 
 .loader__text {
   margin: 5px auto;
-  color: #3D314A;    
+  color: #0c67aa;    
   text-transform: uppercase;
   letter-spacing: 1px;
   font-family: Anton, sans-serif;
@@ -89,8 +89,10 @@
   position: relative;
   width: 56px;
   height: 70px;
-  background: #3D314A;
+  background: #0c67aa;
   z-index: -1;
+  text-align: center;
+  margin-left: 9.5px;
 }
 
 .loader__filmstrip:before,
@@ -126,7 +128,6 @@
   height: 100vh;
   min-height: 200px;
 }
-=======
 @keyframes slideIn {
   from {
     opacity: 0;

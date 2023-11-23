@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
+
 import { useGetListOrderQuery } from "@/apis/order";
 import {
   FaTags,
@@ -13,10 +14,15 @@ import {
   FaCubes,
 } from "react-icons/fa";
 
+
+import { useCreateUrlMutation } from "@/apis/payment";
+
+
 const Checkout = () => {
   const { id } = useParams();
   const { data, isLoading } = useGetOrderDetailQuery(id as string);
   const order = useMemo(() => data?.data, [data, isLoading]);
+
   const formatCurrency = (amount: number | bigint | string | undefined) => {
     if (amount === undefined) {
       return "";
@@ -26,11 +32,20 @@ const Checkout = () => {
       currency: "VND",
     }).format(Number(amount));
   };
+
+  const [createUrl] = useCreateUrlMutation();
+
+  const handlePayment = async () => {
+    const res: any = await createUrl({ orderId: id, amount: order?.price });
+    console.log("🚀 ~ file: index.tsx:28 ~ handlePayment ~ res:", res);
+    window.location.href = res.data.url;
+  };
+
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
         <div className="col-span-7 ">
-          <div className="text-xl flex items-center justify-start gap-2 mt-3">
+          <div className="text-xl flex items-center justify-start gap-2 mt-3 title-oswald">
             <Link to="/">Trang Chủ &gt;</Link>
             <span className="text-[#337ab7]">Đơn hàng</span> &gt;
             <span className="text-[#337ab7]">{order?.film}</span>
@@ -59,9 +74,10 @@ const Checkout = () => {
           </div>
           <div className="flex justify-between border-b-2 border-[#ccc] ">
             <div className="col-span-7">
-              <h1>Ghế thường</h1>
+              <h1>Số ghế: {order?.seats?.length}</h1>
             </div>
             <div>
+
               <span>
                 {order?.seats?.length} x {formatCurrency(order?.price)}
               </span>
@@ -71,6 +87,10 @@ const Checkout = () => {
                   Number(order?.seats?.length) * Number(order?.price)
                 )}
               </span>
+
+              <span>Tổng tiền: </span>
+              <span>{formatCurrency(order?.price)}</span>
+
             </div>
           </div>
         </div>
@@ -112,12 +132,23 @@ const Checkout = () => {
                   <FaCubes className="mr-2 mt-[4px]" />
                   Ghế ngồi:
                 </label>
+
                 {order?.seats.map((seat: any, index: any) => (
                   <span key={index} className={`seat-${seat}`}>
                     {seat}
                     {index < order?.seats.length - 1 && ","}
                   </span>
                 ))}
+
+                <div>
+                  {order?.seats.map((seat: any, index: any) => (
+                    <span key={index}>
+                      {seat}
+                      {index < order?.seats.length - 1 && ", "}
+                    </span>
+                  ))}
+                </div>
+
               </li>
             </ul>
           </div>
@@ -128,7 +159,14 @@ const Checkout = () => {
               </span>
               Quay lại
             </button>
+
             <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+
+            <button
+              onClick={handlePayment}
+              className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"
+            >
+
               <span>
                 <GiTicket className="bg-icon" />
               </span>
