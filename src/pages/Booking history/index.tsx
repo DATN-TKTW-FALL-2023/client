@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import { useGetListOrderQuery } from "@/apis/order";
 import dayjs from "dayjs";
 import { FaAngleRight, FaAngleLeft  } from "react-icons/fa6";
+import Loading from "@/components/Loading";
 
 const BookingHistory = () => {
   const { data: orderData, isLoading } = useGetListOrderQuery({});
@@ -10,7 +11,7 @@ const BookingHistory = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   if (isLoading) {
-    return <div className="text-center">Loading...</div>;
+    return <div className="text-center"><Loading /></div>;
   }
 
   const pageCount = Math.ceil(orderData?.data?.length / itemsPerPage);

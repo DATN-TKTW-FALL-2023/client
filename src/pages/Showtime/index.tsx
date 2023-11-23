@@ -171,7 +171,7 @@ const Showtime = () => {
       ) : (
         <div className="grid grid-cols-10 gap-8 mt-4">
           <div className="col-span-7">
-            <div className="text-xl font-semibold flex items-center justify-start gap-2 mt-3">
+            <div className="text-xl flex items-center justify-start gap-2 mt-3 title-oswald">
               <span>
                 <Link to="/">Trang Chủ &gt;</Link>
               </span>
