@@ -14,9 +14,7 @@ import {
   FaCubes,
 } from "react-icons/fa";
 
-
 import { useCreateUrlMutation } from "@/apis/payment";
-
 
 const Checkout = () => {
   const { id } = useParams();
@@ -77,7 +75,6 @@ const Checkout = () => {
               <h1>Số ghế: {order?.seats?.length}</h1>
             </div>
             <div>
-
               <span>
                 {order?.seats?.length} x {formatCurrency(order?.price)}
               </span>
@@ -90,7 +87,6 @@ const Checkout = () => {
 
               <span>Tổng tiền: </span>
               <span>{formatCurrency(order?.price)}</span>
-
             </div>
           </div>
         </div>
@@ -148,7 +144,6 @@ const Checkout = () => {
                     </span>
                   ))}
                 </div>
-
               </li>
             </ul>
           </div>
@@ -160,13 +155,12 @@ const Checkout = () => {
               Quay lại
             </button>
 
-            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"></button>
 
             <button
               onClick={handlePayment}
               className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"
             >
-
               <span>
                 <GiTicket className="bg-icon" />
               </span>
