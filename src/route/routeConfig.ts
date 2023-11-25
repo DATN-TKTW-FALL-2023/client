@@ -6,7 +6,7 @@ import Profile from "@/pages/Profile";
 import React from "react";
 import { PathRouteProps } from "react-router-dom";
 import BookingHistory from "@/pages/Booking history";
-import paymentSuccess from "@/pages/Payment sucess";
+import PaymentSuccess from "@/pages/Callback";
 export interface TRouteConfig extends PathRouteProps {
   Element: React.FC;
   isProtected: boolean;
@@ -43,8 +43,8 @@ const routeConfig: TRouteConfig[] = [
     isProtected: true,
   },
   {
-    path: "/vnpay_return",
-    Element: paymentSuccess,
+    path: "/checkout/vnpay_return",
+    Element: PaymentSuccess,
     isProtected: true,
   },
 ];

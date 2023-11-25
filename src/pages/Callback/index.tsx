@@ -1,9 +1,13 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGetOrderDetailQuery } from "@/apis/order";
+import { expoleCode } from "@/utils/filter";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
-const paymentSuccess = () => {
-  const params = useParams();
-  console.log("🚀 ~ file: index.tsx:5 ~ paymentSuccess ~ params:", params);
-  const navigate = useNavigate();
+const PaymentSuccess = () => {
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  const { data } = useGetOrderDetailQuery(expoleCode(searchParams.get('vnp_OrderInfo')));
+  const navigate = useNavigate()
   return (
     <div className="container">
       <div className="text-center h-center py-[200px]">
@@ -26,4 +30,4 @@ const paymentSuccess = () => {
   );
 };
 
-export default paymentSuccess;
+export default PaymentSuccess;
