@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 import { Link, useParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
-
+import { AiOutlineUser } from "react-icons/ai";
 import { useGetListOrderQuery } from "@/apis/order";
 import {
   FaTags,
@@ -48,9 +48,9 @@ const Checkout = () => {
             <span className="text-[#337ab7]">Đơn hàng</span> &gt;
             <span className="text-[#337ab7]">{order?.film}</span>
           </div>
-          <div className="inline-block mt-8">
+          <div className="inline-block mt-8 flex items-center ">
             <div className="inline-block">
-              <img width="35" src="https://picsum.photos/200/300" alt="" />
+            <img className="w-8 h-8" src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1700898452/ic-inforpayment_dvyogr.png" alt="" />
             </div>
             <div className="inline-block  mb-[-10px] mx-4">
               <h1 className="text-xl text-[#494c62]">THÔNG TIN THANH TOÁN</h1>
@@ -85,8 +85,6 @@ const Checkout = () => {
                 )}
               </span>
 
-              <span>Tổng tiền: </span>
-              <span>{formatCurrency(order?.price)}</span>
             </div>
           </div>
         </div>
@@ -128,14 +126,6 @@ const Checkout = () => {
                   <FaCubes className="mr-2 mt-[4px]" />
                   Ghế ngồi:
                 </label>
-
-                {order?.seats.map((seat: any, index: any) => (
-                  <span key={index} className={`seat-${seat}`}>
-                    {seat}
-                    {index < order?.seats.length - 1 && ","}
-                  </span>
-                ))}
-
                 <div>
                   {order?.seats.map((seat: any, index: any) => (
                     <span key={index}>
@@ -155,7 +145,7 @@ const Checkout = () => {
               Quay lại
             </button>
 
-            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"></button>
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">Hủy Đơn Hàng</button>
 
             <button
               onClick={handlePayment}
