@@ -165,3 +165,7 @@ tr, td {
 .title-oswald {
     font-family: Oswald;
 }
+.bill {
+    display: grid;
+    grid-template-columns: 60% 50%;
+}
