@@ -23,7 +23,7 @@ import Swal from "sweetalert2";
 import Loading from "@/components/Loading";
 
 const Showtime = () => {
-  const { id } = useParams();
+  const { id } = useParams()
   const [selectedSeats, setSeletedSeats] = useState<TSeat[]>([]);
   const location = useLocation();
   const navigate = useNavigate();

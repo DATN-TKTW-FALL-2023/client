@@ -13,3 +13,8 @@ export type TOrder = {
   updatedAt: Date;
   user: TUser;
 };
+export type TCancelOrder = {
+  order: string;
+  showtime: string,
+  seats: string[];
+};

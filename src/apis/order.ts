@@ -1,7 +1,6 @@
 import { TResApi } from "@/interfaces/common";
 import { TOrder } from "@/interfaces/order";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 const orderApi = createApi({
   reducerPath: "order",
   tagTypes: ["Orders"],
@@ -28,6 +27,7 @@ const orderApi = createApi({
         return [{ type: "Orders", id: arg }];
       },
     }),
+
     getListOrder: builder.query<any, any>({
       query: (params) => ({
         url: `/my-order`,
