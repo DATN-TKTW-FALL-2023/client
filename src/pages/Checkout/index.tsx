@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 
 import { useCreateUrlMutation } from "@/apis/payment";
+import Loading from "@/components/Loading";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -38,7 +39,13 @@ const Checkout = () => {
     console.log("🚀 ~ file: index.tsx:28 ~ handlePayment ~ res:", res);
     window.location.href = res.data.url;
   };
-
+  if (isLoading) {
+    return (
+      <div className="text-center">
+        <Loading />
+      </div>
+    );
+  }
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
@@ -50,41 +57,47 @@ const Checkout = () => {
           </div>
           <div className="inline-block mt-8 flex items-center ">
             <div className="inline-block">
-            <img className="w-8 h-8" src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1700898452/ic-inforpayment_dvyogr.png" alt="" />
+              <img
+                className="w-8 h-8"
+                src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1700898452/ic-inforpayment_dvyogr.png"
+                alt=""
+              />
             </div>
             <div className="inline-block  mb-[-10px] mx-4">
-              <h1 className="text-xl text-[#494c62]">THÔNG TIN THANH TOÁN</h1>
+              <h1 className="text-xl text-[#494c62] font-bold">
+                THÔNG TIN THANH TOÁN
+              </h1>
             </div>
           </div>
           <div className="grid grid-cols-3 my-6">
             <div>
-              <h4>Họ tên:</h4>
+              <h4 className="font-bold text-[#494c62]">Họ tên:</h4>
               <span>{order?.user?.username}</span>
             </div>
             <div>
-              <h4>Số điện thoại:</h4>
+              <h4 className="font-bold text-[#494c62]">Số điện thoại:</h4>
               <span>{order?.user?.phone}</span>
             </div>
             <div>
-              <h4>Email:</h4>
+              <h4 className="font-bold text-[#494c62]">Email:</h4>
               <span>{order?.user?.email}</span>
             </div>
           </div>
           <div className="flex justify-between border-b-2 border-[#ccc] ">
-            <div className="col-span-7">
-              <h1>Số ghế: {order?.seats?.length}</h1>
+            <div className="col-span-7 flex">
+              <h1 className="pr-1 font-bold text-[#494c62]">Số ghế: </h1>
+              <span>{order?.seats?.length}</span>
             </div>
             <div>
               <span>
                 {order?.seats?.length} x {formatCurrency(order?.price)}
               </span>
               <span> = </span>
-              <span>
+              <span className="text-[#494c62] font-bold">
                 {formatCurrency(
                   Number(order?.seats?.length) * Number(order?.price)
                 )}
               </span>
-
             </div>
           </div>
         </div>
@@ -145,7 +158,12 @@ const Checkout = () => {
               Quay lại
             </button>
 
-            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">Hủy Đơn Hàng</button>
+            <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+              <span>
+                <GiTicket className="bg-icon" />
+              </span>
+              Hủy Đơn Hàng
+            </button>
 
             <button
               onClick={handlePayment}
