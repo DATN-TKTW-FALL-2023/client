@@ -347,10 +347,10 @@ const Showtime = () => {
                 </li>
               </ul>
             </div>
-            <div className="text-center mt-4">
+            <div className="text-center mt-4 px-10">
               <button
                 onClick={handleOrder}
-                className={`btn btn text-white font-medium w-[40%] py-2 rounded-lg ${
+                className={`btn btn text-white flex justify-center font-medium w-[40%] py-2 rounded-lg ${
                   isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={isButtonDisabled}
