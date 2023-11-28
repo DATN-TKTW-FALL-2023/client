@@ -1,5 +1,5 @@
 import { TResApi } from "@/interfaces/common";
-import { TOrder } from "@/interfaces/order";
+import { TCancelOrder, TOrder } from "@/interfaces/order";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const orderApi = createApi({
   reducerPath: "order",
@@ -62,9 +62,24 @@ const orderApi = createApi({
       invalidatesTags: (_, error, body) =>
         error ? [] : [{ type: "Orders", id: body.idShowtime }],
     }),
+    cancelOrder: builder.mutation<any, TCancelOrder>({
+      query(body) {
+        try {
+          return {
+            url: "/cancel",
+            method: "PATCH",
+            body,
+          };
+        } catch (error: any) {
+          throw new Error(error.message);
+        }
+      },
+      invalidatesTags: (_, error, body) =>
+        error ? [] : [{ type: "Orders", id: body.order }],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetOrderDetailQuery,useGetListOrderQuery } = orderApi;
+export const { useCreateOrderMutation, useGetOrderDetailQuery,useGetListOrderQuery, useCancelOrderMutation } = orderApi;
 export const orderReducer = orderApi.reducer;
 export default orderApi;
