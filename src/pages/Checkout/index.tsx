@@ -13,7 +13,6 @@ import {
   FaTv,
   FaCubes,
 } from "react-icons/fa";
-
 import { useCreateUrlMutation } from "@/apis/payment";
 import Loading from "@/components/Loading";
 
@@ -46,6 +45,8 @@ const Checkout = () => {
       </div>
     );
   }
+
+  
   return (
     <div className="container">
       <div className="grid grid-cols-10 gap-8">
