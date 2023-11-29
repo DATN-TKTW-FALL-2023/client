@@ -8,6 +8,7 @@ import Loading from "@/components/Loading";
 const Details = () => {
   const { id } = useParams();
   const [selectedDay, setSelectedDate] = useState<string>("");
+  const [dayShowing, setDayShowing] = useState<any[]>([])
   const [params, setParams] = useState<any>({
     film: id,
     day: selectedDay,
@@ -23,6 +24,9 @@ const Details = () => {
 
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
+      const dataDayShowing = film?.data?.dayShowing;
+      const dateObjects = dataDayShowing?.map((item: any) => dayjs(item).format('YYYY-MM-DD'));
+      setDayShowing([...new Set(dateObjects)])
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
     }
   }, [film]);
@@ -33,6 +37,7 @@ const Details = () => {
       day: selectedDay,
     }));
   }, [selectedDay]);
+
 
   function formatDate(dateString: any) {
     const date = new Date(dateString);
@@ -141,14 +146,14 @@ const Details = () => {
           </div>
           <div>
             <div className="flex border-b-2 border-[#ccc]">
-              {film?.data?.dayShowing?.map((showingDate: any, index: any) => {
-                const dateString = new Date(showingDate).toISOString();
+              {dayShowing?.map((showingDate: any, index: any) => {
+                const dateString = dayjs(showingDate).format('YYYY-MM-DD');
                 const formattedDate = formatDate(showingDate);
                 const [day, month, dayOfWeek] = formattedDate.split("/");
                 return (
                   <div
                     className={`my-2 px-4 py-1 text-center cursor-pointer ${
-                      selectedDay === dateString
+                      dayjs(selectedDay).format('YYYY-MM-DD') === dateString
                         ? "bg-[#03599d]"
                         : "bg-transparent"
                     }`}
@@ -157,7 +162,7 @@ const Details = () => {
                   >
                     <a
                       className={`${
-                        selectedDay === dateString ? "text-white" : "text-black"
+                        dayjs(selectedDay).format('YYYY-MM-DD') === dateString ? "text-white" : "text-black"
                       }`}
                       style={{ display: "block" }}
                     >
