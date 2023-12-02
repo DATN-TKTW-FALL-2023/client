@@ -37,7 +37,7 @@ const Showtime = () => {
   const [bookedSeats, setBookedSeats] = useState<string[]>([]);
   const [cancelBooking] = useCancelBookingMutation();
   const [order, { isLoading: isLoadingOrder }] = useCreateOrderMutation();
-  const [timeLeft, setTimeLeft] = useState(90);
+  const [timeLeft, setTimeLeft] = useState(600);
   const [isTimeUp, setIsTimeUp] = useState(false);
 
   useEffect(() => {
@@ -119,6 +119,15 @@ const Showtime = () => {
   const handleSelectSeats = async (seat: TSeat) => {
     const isSeatBooked = bookedSeats.includes(seat._id);
     const index = selectedSeats.findIndex((s) => s._id === seat._id);
+    const isSeatHeldByOthers = seatsOtherHeld.includes(seat._id);
+    if (isSeatHeldByOthers) {
+      Swal.fire({
+        icon: "info",
+        title: "Thông báo",
+        text: "Ghế này đang được người khác giữ, vui lòng chọn ghế khác.",
+      });
+      return;
+    }
     if (index < 0 && selectedSeats.length < 10 && !isSeatBooked) {
       setSeletedSeats((prev) => [...prev, seat]);
     } else if (index >= 0) {
@@ -178,7 +187,7 @@ const Showtime = () => {
               <span className="text-[#337ab7]">Đặt vé</span>&gt;
               <span className="text-[#337ab7]">{showtime?.film?.name}</span>
             </div>
-            <div className="mt-12 grid grid-cols-3">
+            <div className="mt-12 grid grid-cols-4">
               <div className="flex h-[35px] justify-center">
                 <img
                   width="35"
@@ -199,6 +208,17 @@ const Showtime = () => {
                 />
                 <span className=" text-[13px] font-medium flex justify-center items-center ml-4">
                   Ghế đang chọn
+                </span>
+              </div>
+              <div className="flex h-[35px]  justify-center">
+                <img
+                  width="35"
+                  height="35"
+                  src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1699685110/seat-process-normal_tbo1zs.png"
+                  alt=""
+                />
+                <span className=" text-[13px] font-medium flex justify-center items-center ml-4">
+                  Ghế đang được giữ
                 </span>
               </div>
 
