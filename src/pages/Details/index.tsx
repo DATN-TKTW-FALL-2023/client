@@ -197,34 +197,38 @@ const Details = () => {
               {showtime && !isLoading && (
                 <div className="flex mx-[-4px]">
                   {/* <h2 className="text-lg font-medium">2D PHỤ ĐỀ</h2> */}
-                  {showtime?.data?.map((st: any) => (
-                    <div className="relative my-4 text-center px-2 cursor-pointer">
-                      <div
-                        onClick={() => {
-                          setSelectedShowtime(st);
-                          setIsShowtimeDetailsVisible(true);
-                        }}
-                        className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
-                      >
-                        {`${dayjs(new Date(st.startHour).toISOString()).format(
-                          "h:mm A"
-                        )}`}
-                      </div>
-                      <p className="text-xs py-2 font-medium">
-                        {st.room.seats.length - st.seatsBooked.length} {"  "}
-                        ghế trống
-                      </p>
-                      {selectedShowtime && (
-                        <ShowtimeDetails
-                          showtime={selectedShowtime}
-                          isPopupVisible={isShowtimeDetailsVisible}
-                          onClosePopup={() =>
-                            setIsShowtimeDetailsVisible(false)
-                          }
-                        />
-                      )}
-                    </div>
-                  ))}
+                  {showtime
+  ?.data
+  ?.slice() // Clone array to avoid modifying the original array
+  .sort((a: any, b: any) => {
+    // Sắp xếp theo thời gian bắt đầu từ sớm đến muộn
+    return new Date(a.startHour).getTime() - new Date(b.startHour).getTime();
+  })
+  .map((st: any) => (
+    <div className="relative my-4 text-center px-2 cursor-pointer" key={st.id}>
+      <div
+        onClick={() => {
+          setSelectedShowtime(st);
+          setIsShowtimeDetailsVisible(true);
+        }}
+        className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
+      >
+        {`${dayjs(new Date(st.startHour).toISOString()).format("h:mm A")}`}
+      </div>
+      <p className="text-xs py-2 font-medium">
+        {st.room.seats.length - st.seatsBooked.length} {"  "}
+        ghế trống
+      </p>
+      {selectedShowtime && (
+        <ShowtimeDetails
+          showtime={selectedShowtime}
+          isPopupVisible={isShowtimeDetailsVisible}
+          onClosePopup={() => setIsShowtimeDetailsVisible(false)}
+        />
+      )}
+    </div>
+  ))}
+
                 </div>
               )}
             </div>
