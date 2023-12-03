@@ -15,31 +15,38 @@ import {
   useGetShowtimeDetailQuery,
 } from "@/apis/showtime";
 import { TSeat } from "@/interfaces/showtime";
-import { useAppSelector } from "@/store/hook";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import dayjs from "dayjs";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Loading from "@/components/Loading";
+import { setSelectedShowtime } from "@/slices/orderSlice";
+import PopupCart from "@/pages/Showtime/PopupCart.tsx";
 
 const Showtime = () => {
-  const { id } = useParams()
+  const { id } = useParams();
   const [selectedSeats, setSeletedSeats] = useState<TSeat[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
-
   const profile: any = useAppSelector((state) => state.auth.profile);
-
   const { data, isLoading } = useGetShowtimeDetailQuery(id as string);
   const showtime = useMemo(() => data?.data, [data, isLoading]);
-
   const [bookingSeat, { isError }] = useBookingSeatMutation();
   const [bookedSeats, setBookedSeats] = useState<string[]>([]);
   const [cancelBooking] = useCancelBookingMutation();
   const [order, { isLoading: isLoadingOrder }] = useCreateOrderMutation();
   const [timeLeft, setTimeLeft] = useState(600);
   const [isTimeUp, setIsTimeUp] = useState(false);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const dispatch = useAppDispatch();
 
+  const openBuyPopup = () => {
+    setIsPopupVisible(true);
+  };
+  const closeBuyPopup = () => {
+    setIsPopupVisible(false);
+  };
   useEffect(() => {
     const timerId = setInterval(() => {
       if (timeLeft > 0) {
@@ -158,13 +165,13 @@ const Showtime = () => {
     }
   };
 
-  const handleOrder = async () => {
-    const res: any = await order({
-      showtime: id,
-      seats: selectedSeats.map((s) => s._id),
-    });
-    navigate(`/checkout/${res.data.data._id}`);
-  };
+  // const handleOrder = async () => {
+  //   // const res: any = await order({
+  //   //   showtime: id,
+  //   //   seats: selectedSeats.map((s) => s._id),
+  //   // });
+  //   // dispatch(setSelectedShowtime(showtime));
+  // };
   const isButtonDisabled = selectedSeats.length === 0;
   const displayTime = () => {
     const minutes = Math.floor(timeLeft / 60);
@@ -369,7 +376,8 @@ const Showtime = () => {
             </div>
             <div className="text-center mt-4 px-10">
               <button
-                onClick={handleOrder}
+                // onClick={handleOrder}
+                onClick={() => openBuyPopup()}
                 className={`btn btn text-white flex justify-center font-medium w-[40%] py-2 rounded-lg ${
                   isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
                 }`}
@@ -403,6 +411,7 @@ const Showtime = () => {
           </div>
         </div>
       )}
+      <PopupCart inforShowtime={showtime} cartNameSelected={selectedSeats} isPopupVisible={isPopupVisible} onClosePopup={closeBuyPopup} />
     </div>
   );
 };

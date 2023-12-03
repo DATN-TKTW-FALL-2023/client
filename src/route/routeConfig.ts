@@ -27,11 +27,11 @@ const routeConfig: TRouteConfig[] = [
     Element: Showtime,
     isProtected: true,
   },
-  {
-    path: "/checkout/:id",
-    Element: Checkout,
-    isProtected: true,
-  },
+  // {
+  //   path: "/checkout",
+  //   Element: Checkout,
+  //   isProtected: true,
+  // },
   {
     path: "/profile",
     Element: Profile,
