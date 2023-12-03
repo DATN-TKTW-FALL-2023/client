@@ -1,0 +1,204 @@
+// // import { useGetOrderDetailQuery } from "@/apis/order";
+// import { useEffect, useMemo } from "react";
+// import dayjs from "dayjs";
+// import { Link, useParams } from "react-router-dom";
+// import { GiTicket } from "react-icons/gi";
+// // import { AiOutlineUser } from "react-icons/ai";
+// // import { useGetListOrderQuery } from "@/apis/order";
+// import {
+//   FaTags,
+//   FaClock,
+//   FaCalendarAlt,
+//   FaRegClock,
+//   FaTv,
+//   FaCubes,
+// } from "react-icons/fa";
+// import { useCreateUrlMutation } from "@/apis/payment";
+// // import Loading from "@/components/Loading";
+// import { useAppDispatch, useAppSelector } from "@/store/hook";
+// const Checkout = () => {
+//   const dispatch = useAppDispatch();
+//   const order = useAppSelector((state) => state.showtimeOrder);
+//   const orderSelectedShowTime:any = order.selectedShowtime;
+// //   const orderSlectedSeats:any = order.selectedSeats;
+//   console.log(orderSelectedShowTime.room.seats);
+// //   console.log(orderSlectedSeats);
+//   const selectedSeatsNames = orderSlectedSeats.map((selectedSeatId:any)=>{
+//     const selectedSeat = orderSelectedShowTime.room.seats.find((seat:any)=>{
+//       return seat._id === selectedSeatId;
+//     })
+//     if (selectedSeat) {
+//       return selectedSeat.name;
+//     } else {
+//       return 'Ghế ' + selectedSeatId + ' không tồn tại trong phòng.';
+//     }
+//   })
+//   console.log(selectedSeatsNames);
+//   const formatCurrency = (amount: number | bigint | string | undefined) => {
+//     if (amount === undefined) {
+//       return "";
+//     }
+//     return new Intl.NumberFormat("vi-VN", {
+//       style: "currency",
+//       currency: "VND",
+//     }).format(Number(amount));
+//   };
+
+//   const [createUrl] = useCreateUrlMutation();
+
+// //   const handlePayment = async () => {
+// //     const res: any = await createUrl({ orderId: new Date(), amount: order?.price });
+// //     console.log("🚀 ~ file: index.tsx:28 ~ handlePayment ~ res:", res);
+// //     window.location.href = res.data.url;
+// //   };
+//   // useEffect(() => {
+//   //   const showtimeOrderData = persistor.getState().showtimeOrder;
+//   //   console.log('Showtime Order Data:', showtimeOrderData);
+//   //   // Sử dụng dữ liệu showtimeOrder trong ứng dụng của bạn
+//   //   if (showtimeOrderData) {
+//   //     // Thực hiện các xử lý liên quan đến dữ liệu showtimeOrder
+//   //     console.log('Số ghế đã chọn:', showtimeOrderData.selectedShowtime);
+//   //     console.log('Danh sách ghế:', showtimeOrderData.showtimeOrder);
+//   //   }
+//   // }, []);
+//   return (
+//     <div className="container">
+//       <div className="grid grid-cols-10 gap-8">
+//         <div className="col-span-7 ">
+//           <div className="text-xl flex items-center justify-start gap-2 mt-3 title-oswald">
+//             <Link to="/">Trang Chủ &gt;</Link>
+//             <span className="text-[#337ab7]">Đơn hàng</span> &gt;
+//             <span className="text-[#337ab7]">
+//               {orderSelectedShowTime?.film.name}
+//             </span>
+//           </div>
+//           <div className="inline-block mt-8 flex items-center ">
+//             <div className="inline-block">
+//               <img
+//                 className="w-8 h-8"
+//                 src="https://res.cloudinary.com/dtiwyksp8/image/upload/v1700898452/ic-inforpayment_dvyogr.png"
+//                 alt=""
+//               />
+//             </div>
+//             <div className="inline-block  mb-[-10px] mx-4">
+//               <h1 className="text-xl text-[#494c62] font-bold">
+//                 THÔNG TIN THANH TOÁN
+//               </h1>
+//             </div>
+//           </div>
+//           <div className="grid grid-cols-3 my-6">
+//             <div>
+//               <h4 className="font-bold text-[#494c62]">Họ tên:</h4>
+//               <span>{orderSelectedShowTime?.author?.username}</span>
+//             </div>
+//             <div>
+//               <h4 className="font-bold text-[#494c62]">Số điện thoại:</h4>
+//               <span>{orderSelectedShowTime?.author?.phone}</span>
+//             </div>
+//             <div>
+//               <h4 className="font-bold text-[#494c62]">Email:</h4>
+//               <span>{orderSelectedShowTime?.author?.email}</span>
+//             </div>
+//           </div>
+//           <div className="flex justify-between border-b-2 border-[#ccc] ">
+//             <div className="col-span-7 flex">
+//               <h1 className="pr-1 font-bold text-[#494c62]">Số ghế: </h1>
+//               <span>{orderSlectedSeats?.length}</span>
+//             </div>
+//             <div>
+//               <span>
+//                 {orderSlectedSeats?.length} x{" "}
+//                 {formatCurrency(orderSelectedShowTime?.price)}
+//               </span>
+//               <span> = </span>
+//               <span className="text-[#494c62] font-bold">
+//                 {formatCurrency(
+//                   Number(orderSlectedSeats?.length) *
+//                     Number(orderSelectedShowTime?.price)
+//                 )}
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//         <div className="col-span-3 bg-white">
+//           <div className=" px-10 gap-6 dashed-border pb-6 border-dashed border-b-2 border-[#ccc]">
+//             <div>
+//               <h1 className="text-xl text-[#03599d] font-bold py-4">
+//                 {orderSelectedShowTime?.film.name}
+//               </h1>
+//               <h4>2D Phụ đề</h4>
+//             </div>
+//           </div>
+//           <div className=" px-10">
+//             <ul>
+//               <li className="py-2 check-out">
+//                 <label className="flex">
+//                   <FaCalendarAlt className="mr-2 mt-[4px]" />
+//                   Ngày chiếu:
+//                 </label>
+
+//                 <span>
+//                   {dayjs(orderSelectedShowTime?.day).format("DD/MM/YYYY")}
+//                 </span>
+//               </li>
+//               <li className="py-2 check-out">
+//                 <label className="flex">
+//                   <FaRegClock className="mr-2 mt-[4px]" />
+//                   Giờ chiếu:
+//                 </label>
+//                 <span>
+//                   {dayjs(orderSelectedShowTime?.startHour).format("HH:mm")}
+//                 </span>
+//               </li>
+//               <li className="py-2 check-out">
+//                 <label className="flex">
+//                   <FaTv className="mr-2 mt-[4px]" />
+//                   Phòng chiếu:
+//                 </label>
+//                 <span>{orderSelectedShowTime?.room?.name}</span>
+//               </li>
+//               <li className="py-2 check-out">
+//                 <label className="flex">
+//                   <FaCubes className="mr-2 mt-[4px]" />
+//                   Ghế ngồi:
+//                 </label>
+//                 <div className="displaySeatSelected">
+//                     <span>
+//                       {selectedSeatsNames.join(', ')}
+//                     </span>
+//                 </div>
+//               </li>
+//             </ul>
+//           </div>
+//           <div className="text-center mt-4">
+//             <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+//               <span>
+//                 <GiTicket className="bg-icon" />
+//               </span>
+//               Quay lại
+//             </button>
+
+//             <button className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md">
+//               <span>
+//                 <GiTicket className="bg-icon" />
+//               </span>
+//               Hủy Đơn Hàng
+//             </button>
+
+//             <button
+//               onClick={handlePayment}
+//               className="btn btn mx-2 mb-8 text-white font-medium w-[40%] py-2 rounded-md"
+//             >
+//               <span>
+//                 <GiTicket className="bg-icon" />
+//               </span>
+//               Tiếp tục
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Checkout;

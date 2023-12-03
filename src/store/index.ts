@@ -8,6 +8,7 @@ import showtimeApi, { showtimeReducer } from "@/apis/showtime";
 import userApi, { userReducer } from "@/apis/auth";
 import filmApi, { filmReducer } from "@/apis/films";
 import profileApi, { profileReducer } from "@/apis/user";
+import showtimeSliceReducer from "@/slices/orderSlice";
 import {
   FLUSH,
   PAUSE,
@@ -25,7 +26,7 @@ import vnpayApi, { vnpayReducer } from "@/apis/payment";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth","showtimeOrder"],
 };
 const rootReducer = combineReducers({
   film: filmReducer,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   profile: profileReducer,
   vnpay: vnpayReducer,
+  showtimeOrder: showtimeSliceReducer
 });
 const middleware = [
   userApi.middleware,
