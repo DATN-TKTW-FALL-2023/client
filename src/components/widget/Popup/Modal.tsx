@@ -6,13 +6,19 @@ import { useEffect, useState } from "react";
 
 const Modal = ({ isOpen, onClose, id }: any) => {
   const [selectedDay, setSelectedDate] = useState<string>("");
+  const [dayShowing, setDayShowing] = useState<any[]>([]);
+
   const [params, setParams] = useState<any>({
     film: id,
     day: selectedDay,
   });
 
   const { data: film } = useGetFilmsByIdQuery(id);
-  const { data: showtime, isLoading } = useGetShowtimeQuery(params, {
+  const {
+    data: showtime,
+    isLoading,
+    isFetching,
+  } = useGetShowtimeQuery(params, {
     skip: !params.day,
   });
 
@@ -22,6 +28,11 @@ const Modal = ({ isOpen, onClose, id }: any) => {
 
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
+      const dataDayShowing = film?.data?.dayShowing;
+      const dateObjects = dataDayShowing?.map((item: any) =>
+        dayjs(item).format("YYYY-MM-DD")
+      );
+      setDayShowing([...new Set(dateObjects)]);
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
     }
   }, [film]);
@@ -44,7 +55,7 @@ const Modal = ({ isOpen, onClose, id }: any) => {
     const dayOfWeek = daysOfWeek[date.getDay()];
     return `${day}/${month}/${dayOfWeek}`;
   }
-  const modalClassName = `modal ${isOpen ? 'open' : ''}`;
+  const modalClassName = `modal ${isOpen ? "open" : ""}`;
   if (!isOpen || !id) return null;
   return (
     <div className={`modal-overlay ${modalClassName}`}>
@@ -54,14 +65,14 @@ const Modal = ({ isOpen, onClose, id }: any) => {
         </button>
         <div>
           <div className="flex border-b-2 border-[#ccc]">
-            {film?.data?.dayShowing?.map((showingDate: any, index: any) => {
-              const dateString = new Date(showingDate).toISOString();
+            {dayShowing?.map((showingDate: any, index: any) => {
+              const dateString = dayjs(showingDate).format("YYYY-MM-DD");
               const formattedDate = formatDate(showingDate);
               const [day, month, dayOfWeek] = formattedDate.split("/");
               return (
                 <div
                   className={`my-2 px-4 py-1 text-center cursor-pointer ${
-                    selectedDay === dateString
+                    dayjs(selectedDay).format("YYYY-MM-DD") === dateString
                       ? "bg-[#03599d]"
                       : "bg-transparent"
                   }`}
@@ -70,7 +81,9 @@ const Modal = ({ isOpen, onClose, id }: any) => {
                 >
                   <a
                     className={`${
-                      selectedDay === dateString ? "text-white" : "text-black"
+                      dayjs(selectedDay).format("YYYY-MM-DD") === dateString
+                        ? "text-white"
+                        : "text-black"
                     }`}
                     style={{ display: "block" }}
                   >
@@ -82,7 +95,7 @@ const Modal = ({ isOpen, onClose, id }: any) => {
           </div>
           <div className="py-8">
             <h2 className="text-lg font-medium">2D PHỤ ĐỀ</h2>
-            {isLoading && (
+            {isFetching && (
               <div role="status">
                 <svg
                   aria-hidden="true"

@@ -8,7 +8,7 @@ import Loading from "@/components/Loading";
 const Details = () => {
   const { id } = useParams();
   const [selectedDay, setSelectedDate] = useState<string>("");
-  const [dayShowing, setDayShowing] = useState<any[]>([])
+  const [dayShowing, setDayShowing] = useState<any[]>([]);
   const [params, setParams] = useState<any>({
     film: id,
     day: selectedDay,
@@ -25,8 +25,10 @@ const Details = () => {
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
       const dataDayShowing = film?.data?.dayShowing;
-      const dateObjects = dataDayShowing?.map((item: any) => dayjs(item).format('YYYY-MM-DD'));
-      setDayShowing([...new Set(dateObjects)])
+      const dateObjects = dataDayShowing?.map((item: any) =>
+        dayjs(item).format("YYYY-MM-DD")
+      );
+      setDayShowing([...new Set(dateObjects)]);
       setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
     }
   }, [film]);
@@ -37,7 +39,6 @@ const Details = () => {
       day: selectedDay,
     }));
   }, [selectedDay]);
-
 
   function formatDate(dateString: any) {
     const date = new Date(dateString);
@@ -147,13 +148,13 @@ const Details = () => {
           <div>
             <div className="flex border-b-2 border-[#ccc]">
               {dayShowing?.map((showingDate: any, index: any) => {
-                const dateString = dayjs(showingDate).format('YYYY-MM-DD');
+                const dateString = dayjs(showingDate).format("YYYY-MM-DD");
                 const formattedDate = formatDate(showingDate);
                 const [day, month, dayOfWeek] = formattedDate.split("/");
                 return (
                   <div
                     className={`my-2 px-4 py-1 text-center cursor-pointer ${
-                      dayjs(selectedDay).format('YYYY-MM-DD') === dateString
+                      dayjs(selectedDay).format("YYYY-MM-DD") === dateString
                         ? "bg-[#03599d]"
                         : "bg-transparent"
                     }`}
@@ -162,7 +163,9 @@ const Details = () => {
                   >
                     <a
                       className={`${
-                        dayjs(selectedDay).format('YYYY-MM-DD') === dateString ? "text-white" : "text-black"
+                        dayjs(selectedDay).format("YYYY-MM-DD") === dateString
+                          ? "text-white"
+                          : "text-black"
                       }`}
                       style={{ display: "block" }}
                     >
@@ -197,38 +200,46 @@ const Details = () => {
               {showtime && !isLoading && (
                 <div className="flex mx-[-4px]">
                   {/* <h2 className="text-lg font-medium">2D PHỤ ĐỀ</h2> */}
-                  {showtime
-  ?.data
-  ?.slice() // Clone array to avoid modifying the original array
-  .sort((a: any, b: any) => {
-    // Sắp xếp theo thời gian bắt đầu từ sớm đến muộn
-    return new Date(a.startHour).getTime() - new Date(b.startHour).getTime();
-  })
-  .map((st: any) => (
-    <div className="relative my-4 text-center px-2 cursor-pointer" key={st.id}>
-      <div
-        onClick={() => {
-          setSelectedShowtime(st);
-          setIsShowtimeDetailsVisible(true);
-        }}
-        className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
-      >
-        {`${dayjs(new Date(st.startHour).toISOString()).format("h:mm A")}`}
-      </div>
-      <p className="text-xs py-2 font-medium">
-        {st.room.seats.length - st.seatsBooked.length} {"  "}
-        ghế trống
-      </p>
-      {selectedShowtime && (
-        <ShowtimeDetails
-          showtime={selectedShowtime}
-          isPopupVisible={isShowtimeDetailsVisible}
-          onClosePopup={() => setIsShowtimeDetailsVisible(false)}
-        />
-      )}
-    </div>
-  ))}
-
+                  {showtime?.data
+                    ?.slice() 
+                    .sort((a: any, b: any) => {
+                    
+                      return (
+                        new Date(a.startHour).getTime() -
+                        new Date(b.startHour).getTime()
+                      );
+                    })
+                    .map((st: any) => (
+                      <div
+                        className="relative my-4 text-center px-2 cursor-pointer"
+                        key={st.id}
+                      >
+                        <div
+                          onClick={() => {
+                            setSelectedShowtime(st);
+                            setIsShowtimeDetailsVisible(true);
+                          }}
+                          className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
+                        >
+                          {`${dayjs(
+                            new Date(st.startHour).toISOString()
+                          ).format("h:mm A")}`}
+                        </div>
+                        <p className="text-xs py-2 font-medium">
+                          {st.room.seats.length - st.seatsBooked.length} {"  "}
+                          ghế trống
+                        </p>
+                        {selectedShowtime && (
+                          <ShowtimeDetails
+                            showtime={selectedShowtime}
+                            isPopupVisible={isShowtimeDetailsVisible}
+                            onClosePopup={() =>
+                              setIsShowtimeDetailsVisible(false)
+                            }
+                          />
+                        )}
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
