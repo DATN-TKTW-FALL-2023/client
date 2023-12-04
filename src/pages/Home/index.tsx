@@ -36,6 +36,7 @@ const Home = () => {
     <div>
       <div className="banner">
         <img
+          width="100%"
           src="https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg"
           alt=""
         />
