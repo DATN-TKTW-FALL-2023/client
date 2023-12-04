@@ -40,7 +40,7 @@ const PaymentSuccess = () => {
       <div className="mt-12 mb-12 px-8 py-4 shadow-htr rounded w-[800px] mx-auto ">
         <div className="grid grid-cols-2 ">
           <div className="flex">
-            <p className="text-2xl font-medium">Hóa đơn số #conc</p>
+            <p className="text-2xl font-medium">HÓA ĐƠN </p>
             <p className=" mt-[3px] mx-4">
               <span className="px-2 py-[4px] font-medium bg-[#89ce84] text-xs text-white rounded">
                 ĐÃ THANH TOÁN
@@ -93,7 +93,7 @@ const PaymentSuccess = () => {
               <p>
                 {" "}
                 {data?.data?.seats.map((seat: any) => (
-                  <span>{seat}</span>
+                  <span>{seat}{" "}</span>
                 ))}
               </p>
               <p>{data?.data?.price}đ</p>
