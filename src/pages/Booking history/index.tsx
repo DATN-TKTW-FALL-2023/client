@@ -16,7 +16,7 @@ const BookingHistory = () => {
 
   const pageCount = Math.ceil(orderData?.data?.length / itemsPerPage);
 
-  const handlePageClick = (data) => {
+  const handlePageClick = (data:any) => {
     const selectedPage = data.selected;
     setCurrentPage(selectedPage);
   };

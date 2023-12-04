@@ -7,6 +7,8 @@ import {
   useOrderSuccessMutation,
 } from "@/apis/order";
 import { useAppSelector } from "@/store/hook";
+import dayjs from "dayjs";
+
 const PaymentSuccess = () => {
   let [searchParams] = useSearchParams();
   const showtimeOrder = useAppSelector((state) => state.showtimeOrder.showtime);
@@ -49,13 +51,13 @@ const PaymentSuccess = () => {
             <div className="bill ">
               <p className="font-medium">Ngày tạo hóa đơn: </p>
               <p className="text-[#6a6868]">
-                {/* {data?.data?.day
-                          ? dayjs(data?.data?.day).format("DD/MM/YYYY")
-                          : "Invalid Date"} */}
+                {data?.data?.day
+                  ? dayjs(data?.data?.day).format("DD/MM/YYYY")
+                  : "Invalid Date"}
               </p>
             </div>
             <div className="bill">
-              <p className="font-medium">HÌnh thức thanh toán: </p>
+              <p className="font-medium">Hình thức thanh toán: </p>
               <p className="text-[#6a6868]">NCB - Ngân Hàng Quốc Dân</p>
             </div>
           </div>
@@ -68,9 +70,9 @@ const PaymentSuccess = () => {
           <div>
             <p className="font-medium text-xl">Thông tin khách hàng: </p>
             <div className="mt-4">
-              {/* <p className="text-base">{data?.data?.user?.lastName}</p>
+              <p className="text-base">{data?.data?.user?.lastName}</p>
               <p className="text-base">{data?.data?.user?.phone}</p>
-              <p className="text-base">{data?.data?.user?.email}</p> */}
+              <p className="text-base">{data?.data?.user?.email}</p>
             </div>
           </div>
         </div>
@@ -81,17 +83,26 @@ const PaymentSuccess = () => {
           <div>
             <div className="mt-4 border-b-2 border-[#ccc] flex justify-between pr-8 pb-2">
               <p className="text-[#747373]">Tên Film</p>
+              <p className="text-[#747373]">Phòng</p>
+              <p className="text-[#747373]">Ghế</p>
               <p className="text-[#747373]">Thành tiền</p>
             </div>
             <div className="border-b-2 border-[#ccc] py-4 flex justify-between pr-8">
-              {/* <p>{data?.data?.film}</p>
-              <p>{data?.data?.price}đ</p> */}
+              <p>{data?.data?.film}</p>
+              <p>{data?.data?.room}</p>
+              <p>
+                {" "}
+                {data?.data?.seats.map((seat: any) => (
+                  <span>{seat}</span>
+                ))}
+              </p>
+              <p>{data?.data?.price}đ</p>
             </div>
             <div className="py-4 flex justify-between pr-8">
               <div></div>
               <div className="flex">
                 <p className="mr-6 font-bold">Tổng tiền thanh toán</p>
-                {/* <p className="">{data?.data?.price}đ</p> */}
+                <p className="">{data?.data?.price}đ</p>
               </div>
             </div>
             <div className="flex justify-end pr-8 mt-2">
