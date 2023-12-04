@@ -40,7 +40,11 @@ const orderApi = createApi({
               type: "Orders" as const,
               id: _id,
             })),
-            { type: "Orders" as const, id: "LIST", params: JSON.stringify(arg) },
+            {
+              type: "Orders" as const,
+              id: "LIST",
+              params: JSON.stringify(arg),
+            },
           ];
           return final;
         }
@@ -59,8 +63,8 @@ const orderApi = createApi({
           throw new Error(error.message);
         }
       },
-      invalidatesTags: (_, error, body) =>
-        error ? [] : [{ type: "Orders", id: body.idShowtime }],
+      invalidatesTags: (_, error) =>
+        error ? [] : [{ type: "Orders", id: "LIST" }],
     }),
     cancelOrder: builder.mutation<any, TCancelOrder>({
       query(body) {
@@ -77,9 +81,29 @@ const orderApi = createApi({
       invalidatesTags: (_, error, body) =>
         error ? [] : [{ type: "Orders", id: body.order }],
     }),
+    orderSuccess: builder.mutation<any, string>({
+      query(id) {
+        try {
+          return {
+            url: `/${id}/order-success`,
+            method: "PATCH",
+          };
+        } catch (error: any) {
+          throw new Error(error.message);
+        }
+      },
+      invalidatesTags: (_, error) =>
+        error ? [] : [{ type: "Orders", id: "LIST" }],
+    }),
   }),
 });
 
-export const { useCreateOrderMutation, useGetOrderDetailQuery,useGetListOrderQuery, useCancelOrderMutation } = orderApi;
+export const {
+  useCreateOrderMutation,
+  useGetOrderDetailQuery,
+  useGetListOrderQuery,
+  useCancelOrderMutation,
+  useOrderSuccessMutation,
+} = orderApi;
 export const orderReducer = orderApi.reducer;
 export default orderApi;

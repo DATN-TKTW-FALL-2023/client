@@ -1,4 +1,3 @@
-import Checkout from "@/pages/Checkout";
 import Details from "@/pages/Details";
 import Home from "@/pages/Home";
 import Showtime from "@/pages/Showtime";
@@ -27,11 +26,6 @@ const routeConfig: TRouteConfig[] = [
     Element: Showtime,
     isProtected: true,
   },
-  // {
-  //   path: "/checkout",
-  //   Element: Checkout,
-  //   isProtected: true,
-  // },
   {
     path: "/profile",
     Element: Profile,
@@ -43,7 +37,7 @@ const routeConfig: TRouteConfig[] = [
     isProtected: true,
   },
   {
-    path: "/checkout/vnpay_return",
+    path: "/vnpay_return",
     Element: PaymentSuccess,
     isProtected: true,
   },

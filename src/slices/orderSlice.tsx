@@ -1,29 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const showtimeSlice = createSlice({
-  name: 'showtime',
+  name: "showtimeOrder",
   initialState: {
-    selectedShowtime: null,
-    selectedSeats: [],
+    showtime: null,
+    seats: [],
   },
   reducers: {
-    setSelectedShowtime: (state, action) => {
-      state.selectedShowtime = action.payload;
+    setCurrentShowtime: (state, action) => {
+      state.showtime = action.payload.showtime;
+      state.seats = action.payload.seats;
     },
-    setSelectedSeats: (state, action) => {
-      state.selectedSeats = action.payload;
-    },
-    clearSelectedShowtimeAndSeats: (state) => {
-      state.selectedShowtime = null;
-      state.selectedSeats = [];
+    removeOrder: (state) => {
+      state.showtime = null;
+      state.seats = [];
     },
   },
 });
 
-export const {
-  setSelectedShowtime,
-  setSelectedSeats,
-  clearSelectedShowtimeAndSeats,
-} = showtimeSlice.actions;
+export const { removeOrder, setCurrentShowtime } = showtimeSlice.actions;
 
 export default showtimeSlice.reducer;
