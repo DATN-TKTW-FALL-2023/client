@@ -1,28 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { useGetListOrderQuery } from "@/apis/order";
 import dayjs from "dayjs";
-import { FaAngleRight, FaAngleLeft  } from "react-icons/fa6";
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import Loading from "@/components/Loading";
+import { useGetListOrderQuery } from "@/apis/order";
 
 const BookingHistory = () => {
-  const { data: orderData, isLoading } = useGetListOrderQuery({});
-  const itemsPerPage = 5; // Số lượng mục trên mỗi trang
   const [currentPage, setCurrentPage] = useState(0);
+
+  const { data: orderData, isLoading, refetch } = useGetListOrderQuery(
+    { key: "listOrder", enabled: false },
+    { retry: false }
+  );
+
+  useEffect(() => {
+    if (!isLoading) {
+      refetch();
+    }
+  }, [isLoading, currentPage, refetch]);
 
   if (isLoading) {
     return <div className="text-center"><Loading /></div>;
   }
 
+  const itemsPerPage = 5;
   const pageCount = Math.ceil(orderData?.data?.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = orderData?.data?.slice(offset, offset + itemsPerPage);
 
   const handlePageClick = (data:any) => {
     const selectedPage = data.selected;
     setCurrentPage(selectedPage);
   };
-
-  const offset = currentPage * itemsPerPage;
-  const currentPageData = orderData?.data?.slice(offset, offset + itemsPerPage);
 
   return (
     <div className="container">
@@ -54,7 +63,7 @@ const BookingHistory = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentPageData?.map((item: any, index: number) => (
+                  {currentPageData?.map((item:any, index:any) => (
                     <tr key={index} className="border-b dark:border-neutral-500">
                       <td className="whitespace-nowrap px-6 py-4">
                         {item?.film}
@@ -108,7 +117,7 @@ const BookingHistory = () => {
         pageClassName={"cursor-pointer mt-[-3px] p-2 mx-2"}
         breakClassName={"cursor-pointer p-2 mx-2"}
       />
-    </div>
+      </div>
     </div>
   );
 };
