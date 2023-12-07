@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/hook";
 import { setAuth, setProfile } from "@/slices/authSlice";
 import { useState } from "react";
-
+import { GiTicket } from "react-icons/gi";
 interface FormData {
   username: string;
   password: string;
@@ -116,8 +116,11 @@ const Login = () => {
                 <div className="text-center flex justify-center">
                   <button
                     type="submit"
-                    className="btn-gradient bg-gradient-to-r mt-4 from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2 flex justify-center"
+                    className="btn text-white font-medium w-[50%] mt-4 py-2 rounded-lg"
                   >
+                    <span>
+                        <GiTicket className="bg-icon" />
+                    </span>
                     {isLoading ? (
                   <svg
                     aria-hidden="true"
