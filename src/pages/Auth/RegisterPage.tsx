@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useRegisterMutation } from "@/apis/auth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import { GiTicket } from "react-icons/gi";
 interface FormData {
   username: string;
   lastName: string;
@@ -274,7 +274,10 @@ const Signup = () => {
 
                 {/* Submit Button */}
                 <div className="text-center mt-6">
-                  <button className="btn-gradient bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg text-white px-[100px] py-2">
+                  <button className="btn text-white font-medium w-[50%] mt-4 py-2 rounded-lg">
+                    <span>
+                      <GiTicket className="bg-icon" />
+                    </span>
                     {isLoading ? "loading" : "Đăng ký"}
                   </button>
                 </div>
