@@ -14,14 +14,34 @@ export const userApi = createApi({
     }),
     Register: builder.mutation({
       query: (data) => ({
-        url: `auth/register`,
+        url: `/auth/register`,
         method: "POST",
         body: data,
+      }),
+    }),
+    ForgotPassword: builder.mutation({
+      query: ({ email }) => ({
+        url: `/auth/forgot-password`,
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    ResetPassword: builder.mutation({
+      query: ({ newPassword, confirmPassword, token }) => ({
+        url: `/auth/reset-password`,
+        method: "POST",
+        body: { newPassword, confirmPassword, token },
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = userApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation, // Thêm vào đây
+} = userApi;
+
 export const userReducer = userApi.reducer;
 export default userApi;
