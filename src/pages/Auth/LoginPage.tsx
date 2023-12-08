@@ -144,7 +144,7 @@ const Login = () => {
 
                 <div className="flex justify-end">
                   <p className="text-p py-4 text-[#337ab7] hover:underline inline-block text-gradient">
-                    <a href="#">Quên mật khẩu?</a>
+                    <a href="#/forgot_password">Quên mật khẩu?</a>
                   </p>
                 </div>
               </div>

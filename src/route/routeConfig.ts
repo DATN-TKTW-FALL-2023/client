@@ -44,7 +44,7 @@ const routeConfig: TRouteConfig[] = [
     isProtected: true,
   },
   {
-    path: "/reset_password",
+    path: "/reset-password",
     Element: ResetPassword,
     isProtected: false,
   },
