@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { GiTicket } from "react-icons/gi";
 interface FormData {
   username: string;
+  email: string;
+  phone:string
   lastName: string;
   firstName: string;
   password: string;
@@ -33,7 +35,9 @@ const Signup = () => {
   };
 
   const onSubmit = async (formData: FormData) => {
+    formData.email = formData.email.trim();
     formData.username = formData.username.trim();
+    formData.phone = formData.phone.trim();
     formData.lastName = formData.lastName.trim();
     formData.firstName = formData.firstName.trim();
     formData.password = formData.password.trim();
@@ -63,7 +67,7 @@ const Signup = () => {
     }
 
     try {
-      const response = await registerMutation(formData);
+      const response:any = await registerMutation(formData);
       if (response.error) {
         if (response.error.data) {
           const errorMessages = response.error.data.message;
@@ -93,9 +97,10 @@ const Signup = () => {
 
   return (
     <div className="bg-login">
-      <div className="container">
+      <div className="overlay-banner--style"></div>
+      <div className="container login-container--style">
         <div className="px-[300px]">
-          <div className="forms">
+          <div className="forms form-login--style">
             <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
               <li className=" w-[50%] tab px-14 py-2 event">
                 <a href="#login">Log In</a>
@@ -140,6 +145,65 @@ const Signup = () => {
                   </div>
                 </div>
 
+                <div className="mr-2 flex-1 mb-2">
+                  <p className="py-2">
+                    <span className="text-red-500">*</span> Email
+                  </p>
+                  <div className="relative">
+                    <div
+                      className={`form-field ${errors.email ? "error" : ""}`}
+                    >
+                      <input
+                        className="form-input"
+                        placeholder=" "
+                        {...register("email", {
+                          required: "email is required",
+                          validate: (value) => value.trim() !== "",
+                        })}
+                        type="text"
+                        name="email"
+                      />
+                      <label className="form-label">
+                        <span>Email</span>
+                      </label>
+                    </div>
+                    {errors.email && (
+                      <p className="error-text text-red-500 text-[13px]">
+                        Email không được để trống
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="mr-2 flex-1 mb-2">
+                  <p className="py-2">
+                    <span className="text-red-500">*</span> Số điện thoại
+                  </p>
+                  <div className="relative">
+                    <div
+                      className={`form-field ${errors.phone ? "error" : ""}`}
+                    >
+                      <input
+                        className="form-input"
+                        placeholder=" "
+                        {...register("phone", {
+                          required: "phone is required",
+                          validate: (value) => value.trim() !== "",
+                        })}
+                        type="text"
+                        name="phone"
+                      />
+                      <label className="form-label">
+                        <span>Số điện thoại</span>
+                      </label>
+                    </div>
+                    {errors.phone && (
+                      <p className="error-text text-red-500 text-[13px]">
+                        Số điện thoại không được để trống
+                      </p>
+                    )}
+                  </div>
+                </div>
                 {/* First Name */}
                 <div className="mr-2 flex-1 mb-2">
                   <p className="py-2">
@@ -241,7 +305,7 @@ const Signup = () => {
                   {/* Confirm Password */}
                   <div className="mr-2 flex-1 mb-2">
                     <p className="py-2">
-                      <span className="text-red-500">*</span>Xác nhận mật khẩu
+                      <span className="text-red-500">*</span> Xác nhận mật khẩu
                     </p>
                     <div className="relative">
                       <div

@@ -25,11 +25,13 @@ const Details = () => {
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
       const dataDayShowing = film?.data?.dayShowing;
-      const dateObjects = dataDayShowing?.map((item: any) =>
-        dayjs(item).format("YYYY-MM-DD")
-      );
-      setDayShowing([...new Set(dateObjects)]);
-      setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
+      const today = dayjs();
+      const futureDates = dataDayShowing
+        .filter((date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day'))
+        .map((item: any) => dayjs(item).format("YYYY-MM-DD"));
+
+      setDayShowing(futureDates);
+      setSelectedDate(new Date(futureDates[0])?.toISOString());
     }
   }, [film]);
 

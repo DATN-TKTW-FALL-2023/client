@@ -26,14 +26,23 @@ const PopupCart = ({
   const [createUrl, { isLoading }] = useCreateUrlMutation();
   const [createOrder, { isLoading: isLoa }] = useCreateOrderMutation();
 
+  function randomMongoId(): string {
+    const hexDigits: string = "0123456789abcdef";
+    let result: string = "";
+    for (let i: number = 0; i < 12; i++) {
+      result += hexDigits[Math.floor(Math.random() * 16)];
+    }
+    return result;
+  }
+
   const handlePayment = async () => {
-    const resOrder: any = await createOrder({
-      showtime: inforShowtime?._id,
-      seats: cartNameSelected?.map((s: any) => s._id),
-    });
+    // const resOrder: any = await createOrder({
+    //   showtime: inforShowtime?._id,
+    //   seats: cartNameSelected?.map((s: any) => s._id),
+    // });
 
     const resUrl: any = await createUrl({
-      orderId: resOrder.data?.data?._id,
+      orderId: randomMongoId(),
       amount: inforShowtime?.price * cartNameSelected?.length,
     });
     dispatch(
@@ -43,6 +52,7 @@ const PopupCart = ({
       })
     );
     window.open(resUrl.data.url, "_blank");
+
   };
 
   const formatCurrency = (amount: number | bigint | string | undefined) => {
