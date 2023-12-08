@@ -106,14 +106,36 @@ tr, td {
     font-family: "Oswald", sans-serif;
 }
 .bg-login {
-    background-repeat:no-repeat;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(https://assets.nflxext.com/ffe/siteui/vlv3/a09bb938-2d90-42ae-986e-5a3e4abf9e77/79bfc481-ec2a-4ef9-baf2-0ed1d0592a3e/VN-vi-20231113-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+    position: relative;
+  background-image: url(https://res.cloudinary.com/dtiwyksp8/image/upload/v1702029508/aquaman-and-the-3840x2160-13563_stef2k.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 148vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+  background-position: center;
 }
 
+.overlay-banner--style {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+  }
+
+  .login-container--style {
+    position: relative;
+    z-index: 1; 
+  }
+
+  .form-login--style form{
+    position: relative;
+    z-index: 2;
+  }
 
 /* Input forcus */
 .form-input {

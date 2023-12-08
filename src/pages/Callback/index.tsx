@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { GiTicket } from "react-icons/gi";
 import {
   useCancelOrderMutation,
+  useCreateOrderMutation,
   useGetOrderDetailQuery,
-  useOrderSuccessMutation,
 } from "@/apis/order";
 import { useAppSelector } from "@/store/hook";
 import dayjs from "dayjs";
@@ -15,24 +15,25 @@ const PaymentSuccess = () => {
   const seatsOrder = useAppSelector((state) => state.showtimeOrder.seats);
 
   const vnpayRes = searchParams.get("vnp_ResponseCode");
-  const orderId = searchParams.get("vnp_TxnRef");
+  const [orderId, setOrderId] = useState<string | null>('');
 
   const { data, isLoading: isLoadingData } = useGetOrderDetailQuery(
     orderId as string
   );
 
-  const [orderSuccess] = useOrderSuccessMutation();
-  const [cancelOrder] = useCancelOrderMutation();
+  const [createOrder, { isLoading: isLoa }] = useCreateOrderMutation();
+  //const [cancelOrder] = useCancelOrderMutation();
   useEffect(() => {
-    if (vnpayRes == "00" && orderId) {
-      orderSuccess(orderId || "");
-      return;
+    const createOrdertest = async (createOrder : any) => {
+      const res : any = await createOrder({
+        showtime: showtimeOrder,
+        seats: seatsOrder?.map((s: any) => s),
+      });
+      setOrderId(res.data.data._id)
     }
-    cancelOrder({
-      order: orderId as string,
-      showtime: showtimeOrder as unknown as string,
-      seats: seatsOrder,
-    });
+    if (vnpayRes == "00") {
+      createOrdertest(createOrder)
+    }
   }, [vnpayRes]);
 
   return (
@@ -41,11 +42,15 @@ const PaymentSuccess = () => {
         <div className="grid grid-cols-2 ">
           <div className="flex">
             <p className="text-2xl font-medium">HÓA ĐƠN </p>
-            <p className=" mt-[3px] mx-4">
-              <span className="px-2 py-[4px] font-medium bg-[#89ce84] text-xs text-white rounded">
+            
+              {vnpayRes == "00"
+                ? (<p className=" mt-[3px] mx-4"><span className="px-2 py-[4px] font-medium bg-[#89ce84] text-xs text-white rounded">
                 ĐÃ THANH TOÁN
-              </span>
-            </p>
+              </span></p>)
+                : (<p className=" mt-[3px] mx-4"><span className="px-2 py-[4px] font-medium bg-red-500 text-xs text-white rounded">
+              HỦY THÀNH CÔNG
+            </span></p>)}
+            
           </div>
           <div>
             <div className="bill ">
@@ -93,7 +98,7 @@ const PaymentSuccess = () => {
               <p>
                 {" "}
                 {data?.data?.seats.map((seat: any) => (
-                  <span>{seat}{" "}</span>
+                  <span>{seat} </span>
                 ))}
               </p>
               <p>{data?.data?.price}đ</p>

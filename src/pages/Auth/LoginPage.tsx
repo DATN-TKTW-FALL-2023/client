@@ -45,9 +45,10 @@ const Login = () => {
 
   return (
     <div className="bg-login">
-      <div className="container">
+      <div className="overlay-banner--style"></div>
+      <div className="container login-container--style">
         <div className="px-[300px]">
-          <div className="forms">
+          <div className="forms form-login--style">
             <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
               <li className=" w-[50%] tab px-14 py-2 event bg-gradient-to-r from-cyan-500 to-blue-500 rounded-tl-lg">
                 <a className="font-bold text-white" href="#login">
