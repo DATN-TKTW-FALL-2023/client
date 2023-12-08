@@ -1,12 +1,6 @@
 * {
   font-family: "Open Sans", sans-serif;
 }
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
 
 .logo {
   height: 6em;
@@ -42,4 +36,21 @@
 
 .read-the-docs {
   color: #888;
+}
+.input-profile {
+  width: 75%;
+  height: 25px;
+  text-indent: 5px;
+  font-size: 15px;
+  border-radius: 5px;
+  border: solid 1.5px #D3D3D3;
+  -webkit-transition: 1s; /* Safari */
+  transition: 1s;
+}
+.input-profile[type=text]:hover{
+  box-shadow: 0 0 5pt 0.5pt #D3D3D3;
+}
+.input-profile[type=text]:focus {
+  box-shadow: 0 0 5pt 2pt #D3D3D3;
+  outline-width: 0px;
 }

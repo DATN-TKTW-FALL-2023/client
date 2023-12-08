@@ -1,17 +1,18 @@
 import { useGetUserProfileQuery } from "@/apis/user";
 import Loading from "@/components/Loading";
+import { GiTicket } from "react-icons/gi";
+import { Link } from 'react-router-dom';
 const Profile = () => {
   const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
 
   if (isLoading) {
     return <div className="text-center"><Loading /></div>;
   }
-
   if (isError) {
     return <div>Error fetching user data</div>;
   }
- 
-  console.log(userData);
+
+//   console.log(userData);
 
   return (
 
@@ -54,6 +55,16 @@ const Profile = () => {
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   {userData?.data.firstName}
                 </dd>
+              </div>
+              <div className="flex justify-end mx-8">
+              <button className="btn text-white font-medium w-[25%] py-2 rounded-lg my-4 mb-8">
+                <Link to="/update_profile">
+                  <span>
+                    <GiTicket className="bg-icon" />
+                  </span>
+                  Edit Profile
+                </Link>
+              </button>
               </div>
             </dl>
           </div>
