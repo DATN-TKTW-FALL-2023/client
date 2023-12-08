@@ -19,10 +19,23 @@ const profileApi = createApi({
     getUserProfile: builder.query({
       query: () => 'user/profile',
     }),
+    updateUserProfile: builder.mutation<any, any>({
+      query(body) {
+        try {
+          return {
+            url: "user/profile",
+            method: "PATCH",
+            body,
+          };
+        } catch (error: any) {
+          throw new Error(error.message);
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetUserProfileQuery } = profileApi;
+export const { useGetUserProfileQuery, useUpdateUserProfileMutation } = profileApi;
 export const profileReducer = profileApi.reducer;
 
 export default profileApi;

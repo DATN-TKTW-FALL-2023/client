@@ -8,6 +8,7 @@ import BookingHistory from "@/pages/Booking history";
 import PaymentSuccess from "@/pages/Callback";
 import ResetPassword from "@/pages/Reset password";
 import ForgotPassword from "@/pages/Auth/ForgotPassword";
+import updateProfile from "@/pages/Profile/updateProfile";
 export interface TRouteConfig extends PathRouteProps {
   Element: React.FC;
   isProtected: boolean;
@@ -51,6 +52,11 @@ const routeConfig: TRouteConfig[] = [
   {
     path: "/forgot_password",
     Element: ForgotPassword,
+    isProtected: false,
+  },
+  {
+    path: "/update_profile",
+    Element: updateProfile,
     isProtected: false,
   },
 ];
