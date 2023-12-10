@@ -6,16 +6,18 @@ import {
   useCreateOrderMutation,
   useGetOrderDetailQuery,
 } from "@/apis/order";
-import { useAppSelector } from "@/store/hook";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import dayjs from "dayjs";
+import { setCurrentShowtime } from "@/slices/orderSlice";
 
 const PaymentSuccess = () => {
   let [searchParams] = useSearchParams();
   const showtimeOrder = useAppSelector((state) => state.showtimeOrder.showtime);
   const seatsOrder = useAppSelector((state) => state.showtimeOrder.seats);
+  const dispatch = useAppDispatch();
 
   const vnpayRes = searchParams.get("vnp_ResponseCode");
-  const [orderId, setOrderId] = useState<string | null>('');
+  const [orderId, setOrderId] = useState<string | null>("");
 
   const { data, isLoading: isLoadingData } = useGetOrderDetailQuery(
     orderId as string
@@ -24,15 +26,21 @@ const PaymentSuccess = () => {
   const [createOrder, { isLoading: isLoa }] = useCreateOrderMutation();
   //const [cancelOrder] = useCancelOrderMutation();
   useEffect(() => {
-    const createOrdertest = async (createOrder : any) => {
-      const res : any = await createOrder({
+    const createOrdertest = async (createOrder: any) => {
+      const res: any = await createOrder({
         showtime: showtimeOrder,
         seats: seatsOrder?.map((s: any) => s),
       });
-      setOrderId(res.data.data._id)
-    }
+      setOrderId(res.data.data._id);
+      dispatch(
+        setCurrentShowtime({
+          showtime: "",
+          seats: [],
+        })
+      );
+    };
     if (vnpayRes == "00") {
-      createOrdertest(createOrder)
+      createOrdertest(createOrder);
     }
   }, [vnpayRes]);
 
@@ -42,15 +50,20 @@ const PaymentSuccess = () => {
         <div className="grid grid-cols-2 ">
           <div className="flex">
             <p className="text-2xl font-medium">HÓA ĐƠN </p>
-            
-              {vnpayRes == "00"
-                ? (<p className=" mt-[3px] mx-4"><span className="px-2 py-[4px] font-medium bg-[#89ce84] text-xs text-white rounded">
-                ĐÃ THANH TOÁN
-              </span></p>)
-                : (<p className=" mt-[3px] mx-4"><span className="px-2 py-[4px] font-medium bg-red-500 text-xs text-white rounded">
-              HỦY THÀNH CÔNG
-            </span></p>)}
-            
+
+            {vnpayRes == "00" ? (
+              <p className=" mt-[3px] mx-4">
+                <span className="px-2 py-[4px] font-medium bg-[#89ce84] text-xs text-white rounded">
+                  ĐÃ THANH TOÁN
+                </span>
+              </p>
+            ) : (
+              <p className=" mt-[3px] mx-4">
+                <span className="px-2 py-[4px] font-medium bg-red-500 text-xs text-white rounded">
+                  HỦY THÀNH CÔNG
+                </span>
+              </p>
+            )}
           </div>
           <div>
             <div className="bill ">
