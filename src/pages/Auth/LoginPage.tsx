@@ -56,7 +56,7 @@ const Login = () => {
                 </a>
               </li>
               <li className=" w-[50%] tab px-14 py-2">
-                <a href="#register">Sign Up</a>
+                <a href="#/register">Sign Up</a>
               </li>
             </ul>
             <form id="login" onSubmit={handleSubmit(onSubmit)}>
