@@ -10,7 +10,7 @@ const BookingHistory = () => {
 
   const { data: orderData, isLoading, refetch } = useGetListOrderQuery(
     { key: "listOrder", enabled: false },
-    { retry: false }
+    {}
   );
 
   useEffect(() => {

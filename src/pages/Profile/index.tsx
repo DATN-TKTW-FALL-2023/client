@@ -1,9 +1,20 @@
 import { useGetUserProfileQuery } from "@/apis/user";
+import React, { useState, useEffect } from "react";
+
 import Loading from "@/components/Loading";
 import { GiTicket } from "react-icons/gi";
 import { Link } from 'react-router-dom';
 const Profile = () => {
-  const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
+  const [currentPage, setCurrentPage] = useState(0);
+  const { data: userData, isLoading, isError,refetch } = useGetUserProfileQuery(
+    { key: "listOrder", enabled: false },
+    {}
+  );
+  useEffect(() => {
+    if (!isLoading) {
+      refetch();
+    }
+  }, [isLoading, currentPage, refetch]);
 
   if (isLoading) {
     return <div className="text-center"><Loading /></div>;
@@ -62,7 +73,7 @@ const Profile = () => {
                   <span>
                     <GiTicket className="bg-icon" />
                   </span>
-                  Edit Profile
+                 Chỉnh sửa 
                 </Link>
               </button>
               </div>

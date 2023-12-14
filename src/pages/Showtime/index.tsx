@@ -188,8 +188,8 @@ const Showtime = () => {
               <span>
                 <Link to="/">Trang Chủ &gt;</Link>
               </span>
-              <span className="text-[#337ab7]">Đặt vé</span>&gt;
-              <span className="text-[#337ab7]">{showtime?.film?.name}</span>
+              <span className="text-[#337ab7]">{showtime?.film?.name}</span>&gt;
+              <span className="text-[#337ab7]">Đặt vé</span>
             </div>
             <div className="mt-12 grid grid-cols-4">
               <div className="flex h-[35px] justify-center">
