@@ -72,11 +72,7 @@ const ForgotPassword = () => {
                   </button>
                 </div>
 
-                <div className="flex justify-end">
-                  <p className="text-p py-4 text-[#337ab7] hover:underline inline-block text-gradient">
-                    <a href="#">Đăng nhập</a>
-                  </p>
-                </div>
+                
               </div>
             </form>
           </div>
