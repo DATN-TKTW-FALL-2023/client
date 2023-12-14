@@ -3,7 +3,8 @@ import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/apis/use
 import Loading from "@/components/Loading";
 import "../../App.css";
 import { GiTicket } from "react-icons/gi";
-
+import { Alert, Space, message  } from 'antd';
+import { useNavigate } from "react-router-dom";
 const UpdateProfile = () => {
   const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
   const [updateProfileData, setUpdateProfileData] = useState({
@@ -14,6 +15,7 @@ const UpdateProfile = () => {
     lastName: userData?.data.lastName || "",
   });
 
+  const navigate = useNavigate()
   console.log(updateProfileData);
   
   const [updateUserProfile, { isLoading: isUpdating, isError: updateError }] = useUpdateUserProfileMutation();
@@ -39,8 +41,8 @@ const UpdateProfile = () => {
   const handleUpdateProfile = async () => {
     try {
       const response = await updateUserProfile(updateProfileData).unwrap();
-      alert("Profile updated successfully", response);
-      
+      message.success(`Cập nhật thông tin thành công`);
+      navigate("/profile");
     } catch (error) {
       console.error("Error updating profile", error);
     }
@@ -59,7 +61,7 @@ const UpdateProfile = () => {
         <div className="mx-auto max-w-2xl shadow-htr overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Thông tin thành viên
+              Sửa thông tin tài khoản 
             </h3>
           </div>
           <div className="border-t border-gray-200">
@@ -135,16 +137,19 @@ const UpdateProfile = () => {
                 </dd>
               </div>
               <div className="m-6">
-                <button
-                  className="btn text-white font-medium w-[40%] py-2 rounded-lg"
-                  onClick={handleUpdateProfile}
-                  disabled={isUpdating}
-                >
-                  <span>
-                    <GiTicket className="bg-icon" />
-                  </span>
-                  {isUpdating ? "Đang cập nhật..." : "Cập nhật thông tin"}
-                </button>
+                <div className="text-center">
+                  <button
+                    className="btn text-white font-medium w-[40%] py-2 rounded-lg"
+                    onClick={handleUpdateProfile}
+                    disabled={isUpdating}
+                  >
+                    <span>
+                      <GiTicket className="bg-icon" />
+                    </span>
+                    {isUpdating ? "Đang cập nhật..." : "Cập nhật thông tin"}
+                  </button>
+
+                </div>
               </div>
             </dl>
           </div>
