@@ -24,14 +24,13 @@ const Details = () => {
 
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
+      const today=dayjs()
       const dataDayShowing = film?.data?.dayShowing;
-      const today = dayjs();
-      const futureDates = dataDayShowing
-        .filter((date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day'))
-        .map((item: any) => dayjs(item).format("YYYY-MM-DD"));
-
-      setDayShowing(futureDates);
-      setSelectedDate(new Date(futureDates[0])?.toISOString());
+      const dateObjects = dataDayShowing?.map((item: any) =>
+        dayjs(item).format("YYYY-MM-DD")
+      ).filter((date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day'));
+      setDayShowing([...new Set(dateObjects)]);
+      setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
     }
   }, [film]);
 
@@ -225,7 +224,7 @@ const Details = () => {
                         >
                           {`${dayjs(
                             new Date(st.startHour).toISOString()
-                          ).format("HH:mm")}`}
+                          ).format("h:mm A")}`}
                         </div>
                         <p className="text-xs py-2 font-medium">
                           {st.room.seats.length - st.seatsBooked.length} {"  "}
