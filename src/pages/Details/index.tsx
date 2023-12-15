@@ -24,13 +24,17 @@ const Details = () => {
 
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
-      const today=dayjs()
+      const today = dayjs();
       const dataDayShowing = film?.data?.dayShowing;
-      const dateObjects = dataDayShowing?.map((item: any) =>
-        dayjs(item).format("YYYY-MM-DD")
-      ).filter((date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day'));
-      setDayShowing([...new Set(dateObjects)]);
-      setSelectedDate(new Date(film?.data?.dayShowing?.[0])?.toISOString());
+      const validDates = dataDayShowing?.filter(
+        (date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day')
+      );
+  
+      if (validDates.length > 0) {
+        const earliestValidDate = dayjs(validDates[0]).format("YYYY-MM-DD");
+        setDayShowing([...new Set(validDates.map((item: any) => dayjs(item).format("YYYY-MM-DD")))]);
+        setSelectedDate(new Date(earliestValidDate).toISOString());
+      }
     }
   }, [film]);
 

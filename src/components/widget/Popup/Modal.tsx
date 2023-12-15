@@ -28,14 +28,17 @@ const Modal = ({ isOpen, onClose, id }: any) => {
 
   useEffect(() => {
     if (film?.data?.dayShowing.length > 0) {
-      const dataDayShowing = film?.data?.dayShowing;
       const today = dayjs();
-      const futureDates = dataDayShowing
-        .filter((date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day'))
-        .map((item: any) => dayjs(item).format("YYYY-MM-DD"));
-
-      setDayShowing(futureDates);
-      setSelectedDate(new Date(futureDates[0])?.toISOString());
+      const dataDayShowing = film?.data?.dayShowing;
+      const validDates = dataDayShowing?.filter(
+        (date: any) => dayjs(date).isAfter(today, 'day') || dayjs(date).isSame(today, 'day')
+      );
+  
+      if (validDates.length > 0) {
+        const earliestValidDate = dayjs(validDates[0]).format("YYYY-MM-DD");
+        setDayShowing([...new Set(validDates.map((item: any) => dayjs(item).format("YYYY-MM-DD")))]);
+        setSelectedDate(new Date(earliestValidDate).toISOString());
+      }
     }
   }, [film]);
 
