@@ -1,33 +1,40 @@
 import React, { useState } from 'react';
 import { GiTicket } from 'react-icons/gi';
-import { useForgotPasswordMutation } from '@/apis/auth'
-import { useNavigate } from "react-router-dom";
+import { useForgotPasswordMutation } from '@/apis/auth';
+import { useNavigate } from 'react-router-dom';
+import { Alert } from 'antd';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Simple email regex
   const forgotPasswordMutation = useForgotPasswordMutation();
 
-  const handleEmailChange = (e:any) => {
+  const handleEmailChange = (e: any) => {
     setEmail(e.target.value);
   };
 
-  const handleForgotPassword = async (e:any) => {
+  const handleForgotPassword = async (e: any) => {
     e.preventDefault();
 
+    // Validate email format
+    if (!emailRegex.test(email)) {
+      setError('Invalid email format. Please enter a valid email address.');
+      return;
+    }
+
     try {
-      // Gọi hàm mutation để thực hiện yêu cầu Forgot Password
+      // Call the mutation function to initiate Forgot Password request
       const [mutateAsync] = forgotPasswordMutation;
       await mutateAsync({ email });
 
-      // Xử lý kết quả nếu cần thiết
-      window.alert('Yêu cầu thành công. Kiểm tra email của bạn để đặt lại mật khẩu.');
-      navigate("/");
-      
+      // Handle the result if necessary
+      alert('Request successful. Check your email to reset the password.');
+      navigate('/');
     } catch (error) {
-      // Xử lý khi có lỗi
-      console.error('Yêu cầu không thành công. Vui lòng kiểm tra lại địa chỉ email.');
+      // Handle errors
+      setError('Request unsuccessful. Please check your email address.');
     }
   };
 
@@ -60,6 +67,12 @@ const ForgotPassword = () => {
                   </div>
                 </div>
 
+                {error && (
+                  <div className="text-red-500 mb-4">
+                    <p>{error}</p>
+                  </div>
+                )}
+
                 <div className="text-center flex justify-center">
                   <button
                     onClick={handleForgotPassword}
@@ -68,11 +81,9 @@ const ForgotPassword = () => {
                     <span>
                       <GiTicket className="bg-icon" />
                     </span>
-                    Lấy lại mật khẩu
+                    Recover Password
                   </button>
                 </div>
-
-                
               </div>
             </form>
           </div>
