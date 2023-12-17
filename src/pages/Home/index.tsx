@@ -8,6 +8,9 @@ import Modal from "../../components/widget/Popup/Modal"; // Import Modal compone
 import Loading from "@/components/Loading";
 import { AiFillPlayCircle } from "react-icons/ai";
 import * as dayjs from "dayjs";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [params, setParams] = useState<any>({
@@ -32,14 +35,33 @@ const Home = () => {
     setIsBuyPopupOpen(false);
   };
 
+  const bannerImages = [
+    "https://files.betacorp.vn/files/ecm/2023/12/11/untitled-1-154822-111223-78.jpg",
+    "https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg",
+
+    // Thêm các ảnh khác
+  ];
+
+  const sliderSettings = {
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
     <div>
       <div className="banner">
-        <img
-          width="100%"
-          src="https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg"
-          alt=""
-        />
+        <Slider {...sliderSettings}>
+          {bannerImages.map((image, index) => (
+            <div key={index}>
+              <img width="100%" src={image} alt={`Banner ${index}`} />
+            </div>
+          ))}
+        </Slider>
       </div>
       <div className="content container">
         <div>
