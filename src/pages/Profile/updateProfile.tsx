@@ -31,6 +31,12 @@ const UpdateProfile = () => {
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
+
+    // Skip updating the email field
+    if (name === "email") {
+      return;
+    }
+
     setUpdateProfileData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -43,11 +49,11 @@ const UpdateProfile = () => {
 
   const handleUpdateProfile = async () => {
     const newErrors = {
-      username: !updateProfileData.username ? "Vui lòng nhập username." : "",
-      email: !updateProfileData.email ? "Vui lòng nhập email." : "",
-      phone: !updateProfileData.phone ? "Vui lòng nhập phone." : "",
-      firstName: !updateProfileData.firstName ? "Vui lòng nhập họ." : "",
-      lastName: !updateProfileData.lastName ? "Vui lòng nhập tên." : "",
+      username: !updateProfileData.username ? "Vui lòng nhập username!" : "",
+      email: !updateProfileData.email ? "Vui lòng nhập email!" : "",
+      phone: !updateProfileData.phone ? "Vui lòng nhập phone!" : "",
+      firstName: !updateProfileData.firstName ? "Vui lòng nhập họ!" : "",
+      lastName: !updateProfileData.lastName ? "Vui lòng nhập tên!" : "",
     };
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -105,9 +111,7 @@ const UpdateProfile = () => {
           <div className="border-t border-gray-200">
             <dl>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium font-bold text-black">
-                  Username
-                </dt>
+                <dt className="text-sm font-medium font-bold text-black">Username</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   <input
                     type="text"
@@ -120,24 +124,20 @@ const UpdateProfile = () => {
                 </dd>
               </div>
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium font-bold text-black">
-                  Email
-                </dt>
+                <dt className="text-sm font-medium font-bold text-black">Email</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   <input
                     type="text"
                     name="email"
                     className="input-profile pl-[3px] py-[14px]"
                     value={updateProfileData.email}
-                    onChange={handleInputChange}
+                    disabled // Disable the email input field
                   />
                   {errors.email && <div className="text-red-500">{errors.email}</div>}
                 </dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium font-bold text-black">
-                  Phone
-                </dt>
+                <dt className="text-sm font-medium font-bold text-black">Phone</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   <input
                     type="text"
@@ -150,9 +150,7 @@ const UpdateProfile = () => {
                 </dd>
               </div>
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium font-bold text-black">
-                  Họ
-                </dt>
+                <dt className="text-sm font-medium font-bold text-black">Họ</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   <input
                     type="text"
@@ -165,9 +163,7 @@ const UpdateProfile = () => {
                 </dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium font-bold text-black">
-                  Tên
-                </dt>
+                <dt className="text-sm font-medium font-bold text-black">Tên</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 font-normal sm:col-span-2">
                   <input
                     type="text"
