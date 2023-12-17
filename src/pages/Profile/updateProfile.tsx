@@ -3,7 +3,7 @@ import { useGetUserProfileQuery, useUpdateUserProfileMutation } from "@/apis/use
 import Loading from "@/components/Loading";
 import "../../App.css";
 import { GiTicket } from "react-icons/gi";
-import { Alert, Space, message } from "antd";
+import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
@@ -26,10 +26,9 @@ const UpdateProfile = () => {
 
   const navigate = useNavigate();
 
-  const [updateUserProfile, { isLoading: isUpdating, isError: updateError }] =
-    useUpdateUserProfileMutation();
+  const [updateUserProfile, { isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e:any) => {
     const { name, value } = e.target;
 
     // Skip updating the email field
@@ -49,17 +48,12 @@ const UpdateProfile = () => {
 
   const handleUpdateProfile = async () => {
     const newErrors = {
-      username: !updateProfileData.username ? "Vui lòng nhập username!" : "",
+      username: !updateProfileData.username.trim() ? "Vui lòng nhập username!" : "",
       email: !updateProfileData.email ? "Vui lòng nhập email!" : "",
-      phone: !updateProfileData.phone ? "Vui lòng nhập phone!" : "",
-      firstName: !updateProfileData.firstName ? "Vui lòng nhập họ!" : "",
-      lastName: !updateProfileData.lastName ? "Vui lòng nhập tên!" : "",
+      phone: !updateProfileData.phone.trim() ? "Vui lòng nhập phone!" : "",
+      firstName: !updateProfileData.firstName.trim() ? "Vui lòng nhập họ!" : "",
+      lastName: !updateProfileData.lastName.trim() ? "Vui lòng nhập tên!" : "",
     };
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (updateProfileData.email && !emailRegex.test(updateProfileData.email)) {
-      newErrors.email = "Email không hợp lệ.";
-    }
 
     setErrors(newErrors);
 
