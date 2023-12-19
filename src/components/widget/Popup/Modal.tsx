@@ -135,7 +135,7 @@ const Modal = ({ isOpen, onClose, id }: any) => {
                       className="px-4 py-[6px] bg-[#e5e5e5] text-sm font-medium duration-500 hover:bg-[#ccc]"
                     >
                       {`${dayjs(new Date(st.startHour).toISOString()).format(
-                        "h:mm A"
+                        "HH:mm"
                       )}`}
                     </div>
                     <p className="text-xs py-2 font-medium">

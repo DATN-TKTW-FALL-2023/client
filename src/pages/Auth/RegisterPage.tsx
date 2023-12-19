@@ -349,7 +349,7 @@ const Signup = () => {
                   <p className="font-semibold">
                     Bạn đã có tài khoản?{" "}
                     <span className="text-gradient">
-                      <a href="#login">Đăng nhập ngay!</a>
+                      <a href="#/login">Đăng nhập ngay!</a>
                     </span>
                   </p>
                 </div>

@@ -20,7 +20,7 @@ const ForgotPassword = () => {
 
     // Validate email format
     if (!emailRegex.test(email)) {
-      setError('Invalid email format. Please enter a valid email address.');
+      setError('Định dạng email không hợp lệ. Vui lòng nhập địa chỉ email hợp lệ.');
       return;
     }
 
@@ -30,11 +30,11 @@ const ForgotPassword = () => {
       await mutateAsync({ email });
 
       // Handle the result if necessary
-      alert('Request successful. Check your email to reset the password.');
+      alert('Yêu cầu thành công. Kiểm tra email của bạn để đặt lại mật khẩu.');
       navigate('/');
     } catch (error) {
       // Handle errors
-      setError('Request unsuccessful. Please check your email address.');
+      setError('Yêu cầu không thành công. Vui lòng kiểm tra địa chỉ email của bạn.');
     }
   };
 
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
           <div className="forms">
             <ul className="tab-group flex text-center justify-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
               <li className=" w-[50%] tab px-14 py-2">
-                <a href="#register">Forgot Password</a>
+                <a href="#register">Quên mật khẩu</a>
               </li>
             </ul>
             <form>
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
                     <span>
                       <GiTicket className="bg-icon" />
                     </span>
-                    Recover Password
+                    Lấy lại mật khẩu
                   </button>
                 </div>
               </div>
