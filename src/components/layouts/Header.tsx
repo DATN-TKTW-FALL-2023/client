@@ -43,7 +43,7 @@ const Header = () => {
         </div>
       </div>
       <div className="header relative z-50">
-        <div className=" h-[80px] leading-[80px] flex container justify-between ">
+        <div className=" h-[80px] leading-[80px] flex container">
           <div className="py-[8px]">
             <Link to="/">
               <img
@@ -61,28 +61,11 @@ const Header = () => {
               <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">PHIM</a>
               </li>
-              <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">RẠP</a>
-              </li>
-              <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">GIÁ VÉ</a>
-              </li>
-              <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">TIN MỚI VÀ ƯU ĐÃI</a>
-              </li>
-              <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">NHƯỢNG QUYỀN</a>
-              </li>
-              <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">THÀNH VIÊN</a>
-              </li>
+            
             </ul>
           </div>
         </div>
       </div>
-      {/* <div className="banner">
-        <img src="https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg" alt="" />
-      </div> */}
     </div>
   );
 };

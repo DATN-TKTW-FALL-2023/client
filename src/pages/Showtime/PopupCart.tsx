@@ -64,6 +64,7 @@ const PopupCart = ({
       currency: "VND",
     }).format(Number(amount));
   };
+  
   return (
     <>
       <div className=" popup-container ">
