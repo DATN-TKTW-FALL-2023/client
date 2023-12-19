@@ -7,7 +7,16 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
-  const { data: userData, isLoading, isError } = useGetUserProfileQuery({});
+  const [currentPage, setCurrentPage] = useState(0);
+  const { data: userData, isLoading, isError,refetch } = useGetUserProfileQuery(
+    { key: "listOrder", enabled: false },
+    {}
+  );
+  useEffect(() => {
+    if (!isLoading) {
+      refetch();
+    }
+  }, [isLoading, currentPage, refetch]);
   const [updateProfileData, setUpdateProfileData] = useState({
     username: userData?.data.username || "",
     email: userData?.data.email || "",
@@ -29,13 +38,12 @@ const UpdateProfile = () => {
   const [updateUserProfile, { isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
   const handleInputChange = (e:any) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
 
     // Skip updating the email field
     if (name === "email") {
       return;
     }
-
     setUpdateProfileData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -62,6 +70,7 @@ const UpdateProfile = () => {
     }
 
     try {
+      updateProfileData.phone = "+84" + updateProfileData.phone
       const response = await updateUserProfile(updateProfileData).unwrap();
       message.success("Cập nhật thông tin thành công");
       navigate("/profile");
