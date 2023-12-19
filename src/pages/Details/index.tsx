@@ -228,7 +228,7 @@ const Details = () => {
                         >
                           {`${dayjs(
                             new Date(st.startHour).toISOString()
-                          ).format("h:mm A")}`}
+                          ).format("HH:mm")}`}
                         </div>
                         <p className="text-xs py-2 font-medium">
                           {st.room.seats.length - st.seatsBooked.length} {"  "}
