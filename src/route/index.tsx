@@ -6,6 +6,7 @@ import Header from "@/components/layouts/Header";
 import Footer from "@/components/layouts/Footer";
 import Signup from "@/pages/Auth/RegisterPage";
 import Login from "@/pages/Auth/LoginPage";
+import Logout from "@/components/Logout";
 
 function RouteApp() {
   return (
@@ -30,6 +31,7 @@ function RouteApp() {
           </>
         }
       />
+      <Route path="/logout" element={<Logout />} />
       <Route path="*" element={<NotFound />} />
       {routeConfig.map(
         (

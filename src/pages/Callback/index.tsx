@@ -37,7 +37,7 @@ const PaymentSuccess = () => {
 
       dispatch(
         setCurrentShowtime({
-          showtime: "",
+          showtime: null,
           seats: [],
         })
       );
@@ -46,6 +46,13 @@ const PaymentSuccess = () => {
   
       
       createOrdertest();
+    }else{
+      dispatch(
+        setCurrentShowtime({
+          showtime: null,
+          seats: [],
+        })
+      );
     }
   }, [vnpayRes]);
 console.log(data)

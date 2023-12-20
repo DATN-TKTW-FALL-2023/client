@@ -11,6 +11,7 @@ import * as dayjs from "dayjs";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useOptionByKeyQuery } from "@/apis/option";
 
 const Home = () => {
   const [params, setParams] = useState<any>({
@@ -23,7 +24,8 @@ const Home = () => {
   );
   // State để theo dõi trạng thái của popup mua vé
   const [isBuyPopupOpen, setIsBuyPopupOpen] = useState(false);
-
+    const {data:bannerData} = useOptionByKeyQuery('BANNER')
+    
   // Function để mở popup mua vé
   const openBuyPopup = (id: any) => {
     setFilmSelected(id);
@@ -39,7 +41,6 @@ const Home = () => {
     "https://files.betacorp.vn/files/ecm/2023/12/11/untitled-1-154822-111223-78.jpg",
     "https://files.betacorp.vn/files/ecm/2023/11/16/untitled-1-172749-161123-58.jpg",
 
-    // Thêm các ảnh khác
   ];
 
   const sliderSettings = {

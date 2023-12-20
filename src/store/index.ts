@@ -23,6 +23,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "@/slices/authSlice";
 import orderApi, { orderReducer } from "@/apis/order";
 import vnpayApi, { vnpayReducer } from "@/apis/payment";
+import optionApi, { optionReducer } from "@/apis/option";
 const persistConfig = {
   key: "root",
   storage,
@@ -36,7 +37,8 @@ const rootReducer = combineReducers({
   order: orderReducer,
   profile: profileReducer,
   vnpay: vnpayReducer,
-  showtimeOrder: showtimeSliceReducer
+  showtimeOrder: showtimeSliceReducer,
+  option: optionReducer,
 });
 const middleware = [
   userApi.middleware,
@@ -45,6 +47,7 @@ const middleware = [
   orderApi.middleware,
   profileApi.middleware,
   vnpayApi.middleware,
+  optionApi.middleware
 ];
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

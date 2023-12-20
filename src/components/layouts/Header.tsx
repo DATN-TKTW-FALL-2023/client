@@ -25,7 +25,7 @@ const Header = () => {
                     <Link to="/bookinghistory">Lịch sử đặt vé</Link>
                   </li>
                   <li className="pt-1 text-white text-[15px] hover:underline cursor-pointer">
-                    <p onClick={handleLogout}>Đăng xuất</p>
+                    <Link to="/logout">Đăng xuất</Link>
                   </li>
                 </>
               ) : (
