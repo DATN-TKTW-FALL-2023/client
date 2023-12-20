@@ -8,15 +8,17 @@ import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const { data: userData, isLoading, isError,refetch } = useGetUserProfileQuery(
+  const { data: userData, isLoading, isError, refetch } = useGetUserProfileQuery(
     { key: "listOrder", enabled: false },
     {}
   );
+
   useEffect(() => {
     if (!isLoading) {
       refetch();
     }
   }, [isLoading, currentPage, refetch]);
+
   const [updateProfileData, setUpdateProfileData] = useState({
     username: userData?.data.username || "",
     email: userData?.data.email || "",
@@ -37,7 +39,7 @@ const UpdateProfile = () => {
 
   const [updateUserProfile, { isLoading: isUpdating }] = useUpdateUserProfileMutation();
 
-  const handleInputChange = (e:any) => {
+  const handleInputChange = (e) => {
     let { name, value } = e.target;
 
     // Skip updating the email field
@@ -63,6 +65,13 @@ const UpdateProfile = () => {
       lastName: !updateProfileData.lastName.trim() ? "Vui lòng nhập tên!" : "",
     };
 
+    // Validate phone number
+    const isPhoneNumberValid = /^\+84\d{9,10}$/.test(updateProfileData.phone) || /^\d{10}$/.test(updateProfileData.phone);
+
+    if (!isPhoneNumberValid) {
+      newErrors.phone = "Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng.";
+    }
+
     setErrors(newErrors);
 
     if (Object.values(newErrors).some((error) => error !== "")) {
@@ -70,7 +79,9 @@ const UpdateProfile = () => {
     }
 
     try {
-      updateProfileData.phone = "+84" + updateProfileData.phone
+      // Update phone number format before making the request
+      updateProfileData.phone = "(+84)" + updateProfileData.phone;
+
       const response = await updateUserProfile(updateProfileData).unwrap();
       message.success("Cập nhật thông tin thành công");
       navigate("/profile");
