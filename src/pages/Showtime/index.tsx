@@ -152,10 +152,10 @@ const Showtime = () => {
         text: "Bạn không thể đặt được quá 10 ghế trong 1 lần đặt!",
       });
     }
-    // await bookingSeat({
-    //   idShowtime: id as string,
-    //   idSeat: seat._id,
-    // });
+    await bookingSeat({
+      idShowtime: id as string,
+      idSeat: seat._id,
+    });
 
     if (isError) {
       setSeletedSeats((prev) => [...prev.filter((s) => s._id !== seat._id)]);

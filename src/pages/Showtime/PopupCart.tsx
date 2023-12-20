@@ -52,9 +52,9 @@ const PopupCart = ({
         seats: cartNameSelected?.map((s: any) => s._id),
       })
     );
-    window.location.href = resUrl.data.url;
+    window.open(resUrl.data.data.url, "_blank");
   };
-
+  const profile: any = useAppSelector((state) => state.auth.profile);
   const formatCurrency = (amount: number | bigint | string | undefined) => {
     if (amount === undefined) {
       return "";
@@ -85,15 +85,15 @@ const PopupCart = ({
             <div className="grid grid-cols-3 my-6">
               <div>
                 <h4 className="font-bold text-[#494c62]">Họ tên:</h4>
-                <span>{inforShowtime?.author?.username}</span>
+                <span>{profile?.username}</span>
               </div>
               <div>
                 <h4 className="font-bold text-[#494c62]">Số điện thoại:</h4>
-                <span>{inforShowtime?.author?.phone}</span>
+                <span>{profile?.phone}</span>
               </div>
               <div>
                 <h4 className="font-bold text-[#494c62]">Email:</h4>
-                <span>{inforShowtime?.author?.email}</span>
+                <span>{profile?.email}</span>
               </div>
             </div>
             <div className="flex justify-between border-b-2 border-[#ccc] ">
