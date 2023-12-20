@@ -88,6 +88,16 @@ const Showtime = () => {
   }, [location]);
   const seatsBooked = showtime?.seatsBooked.map((s) => s._id) || [];
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+      cancelBooking({ idShowtime: id as string });
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
+
   const seatsOtherHeld =
     showtime?.seatsHeld
       .filter((s) => s.user !== profile._id)
