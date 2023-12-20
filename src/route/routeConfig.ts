@@ -9,6 +9,7 @@ import PaymentSuccess from "@/pages/Callback";
 import ResetPassword from "@/pages/Reset password";
 import ForgotPassword from "@/pages/Auth/ForgotPassword";
 import updateProfile from "@/pages/Profile/updateProfile";
+import OrderDetailQr from "@/pages/orderQrDetail";
 export interface TRouteConfig extends PathRouteProps {
   Element: React.FC;
   isProtected: boolean;
@@ -59,6 +60,12 @@ const routeConfig: TRouteConfig[] = [
     Element: updateProfile,
     isProtected: true,
   },
+  {
+    path: "/ticket/:id",
+    Element: OrderDetailQr,
+    isProtected: true,
+  },
+  
 ];
 
 export default routeConfig;

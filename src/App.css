@@ -8,9 +8,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -19,6 +21,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -34,9 +37,15 @@
   padding: 2em;
 }
 
+.qrCodeImage {
+  max-width: 100%;
+  height: 80px;
+}
+
 .read-the-docs {
   color: #888;
 }
+
 .input-profile {
   width: 75%;
   height: 25px;
@@ -44,12 +53,15 @@
   font-size: 15px;
   border-radius: 5px;
   border: solid 1.5px #D3D3D3;
-  -webkit-transition: 1s; /* Safari */
+  -webkit-transition: 1s;
+  /* Safari */
   transition: 1s;
 }
-.input-profile[type=text]:hover{
+
+.input-profile[type=text]:hover {
   box-shadow: 0 0 5pt 0.5pt #D3D3D3;
 }
+
 .input-profile[type=text]:focus {
   box-shadow: 0 0 5pt 2pt #D3D3D3;
   outline-width: 0px;
