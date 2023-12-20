@@ -103,11 +103,11 @@ const Signup = () => {
           <div className="forms form-login--style">
             <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
               <li className=" w-[50%] tab px-14 py-2 event">
-                <a href="#/login">Log In</a>
+                <a href="#/login">Đăng nhập</a>
               </li>
               <li className=" w-[50%] tab px-14 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-tr-lg">
                 <a className="font-bold text-white" href="#/register">
-                  Sign Up
+                  Đăng ký
                 </a>
               </li>
             </ul>
@@ -134,12 +134,12 @@ const Signup = () => {
                         name="username"
                       />
                       <label className="form-label">
-                        <span>Username</span>
+                        <span>Tên đăng nhập</span>
                       </label>
                     </div>
                     {errors.username && (
                       <p className="error-text text-red-500 text-[13px]">
-                        Username không được để trống
+                        Tên đăng nhập không được để trống
                       </p>
                     )}
                   </div>
@@ -224,12 +224,12 @@ const Signup = () => {
                         name="lastName"
                       />
                       <label className="form-label">
-                        <span>First Name</span>
+                        <span>Họ</span>
                       </label>
                     </div>
                     {errors.lastName && (
                       <p className="error-text text-red-500 text-[13px]">
-                        Firstname không được để trống
+                        Họ không được để trống
                       </p>
                     )}
                   </div>
@@ -257,12 +257,12 @@ const Signup = () => {
                         name="firstName"
                       />
                       <label className="form-label">
-                        <span>Last Name</span>
+                        <span>Tên</span>
                       </label>
                     </div>
                     {errors.firstName && (
                       <p className="error-text text-red-500 text-[13px]">
-                        Lastname không được để trống
+                        Tên không được để trống
                       </p>
                     )}
                   </div>
@@ -291,12 +291,12 @@ const Signup = () => {
                           name="password"
                         />
                         <label className="form-label">
-                          <span>Password</span>
+                          <span>Mật khẩu</span>
                         </label>
                       </div>
                       {errors.password && (
                         <p className="error-text text-red-500 text-[13px]">
-                          Password không được để trống
+                          Mật khẩu không được để trống
                         </p>
                       )}
                     </div>
@@ -324,12 +324,12 @@ const Signup = () => {
                           name="confirmPassword"
                         />
                         <label className="form-label">
-                          <span>Confirm password</span>
+                          <span> Xác nhận mật khẩu</span>
                         </label>
                       </div>
                       {errors.confirmPassword && (
                         <p className="error-text text-red-500 text-[13px]">
-                          Confirm password không được để trống
+                          Xác nhận mật khẩu không được để trống
                         </p>
                       )}
                     </div>

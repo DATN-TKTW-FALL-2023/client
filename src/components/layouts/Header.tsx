@@ -56,7 +56,7 @@ const Header = () => {
           <div>
             <ul className="flex">
               <li className="font-bold px-4 hover:text-[#2d98da]">
-                <a href="">LỊCH CHIẾU THEO RẠP</a>
+                <a href="">LỊCH CHIẾU PHIM</a>
               </li>
               <li className="font-bold px-4 hover:text-[#2d98da]">
                 <a href="">PHIM</a>

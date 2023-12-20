@@ -52,17 +52,17 @@ const Login = () => {
             <ul className="tab-group flex text-center border-b-2  bg-white rounded-t-lg border-[#075fa3]">
               <li className=" w-[50%] tab px-14 py-2 event bg-gradient-to-r from-cyan-500 to-blue-500 rounded-tl-lg">
                 <a className="font-bold text-white" href="#/login">
-                  Log In
+                  Đăng nhập
                 </a>
               </li>
               <li className=" w-[50%] tab px-14 py-2">
-                <a href="#/register">Sign Up</a>
+                <a href="#/register">Đăng ký</a>
               </li>
             </ul>
             <form id="login" onSubmit={handleSubmit(onSubmit)}>
               <div className="input-field rounded-b-lg bg-white p-4 pb-8">
                 <div className="relative my-4">
-                  <p className="pb-4">Username</p>
+                  <p className="pb-4">Tên đăng nhập</p>
                   <div className="form-field">
                     <input
                       className={`form-input ${errors.username ? "error" : ""}`}
@@ -75,17 +75,17 @@ const Login = () => {
                       name="username"
                     />
                     <label className="form-label">
-                      <span>Username</span>
+                      <span>Tên đăng nhập</span>
                     </label>
                     {errors.username && (
                       <p className="error-text text-red-500 text-[13px]">
-                        Username là bắt buộc
+                        Tên đăng nhập là bắt buộc
                       </p>
                     )}
                   </div>
                 </div>
                 <div className="relative my-4">
-                  <p className="pb-4">Password</p>
+                  <p className="pb-4">Mật khẩu</p>
                   <div className="form-field">
                     <input
                       className={`form-input ${errors.password ? "error" : ""}`}
@@ -98,11 +98,11 @@ const Login = () => {
                       name="password"
                     />
                     <label className="form-label">
-                      <span>Password</span>
+                      <span>Mật khẩu</span>
                     </label>
                     {errors.password && (
                       <p className="error-text text-red-500 text-[13px]">
-                        Password là bắt buộc
+                        Mật khẩu là bắt buộc
                       </p>
                     )}
                     {/* Hiển thị thông báo lỗi */}
