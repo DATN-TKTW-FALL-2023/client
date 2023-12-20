@@ -100,7 +100,7 @@ const Showtime = () => {
 
   const seatsOtherHeld =
     showtime?.seatsHeld
-      .filter((s) => s.user !== profile._id)
+      .filter((s) => s.user !== profile?._id)
       .reduce(
         (acc, curr) => [...acc, ...curr.seats.map((s) => s._id)],
         [] as string[]

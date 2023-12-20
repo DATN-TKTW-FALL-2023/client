@@ -117,7 +117,7 @@ const Login = () => {
                 <div className="text-center flex justify-center">
                   <button
                     type="submit"
-                    className="btn text-white font-medium w-[50%] mt-4 py-2 rounded-lg"
+                    className="btn flex justify-center items-center text-white font-medium w-[50%] mt-4 py-2 rounded-lg"
                   >
                     <span>
                         <GiTicket className="bg-icon" />

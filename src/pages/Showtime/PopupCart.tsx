@@ -9,7 +9,7 @@ import {
 } from "react-icons/fa";
 import "./PopupCart.css";
 import { useCreateUrlMutation } from "@/apis/payment";
-import { useAppDispatch } from "@/store/hook";
+import { useAppDispatch, useAppSelector } from "@/store/hook";
 import { setCurrentShowtime } from "@/slices/orderSlice";
 import { useCreateOrderMutation } from "@/apis/order";
 import { redirect } from "react-router-dom";
@@ -52,7 +52,8 @@ const PopupCart = ({
         seats: cartNameSelected?.map((s: any) => s._id),
       })
     );
-    window.open(resUrl.data.data.url, "_blank");
+    window.open(resUrl.data.url, "_blank");
+    onClosePopup();
   };
   const profile: any = useAppSelector((state) => state.auth.profile);
   const formatCurrency = (amount: number | bigint | string | undefined) => {

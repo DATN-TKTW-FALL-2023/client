@@ -25,30 +25,33 @@ const PaymentSuccess = () => {
     orderId as string
   );
 
-  const [createOrder, { isLoading: isLoa }] = useCreateOrderMutation();
+  const [createOrder, { isLoading: isLoadingCreate }] = useCreateOrderMutation();
   //const [cancelOrder] = useCancelOrderMutation();
   useEffect(() => {
-    const createOrdertest = async (createOrder: any) => {
+    const createOrdertest =  async () => {
       const res: any = await createOrder({
         showtime: showtimeOrder,
         seats: seatsOrder?.map((s: any) => s),
       });
       setOrderId(res.data.data._id);
+
+      dispatch(
+        setCurrentShowtime({
+          showtime: "",
+          seats: [],
+        })
+      );
     };
     if (vnpayRes == "00") {
-      createOrdertest(createOrder);
+  
+      
+      createOrdertest();
     }
-    dispatch(
-      setCurrentShowtime({
-        showtime: "",
-        seats: [],
-      })
-    );
   }, [vnpayRes]);
 
   return (
     <div className="container">
-      {isLoadingData ? (
+      {isLoadingCreate ? (
         <Loading />
       ) : (
         <div className="mt-12 mb-12 px-8 py-4 shadow-htr rounded w-[800px] mx-auto ">
@@ -129,12 +132,13 @@ const PaymentSuccess = () => {
                 </div>
               </div>
               <div className="flex justify-end pr-8 mt-2">
-                <button className="btn w-[18%] text-white font-medium  py-2 rounded-lg">
+              <Link className="btn w-[18%] text-center text-white font-medium  py-2 rounded-lg" to="/">
+               
                   <span>
                     <GiTicket className="bg-icon" />
                   </span>
-                  <Link to="/">Quay lại</Link>
-                </button>
+                  Quay lại
+              </Link>
               </div>
             </div>
           </div>
