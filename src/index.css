@@ -189,5 +189,5 @@ tr, td {
 }
 .bill {
     display: grid;
-    grid-template-columns: 60% 50%;
+    grid-template-columns: 50% 50%;
 }
