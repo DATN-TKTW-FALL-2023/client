@@ -60,6 +60,9 @@ const BookingHistory = () => {
                     <th scope="col" className="px-6 py-4">
                       Giờ chiếu
                     </th>
+                    <th scope="col" className="px-6 py-4">
+                      Thông tin vé
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -91,6 +94,10 @@ const BookingHistory = () => {
                         {item?.startHour
                           ? dayjs(item?.startHour).format("HH:mm")
                           : "Invalid Date"}
+                      </td>
+
+                      <td className="whitespace-nowrap px-6 py-4">
+                        <span><img className="qrCodeImage" src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://localhost/ticket/${item?._id}`} alt="" /></span>
                       </td>
                     </tr>
                   ))}
