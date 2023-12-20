@@ -57,7 +57,7 @@ const routeConfig: TRouteConfig[] = [
   {
     path: "/update_profile",
     Element: updateProfile,
-    isProtected: false,
+    isProtected: true,
   },
 ];
 
