@@ -12,6 +12,7 @@ import { useCreateUrlMutation } from "@/apis/payment";
 import { useAppDispatch } from "@/store/hook";
 import { setCurrentShowtime } from "@/slices/orderSlice";
 import { useCreateOrderMutation } from "@/apis/order";
+import { redirect } from "react-router-dom";
 const PopupCart = ({
   inforShowtime,
   isPopupVisible,
@@ -51,8 +52,7 @@ const PopupCart = ({
         seats: cartNameSelected?.map((s: any) => s._id),
       })
     );
-    window.open(resUrl.data.url, "_blank");
-
+    window.location.href = resUrl.data.url;
   };
 
   const formatCurrency = (amount: number | bigint | string | undefined) => {
@@ -64,7 +64,7 @@ const PopupCart = ({
       currency: "VND",
     }).format(Number(amount));
   };
-  
+
   return (
     <>
       <div className=" popup-container ">

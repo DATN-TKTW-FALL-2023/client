@@ -51,11 +51,11 @@ const Home = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
+
   return (
     <div>
       <div className="banner">
-      <Slider {...sliderSettings}>
+        <Slider {...sliderSettings}>
           {bannerImages.map((image, index) => (
             <div key={index}>
               <img width="100%" src={image} alt={`Banner ${index}`} />
