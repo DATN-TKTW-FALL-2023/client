@@ -34,6 +34,12 @@ const Signup = () => {
     return password.length >= minLength && hasSpecialChar;
   };
 
+  const isPhoneValid = (phone: string) => {
+    // Kiểm tra số điện thoại theo định dạng mong muốn
+    const phoneRegex = /^\+?\d{9,15}$/;
+    return phoneRegex.test(phone);
+  };
+
   const onSubmit = async (formData: FormData) => {
     formData.email = formData.email.trim();
     formData.username = formData.username.trim();
@@ -66,6 +72,15 @@ const Signup = () => {
       return;
     }
 
+    if (!isPhoneValid(formData.phone)) {
+      Swal.fire(
+        "Error",
+        "Số điện thoại không hợp lệ. Vui lòng nhập đúng định dạng.",
+        "error"
+      );
+      return;
+    }
+
     try {
       const response:any = await registerMutation(formData);
       if (response.error) {
@@ -82,7 +97,7 @@ const Signup = () => {
           Swal.fire("Error", "An unknown error occurred.", "error");
         }
       } else {
-        Swal.fire("Success", "Đăng kí tài khoản thành công", "success").then(
+        Swal.fire("Thành công", "Đăng kí tài khoản thành công", "success").then(
           (result) => {
             if (result.isConfirmed) {
               navigate("/login");
